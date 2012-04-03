@@ -1,0 +1,12 @@
+<?php
+
+function is_allowed()
+{
+    $auth = Zend_Auth::getInstance();
+    if (!$auth->hasIdentity()) {
+        return false;
+    }
+    return true;
+}
+
+?>

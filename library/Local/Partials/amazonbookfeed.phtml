@@ -1,0 +1,22 @@
+<div class="book clearfix">
+    <p class="pic">
+        <a href="<?php echo $this->book->LargeImage->Url?>" >
+            <img src="<?php echo $this->book->MediumImage->Url?>"
+                width="<?php echo $this->book->MediumImage->Width?>"
+                height="<?php echo $this->book->MediumImage->Height?>"></img></a>
+    </p>
+    <h4 class="title">
+        <a href="<?php echo $this->book->DetailPageURL?>" target="_blank">
+            <?php echo $this->book->Title?>
+        </a>
+    </h4>
+    <p class="author"> <?php echo 'by: '?> 
+    <?php if (is_array($this->book->Author)) { ?>
+      <?php echo join(', ', $this->book->Author)?>
+    <?php } else { ?>
+      <?php echo $this->book->Author?>
+    <?php } ?>
+    </p>
+    <div class="clearfix"></div>
+    <hr>
+</div>

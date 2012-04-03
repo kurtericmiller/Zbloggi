@@ -1,0 +1,23 @@
+<?php
+$um = new Local_Domain_Mappers_UserMapper();
+$options['offset'] = $this->limit['offset'];
+$options['count'] = $this->limit['items'];
+$uc = $um->findAll($options); ?>
+<div class="entity">
+<h2>User Admin:</h2>
+<hr>
+<?php
+foreach ($uc as $u) {
+  $name = $um->getProperName($u);
+  $name = (strlen($name) > 0) ? $name : '(no profile)';
+  $args = array(
+  'username' => $u->get('username'),
+  'role' => $u->get('role'),
+  'name' => $name,
+  'id' => $u->getId()
+  );
+  echo $this->partial('partials/user.phtml',$args);
+}
+echo $this->paginationControl($this->paginator,'Sliding','pagination.phtml'); ?>
+</div>
+

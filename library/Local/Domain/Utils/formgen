@@ -1,0 +1,71 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+source ~/.project~
+source $PROJECT_DIR/$PROJECT_NAME/sql/dbprofile
+
+if [[ $# < 2 ]];then
+  echo -e "\n$0 usage: 2 required arguments"
+  echo "1) module (i.e Admin)"
+  echo "2) controller (i.e Article)"
+  echo "3) table (i.e articles)"
+  echo "4) [mysql db]"
+  echo "5) [mysql user]"
+  echo -e "6) [mysql pw]\n"
+  exit;
+fi
+
+module=$1
+controller=$2
+table=$3
+[[ -z $db ]] && db=$4
+[[ -z $user ]] && user=$5
+[[ -z $pw ]] && pw=$6
+colmax=-1
+columns=''
+
+function init {
+  columns=$(/usr/bin/mysql -Nb -D$db -u$user -p$pw -e "show columns from $table"| cut -f1 )
+  colnames=''
+  for c in $columns;do
+    colname=$(echo $c | egrep -v '^id|^created_at|^updated_at')
+    colnames+=$colname" "
+  done
+}
+
+function genForm {
+  echo "<?php"
+  echo "class ${module}_Form_${controller} extends Zend_Form"
+  echo "{"
+  echo "  private \$_id;"
+  echo "  private \$_action = \"/${module:l}/${controller:l}/add\";"
+  echo "  public function init()"
+  echo "  {"
+  echo "    \$options = \$this->getAttribs();"
+  echo "    if (isset(\$options['id'])) {"
+  echo "      \$this->_id = \$options['id'];"
+  echo "      \$this->_action = \"/${module:l}/${controller:l}/edit?id=\$this->id\";"
+  echo "    }"
+  echo "    \$this->setAction(\$this->_action);"
+  echo "    \$this->setName('${table}Form');"
+  echo ""
+
+  for c in $colnames;do
+    echo "    \$${table}_${c} = new Zend_Form_Element_Text('${table}_${c}');"
+    echo "    \$${table}_${c}->setLabel('${(C)c}:')->setRequired(true)->addValidator('NotEmpty', true)->addFilter('HtmlEntities')->addFilter('StringTrim');"
+    echo "    \$this->addElement(\$${table}_${c});"
+  done
+
+  echo "    \$this->addElement('button', 'submit', array('type' => 'submit', 'label' => 'Submit', 'class' => 'button', 'decorators' => array('ViewHelper',),));"
+  echo "    \$this->addElement('button', 'cancel', array('type' => 'submit', 'label' => 'Cancel', 'class' => 'button', 'decorators' => array('ViewHelper',),));"
+  echo "    \$this->addDisplayGroup(array('submit', 'cancel'), 'submitButtons', array('order' => 4, 'decorators' => array('FormElements', array('HtmlTag', array('tag' => 'div', 'class' => 'element')),),));"
+  echo "    if (isset(\$this->_id)) {"
+  echo "      \$this->addElement('hidden', '${table}_id', array('value' => \$this->_id));"
+  echo "    }"
+  echo "  }"
+  echo "}"
+
+}
+
+init
+genForm
+

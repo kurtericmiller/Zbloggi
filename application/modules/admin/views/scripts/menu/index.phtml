@@ -1,0 +1,35 @@
+<?php
+?>
+<div class="artWrap">
+<h2>Menu Admin:</h2>
+<div class="clearfix"></div>
+<hr>
+  <span class="title">New: </span>
+    <span class="createIt">(<a href=/admin/menu/add>Add a Menu item</a>)</span>
+<div class="clearfix"></div>
+<div class="entity">
+<?php
+$old_menu = '';
+foreach ($this->mc as $m) {
+  $menu_id = $m->getId();
+  $menu_menu = $m->get('menu');
+  $menu_ordering = $m->get('ordering');
+  $menu_title = $m->get('title');
+  $menu_link = $m->get('link');
+  if ($menu_menu !== $old_menu) {
+      echo '<hr>';
+      echo '<h3>Menu: ' . $menu_menu . '</h3>';
+      echo '<div class="clearfix"></div>';
+      $old_menu = $menu_menu;
+  }
+  echo '<span class="titles"> Position: ' . $menu_ordering . ' - ' . $menu_title . '</span>';
+echo '<div class="admin clearfix">';
+echo '<a href="/admin/menu/edit?id=' . $menu_id . '">Edit</a>';
+echo '<a href="/admin/menu/delete?id=' . $menu_id . '">Delete</a>';
+echo '</div>';
+echo '<div class="clearfix"></div>';
+}
+echo '</div>';
+echo '<div class="clearfix"></div>';
+?>
+</div>

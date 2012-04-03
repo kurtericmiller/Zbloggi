@@ -1,0 +1,33 @@
+<?php
+$am = new Local_Domain_Mappers_ArticleMapper();
+$options['offset'] = $this->limit['offset'];
+$options['count'] = $this->limit['items'];
+$options['where'] = 'published = 1 and (select count(*) from comments where article_id = articles.id) > 0';
+$ac = $am->findAll($options); 
+$cm = new Local_Domain_Mappers_CommentMapper(); ?>
+<div class="entity comadm">
+  <h2>Comment Admin:</h2>
+  <hr>
+<?php
+$last_header = null;
+foreach ($ac as $a) {
+  $title = $a->get('article_title');
+  $cc = $cm->getArticleComments($a->getId());
+  $comment_count = 0;
+  foreach ($cc as $c) {
+    $comment_count += 1;
+    $args = array('article_title' => $title,
+                  'id' => $c->getId(),
+                  'comment_text' => $c->get('comment_text'));
+    if ($last_header !== $args['article_title']) {
+      $last_header = $args['article_title'];
+      $args['print_header'] = true;
+    } else {
+      $args['print_header'] = false;
+    }
+    echo $this->partial('partials/comment.phtml',$args);
+  }
+  echo '<hr>';
+}
+echo $this->paginationControl($this->paginator,'Sliding','pagination.phtml'); ?>
+</div> 

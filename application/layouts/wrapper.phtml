@@ -1,0 +1,106 @@
+<?php /* @var $this Zend_View */ ?> 
+<?php $localReg = Zend_Registry::get('local'); ?>
+<?php echo $this->doctype() . "\n"?>
+<html> 
+<head> 
+ <?php echo $this->headTitle()?>
+ <?php echo $this->headMeta()?>
+ <?php echo $this->headLink()?>
+ <?php echo $this->headStyle()?>
+</head> 
+<body class = "tundra"> 
+    <div class="container">
+        <div id="topWrap">
+            <div id="logged-in-as">
+                <?php echo $this->loggedInAs()?>
+                <div class="floatRt">
+                    Subscribe <a href="/rss"><img src="/images/rss16.png" /></a>
+                </div>
+            </div><!-- end logged-in-as -->
+            <div class="header clearfix">
+            <h1><a href="/"><?php echo $localReg->get('site_title') ?></a></h1>
+                <h3><?php echo $localReg->get('site_tagline') ?></h3>
+            </div><!-- end header -->
+        </div><!-- end topWrap -->
+        <?php /* NESTED LAYOUT SUPPORT */ ?> 
+        <?php if ($this->layout()->nestedLayout): ?>
+        <?php
+            $this->layout()->setLayout($this->layout()->nestedLayout)?>
+        <?php
+        else: ?>
+        <?php
+            $this->layout()->setLayout('default')?>
+        <?php
+        endif?>
+        <?php echo $this->layout()->render()?>
+        <div class="clearfix"></div>
+        <div class="footer">
+            <div class="info footWrap">
+                <h4>Zend Developer Zone RSS</h4>
+                <hr>
+                <?php echo $this->getRss()?>
+            </div><!-- footWrap1 -->
+            <div class="info footWrap">
+                <h4>Resources</h4>
+                <hr>
+                <ul>
+                    <li><a href="http://www.apress.com/9781430229254" target="_blank">Matt Zandstra</a></li>
+                    <li><a href="http://www.zf-beginners-guide.com/" target="_blank">Vikram Vaswani</a></li>
+                    <li><a href="http://www.lilypadstudio.net/Zend-Framework-Blog-25" target="_blank">The Frog Princess (Amanda Jane Doughty)</a></li>
+                    <li><a href="http://mwop.net/" target="_blank">Matthew Weier O'Phinney</a></li>
+                    <li><a href="http://blog.astrumfutura.com/" target="_blank">Pádraic Brady</a></li>
+                    <li><a href="http://akrabat.com/" target="_blank">Rob Allen</a></li>
+                    <li><a href="http://www.zendcasts.com/" target="_blank">Jon Lebensold</a></li>
+                    <li><a href="http://framework.zend.com/" target="_blank">Zend Framework</a></li>
+                </ul>
+            </div><!-- footWrap2 -->
+            <div class="contactForm footWrap">
+                <h4>Contact</h4>
+                <hr>
+                <?php echo $this->contactform?>
+                <?php echo  implode($this->consoleMessages)?>
+            </div><!-- footWrap3 -->
+            <div class="info footWrap">
+                <h4>Info</h4>
+                <hr>
+                <strong>Location:</strong><br />
+                <address>
+                San Francisco/Bay Area, CA<br />
+                (Available for travel)
+                </address>
+                <p></p>
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/terms">Terms of Use</a></li>
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/credits">Credits</a></li>
+                </ul>
+            </div><!-- footWrap4 -->
+            <div class="clearfix"></div>
+            <div class="copyright">
+                <hr>
+                <a class="zp" href="http://framework.zend.com"><img src="/images/PoweredBy_ZF_4DarkBG.png" alt="Powered by Zend Framework" width="101" height="20"></img></a>
+                <a class="zp" href="http://ymozend.com"><img src="/images/zbBadge_DkBg.png" alt="Brought to you by ZBLoggi" width="116" height="20"></img></a>
+                <p>&copy; 2012 &bull; Your Moment of Zend</p>
+            </div><!-- end copyright -->
+        </div><!-- end footer -->
+    </div><!-- end container -->
+    <?php /* OUTPUT JAVASCRIPT */ ?> 
+    <?php echo $this->headScript()?>
+    <?php echo $this->inlineScript()?>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17957673-5']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body> 
+</html>

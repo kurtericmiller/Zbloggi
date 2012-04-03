@@ -1,0 +1,27 @@
+@mixin background-gradient($begin, $end, $style: linear) {
+  background-image: -webkit-gradient($style, from($begin), to($end));
+  background-image: -webkit-#{$style}-gradient(top, $begin, $end);
+  background-image:    -moz-#{$style}-gradient(top, $begin, $end);
+  background-image:     -ms-#{$style}-gradient(top, $begin, $end);
+  background-image:      -o-#{$style}-gradient(top, $begin, $end);
+  background-repeat: no-repeat;
+}
+
+@mixin rounded-corners($rad: 15px) {
+  -moz-border-radius: $rad;
+  -webkit-border-radius: $rad;
+  border-radius: $rad;
+}
+
+@mixin inset-box-shadow($h-shadow: 1px, $x-shadow: 1px, $blur: 1px, $spread: 0px, $color: #000000) {
+  	box-shadow: $h-shadow $x-shadow $blur $spread $color inset;
+  	-moz-box-shadow: $h-shadow $x-shadow $blur $spread $color inset;
+  	-webkit-box-shadow: $h-shadow $x-shadow $blur $spread $color inset;
+}
+
+@mixin transition($extent: all, $delay: .3s, $style: linear) {
+  -o-transition: $extent $delay $style;
+  -moz-transition: $extent $delay $style;
+  -webkit-transition: $extent $delay $style;
+}
+

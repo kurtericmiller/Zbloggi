@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $line;
+my $TEST;
+
+unless ($ARGV[0]) {
+  die "\nError: a required arg (test filename) is missing.\n";
+}
+
+$TEST=$ARGV[0];
+
+open LINES, "$TEST" or die "cannot open $TEST, $!";
+while (<LINES>) {
+  if (/Begin Actual Setup/ .. /End Actual Setup/) {
+      next if /Begin/;
+      print unless /End/;
+  }
+}
+

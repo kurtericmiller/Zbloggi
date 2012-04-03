@@ -1,0 +1,42 @@
+<?php
+echo '<div class="artWrap">';
+switch ($this->section_filter) {
+  case ("all"):
+    echo "<h2>Section Admin: <em>Displaying All Sections</em></h2>";
+    break;
+  case ("published"):
+    echo "<h2>Section Admin: <em>Displaying Published Sections</em></h2>";
+    break;
+  case ("pending"):
+    echo "<h2>Section Admin: <em>Displaying Pending Sections</em></h2>";
+    break;
+  default:
+    echo "<h2>Section Admin: <em>Displaying All Sections</em></h2>";
+}
+?>
+<div class="admin clearfix">
+  <a href=/admin/section?section_filter=all>All</a>
+  <a href=/admin/section?section_filter=published>Published</a>
+  <a href=/admin/section?section_filter=pending>Pending</a>
+</div>
+<div class="clearfix"></div>
+<hr>
+  <span class="title">New: </span>
+    <span class="createIt">(<a href=/admin/section/add>Create Section</a>)</span>
+<div class="clearfix"></div>
+<?php
+foreach ($this->ac as $a) {
+  $args = array(
+  'id' => $a->getId(),
+  'published' => $a->get('published'),
+  'section_text' => $a->get('section_text'),
+  'section_title' => $a->get('section_title'),
+  'buttonset' => 'pedbuttons'
+  );
+  echo $this->partial('partials/section.phtml',$args);
+echo '<div class="clearfix"></div>';
+}
+  $filtration = array('select' => $this->select);
+  echo $this->paginationControl($this->paginator,'Sliding','pagination.phtml', $filtration); ?>
+</div>
+

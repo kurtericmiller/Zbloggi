@@ -1,0 +1,39 @@
+    <?php if ($this->pageCount > 1): ?>
+    <div class="paginationControl clearfix">
+    <!-- First page link -->
+    <?php if (isset($this->previous)): ?>
+      <a href="<?php echo $this->url() . '?' . $this->select . 'page=' . '1'; ?>">
+        First
+      </a> 
+    <?php else: ?>
+      <span class="disabled">&laquo; First</span>
+    <?php endif; ?>
+
+    <!-- Previous page link -->
+    <?php if (isset($this->previous)): ?>
+      <a href="<?php echo $this->url() . '?' . $this->select . 'page=' . $this->previous; ?>">
+        Previous
+      </a> 
+    <?php else: ?>
+      <span class="disabled">Previous</span>
+    <?php endif; ?>
+     
+    <!-- Next page link -->
+    <?php if (isset($this->next)): ?>
+      <a href="<?php echo $this->url() . '?' . $this->select . 'page=' . $this->next; ?>">
+        Next
+      </a>
+    <?php else: ?>
+      <span class="disabled">Next</span>
+    <?php endif; ?>
+
+    <!-- Last page link -->
+    <?php if (isset($this->next)): ?>
+      <a href="<?php echo $this->url() . '?' . $this->select . 'page=' .  count($this->pagesInRange); ?>">
+        Last &raquo;
+      </a> 
+    <?php else: ?>
+      <span class="disabled">&nbsp;Last &raquo;</span>
+    <?php endif; ?>
+    </div>
+    <?php endif; ?>

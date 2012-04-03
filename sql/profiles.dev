@@ -1,0 +1,49 @@
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+DROP TABLE IF EXISTS `profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `first` varchar(30) NOT NULL,
+  `last` varchar(30) NOT NULL,
+  `middle` varchar(30) DEFAULT NULL,
+  `occupation` varchar(50) DEFAULT NULL,
+  `website` varchar(50) DEFAULT NULL,
+  `bio_text` text,
+  `avatar` varchar(50) NOT NULL DEFAULT 'default.jpg',
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+LOCK TABLES `profiles` WRITE;
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES (1,14,'User1','Findleton','','This and that, but mostly the other thing...','http://www.arbalestmedia.com','With over 30 years experience in the tech industry, User1 still thinks this stuff is pretty cool. Building this site is his first in-depth foray into the worlds of PHP and Zend Framework. Let\'s just say it\'s been character building and leave it at that. You can contact User1 on his personal website.','_9tE0STdr1tbE/headshotMd-150x150.jpg','2012-02-09 02:00:59','2012-02-09 02:00:59'),(2,11,'Kurt','Miller','Eric','programmer','http://www.ymozend.com','Developed Your Moment of Zend blogging site to assist the Zend Framework community members with PHP coding techniques. Site provides examples, tutorials, and discussion of best practices for site development, testing, and deployment with PHP and Zend Framework. YMOZ utilizes HTML5, CSS3/Sass, Dojo, JQuery, a custom domain layer with MySQL back end, and PHPUnit/Selinium for testing.  Currently deploying to www.ymozend.com.','18.jpg','2012-02-09 16:47:28','2012-02-09 20:06:30');
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+

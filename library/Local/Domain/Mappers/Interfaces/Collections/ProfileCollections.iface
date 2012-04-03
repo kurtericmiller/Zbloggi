@@ -1,0 +1,5 @@
+interface ProfileCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Profile $obj);
+  function delete($pointer);
+}

@@ -1,0 +1,33 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+APACHE_DIR=/etc/apache2/sites-available
+[[ -n $2 ]] && fmask=$2;
+[[ -z $2 ]] && fmask='*';
+cd $APACHE_DIR
+echo -e "\nset env with (d)evelopment,(t)esting,(p)roduction,(s)taging <file>\n"
+list=$(eval "grep -li 'application_env' $fmask")
+for e in $list;do
+  echo $e
+  echo "------------------------"
+  egrep --color=always -i 'documentroot|application_env' $e
+  echo "------------------------"
+done
+[[ -z $1 ]] && exit;
+[[ -z $2 ]] && exit;
+if [[ ! -e $2 ]];then
+  echo "File: $2 not found"
+  exit
+fi
+for f in $(grep -li 'application_env' $2);do
+  case $1 in
+    d) sed 's/\(^.*APPLICATION_ENV\).*$/\1 development/g' < $f > $f.new;;
+    t) sed 's/\(^.*APPLICATION_ENV\).*$/\1 testing/g' < $f > $f.new;;
+    p) sed 's/\(^.*APPLICATION_ENV\).*$/\1 production/g' < $f > $f.new;;
+    s) sed 's/\(^.*APPLICATION_ENV\).*$/\1 staging/g' < $f > $f.new;;
+    *) echo "Unknown argument: $1";exit;;
+  esac
+  if [[ -s $f.new ]];then
+    mv -f $f.new $f
+  fi
+done
+sudo service apache2 restart 

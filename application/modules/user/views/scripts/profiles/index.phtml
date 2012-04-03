@@ -1,0 +1,29 @@
+<div class="admbody">
+<div class="entity">
+<?php echo '<h3>' . implode($this->messages) . '</h3>'; ?>
+<div class='userProfile'>
+<h2>User Profile</h2>
+<?php if ($this->show) {?>
+  <hr>
+  <p>Name: <?php echo $this->first?> <?php echo $this->middle?> <?php echo $this->last?></p>
+  <p>Occupation: <?php echo $this->occupation?></p>
+  <p>Bio: <?php echo $this->bio_text?></p>
+  <p>Avatar: <img src="/images/avatars/<?php echo $this->avatar?>"></img></p>
+  <p>Website: <a href="<?php echo $this->website?>"><?php echo $this->website?></a></p>
+  <p></p>
+  <div class="admin">
+  <a href=/user/profiles?id=<?php echo $this->id?>>Edit</a>
+  <a href=/user/profiles/delete>Delete Profile</a>
+  <a href=/user/>Change Password</a>
+  </div>
+  <div class="clearfix"></div>
+  <hr>
+<?php } else {?>
+  <div class="avatarform">
+  <?php echo $this->form?>
+  </div>
+<?php }?>
+</div>
+</div>
+</div>
+

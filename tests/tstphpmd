@@ -1,0 +1,1 @@
+phpmd --suffixes "php,phtml" --exclude "/javascripts/,/tests/" ./ xml "codesize,unusedcode,naming"

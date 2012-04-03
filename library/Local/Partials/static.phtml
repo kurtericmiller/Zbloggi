@@ -1,0 +1,19 @@
+<?php
+$sm = new Local_Domain_Mappers_SectionMapper();
+$s = $sm->findByTitle($this->title);
+?>
+<div class="static">
+<hr>
+    <div class = "articleItem">
+        <div class = "articleTitle">
+            <h2><?php echo $s->get('section_title')?></h2>
+            <p></p>
+        </div>
+        <div class="articleClip">
+            <?php echo $s->get('section_text')?>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+<hr>
+</div>
+

@@ -1,0 +1,6 @@
+  function findByTitle($title)
+  {
+    $sql = 'select * from sections where LOWER(section_title) = ?';
+    $result = $this->doStatement($sql, strtolower($title));
+    return $this->load($result);
+  }

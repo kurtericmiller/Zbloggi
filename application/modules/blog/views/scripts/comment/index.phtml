@@ -1,0 +1,86 @@
+<?php
+$am = new Local_Domain_Mappers_ArticleMapper();
+$a = $am->find($this->article_id);
+$next = $this->getNearArticle($this->article_id, 'next');
+$prev = $this->getNearArticle($this->article_id, 'prev');
+$cm = new Local_Domain_Mappers_CommentMapper();
+$um = new Local_Domain_Mappers_UserMapper();
+$pm = new Local_Domain_Mappers_ProfileMapper();
+$uid = $a->get('user_id');
+$user = $um->find($uid);
+$profile = $pm->findByUser($uid);
+$args = array(
+  'article_text' => $a->get('article_text'),
+  'article_title' => $a->get('article_title'),
+  'username' => $user->get('username'),
+  'read_count' => $a->get('read_count'),
+  'comment_count' => $am->getCommentCount($a),
+  'published' => $a->get('updated_at'),
+  'id' => $a->getId(),
+  'uid' => $uid,
+  'keywords' => $am->getKeywords($a),
+  'continue' => false
+);
+$this->headTitle('::' . $args['article_title']);
+?>
+<div class="articles twoCol">
+<?php
+echo $this->partial('article.phtml',$args);
+echo '<p></p>';
+if(!$next == null){
+    echo '<div class="floatLt"><a href="/blog/comment?id=' . $next['id'] . '">' . $next['title'] . '</a> &larr; Newer</div>';
+}
+if(!$prev == null){
+    echo '<div class="floatRt">Older &rarr; <a href="/blog/comment?id=' . $prev['id'] . '">' . $prev['title'] . '</a></div>';
+}
+echo '<div class="clearfix"></div><p></p>';
+?>
+    <h3>About: <?php echo $user->get('username')?></h3>
+<div class="bio clearfix">
+    <a href="/profile/<?php echo $profile->get('user_id')?>" alt="Profile"><img src="/images/avatars/<?php echo $profile->get('avatar')?>" width=100px height=100px title="Profile"></img></a>
+    <p><?php echo $profile->get('bio_text')?></p>
+    <p>Web site: <a href="<?php echo $profile->get('website')?>" target=_blank><?php echo $profile->get('website')?></a></p>
+</div>
+<p></p>
+<?php
+if (get_class($this->comform) == 'Auth_Form_Login') {
+    echo "<h3>To comment you must be registered and logged in...</h3>";
+    echo '<p></p>';
+    echo '<div id="logform">';
+    echo $this->comform;
+    echo '</div>';
+} else {
+    echo '<div id="commentform">';
+    echo $this->comform;
+    echo '</div>';
+}
+$cc = $cm->getArticleComments($this->article_id);
+if (0 == $am->getCommentCount($a)) {
+  echo "<h3>Be the first to comment...</h3>";
+  echo "&nbsp";
+} else {
+  $pm = new Local_Domain_Mappers_ProfileMapper();
+  echo "<h3>Comments:</h3>";
+  echo "&nbsp";
+  $ccount = 1;
+  foreach ($cc as $c) {
+    $u = $um->find($c->get('user_id'));
+    $p = $pm->findByUser($c->get('user_id'));
+    if (!null === $p) {
+      $avatar = $p->get('avatar');
+    } else {
+      $avatar = 'default.jpg';
+    }
+    $args = array(
+      'comment_text' => $c->get('comment_text'),
+      'published' => $c->get('updated_at'),
+      'username' => $u->get('username'),
+      'avatar' => $avatar,
+      'comcount' => $ccount
+    );
+    echo $this->partial('comment.phtml',$args);
+    $ccount += 1;
+  }
+}
+echo '</div>';
+

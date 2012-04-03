@@ -1,0 +1,5 @@
+interface RegistrationCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Registration $obj);
+  function delete($pointer);
+}

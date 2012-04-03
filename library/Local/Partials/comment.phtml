@@ -1,0 +1,11 @@
+<div class="comment">
+  <div class="comheader">
+  <?php echo "$this->username"?> : <?php echo "$this->published"?>
+  <span class="comcounter">Comment #<?php echo $this->comcount?></span>
+  </div>
+  <div class="combody">
+  <img src="/images/avatars/<?php echo $this->avatar?>" width="50px" height="50px"></img>
+  <?php echo $this->comment_text?>
+  <div class="clearfix"></div>
+  </div>
+</div>

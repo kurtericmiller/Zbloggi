@@ -1,0 +1,14 @@
+<?php $mode = APPLICATION_ENV; ?>
+<?php $version = Zend_Registry::get('local.version'); ?>
+<div class="content"> 
+  <div class="sidebarLt">
+    <?php echo $this->getMenu('main') ?>
+    <?php echo $this->getMenu('admin') ?>
+  </div>
+    <div class="admbody">
+    <h1><?php echo "ZBLoggi <small>(v" . $version . ")</small> - ";?>Admin Dashboard</h1>
+        <?php echo "<dd> Run mode: $mode</dd>"; ?>
+        <?php echo $this->layout()->content?> 
+    </div> 
+    <div class="clearfix"></div>
+</div> 

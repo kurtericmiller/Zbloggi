@@ -1,0 +1,3 @@
+interface KeywordFinder extends Finders
+{
+}

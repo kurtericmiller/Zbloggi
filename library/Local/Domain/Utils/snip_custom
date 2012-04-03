@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $line;
+my $MAPPER;
+
+unless ($ARGV[0]) {
+  die "\nError: a required arg (mapper filename) is missing.\n";
+}
+
+$MAPPER=$ARGV[0];
+
+open LINES, "$MAPPER" or die "cannot open $MAPPER, $!";
+while (<LINES>) {
+  if (/Begin Customizations/ .. /^}/) {
+      next if /Begin/;
+      next if /===/;
+      print unless /^}$/;
+  }
+}
+

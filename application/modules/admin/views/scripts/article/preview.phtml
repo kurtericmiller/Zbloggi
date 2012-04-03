@@ -1,0 +1,14 @@
+<?php
+$um = new Local_Domain_Mappers_UserMapper;
+$am = new Local_Domain_Mappers_ArticleMapper;
+$a = $am->find($this->article_id);
+$u = $um->find($a->get('user_id'));
+$args = array(
+ 'id' => $a->getId(),
+ 'published' => $a->get('published'),
+ 'username' => $u->get('username'),
+ 'article_text' => $a->get('article_text'),
+ 'article_title' => $a->get('article_title'),
+ 'buttonset' => 'prebuttons'
+);
+echo $this->partial('partials/article.phtml',$args);

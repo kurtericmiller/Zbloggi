@@ -1,0 +1,21 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+source ~/.project~
+source $PROJECT_PATH/sql/dbprofile
+IMAGES=/var/local/workspaces/$PROJECT_NAME/public/images/avatars
+rowmax=$(ls $IMAGES | wc -l)
+rowcnt=0
+sql='insert into avatars values '
+for i in $IMAGES/*;do
+ (( rowcnt = $rowcnt+1 ))
+ if [[ $rowcnt != 0 ]];then
+   name=$(basename $i)
+   sql=$sql"(null,'$name',null,null)"
+   if [[ $rowcnt != $rowmax ]];then
+      sql=$sql','
+   fi
+ fi
+done
+
+/usr/bin/mysql -Nb -D$db -u$user -p$pw -e "delete from avatars"
+/usr/bin/mysql -Nb -D$db -u$user -p$pw -e "$sql"

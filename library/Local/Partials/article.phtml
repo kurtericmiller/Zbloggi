@@ -1,0 +1,30 @@
+<?php
+$mysqlDate = $this->published;
+$date = date("F j, Y", strtotime($mysqlDate)); 
+$args = array('title' => $this->article_title); ?>
+<div class = "articleItem"> 
+ <div class = "articleTitle"> 
+  <h2><a href="/blog/comment?id=<?php echo $this->id?>"> <?php echo $args['title']?></a></h2>
+  <p>By: <a class="author" href=/blog/author?author=<?php echo $this->uid?>><?php echo $this->username?></a> - Published: <?php echo $date?></p>
+ </div>
+ <div class="articleClip">
+  <?php echo $this->article_text?>
+ <hr>
+ <?php if($this->continue) { ?>
+ <a class="clipLink" href="/blog/comment?id=<?php echo $this->id?>">Continue reading...</a>
+ <?php } else { ?>
+  <?php echo $this->partial('addthis.phtml',$args); ?>
+ <?php } ?>
+  <div class="clearfix"></div>
+ </div>
+ <div class="articleMeta">
+  Views(<?php echo $this->read_count?>) : Comments(<?php echo $this->comment_count?>)
+ <?php
+ $taglist = null;
+ foreach ($this->keywords as $keyword) {
+  $taglist.= "<a href=/blog/tag?tag=$keyword>" . $keyword . " </a>";
+ } ?>
+ <span class="tagsList">- Tags:<?php echo $taglist?></span>
+ </div>
+ <hr>
+</div>
