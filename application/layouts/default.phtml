@@ -1,0 +1,46 @@
+<div class="content clearfix"> 
+    <div class="sidebarLt">
+    <?php echo $this->getMenu('main') ?>
+        <div class="clearfix"></div>
+    </div><!-- end sidebarLt -->
+    <div class="sidebarRt">
+        <div class="sideWrap clearfix">
+            <div class="contribs">
+                <h3>Search</h3>
+                <hr>
+                <div class="aboutWrap">
+                    <div class="searchBox">
+                        <?php echo $this->searchForm;?>
+                    </div><!-- end searchBox -->
+                </div><!-- end aboutWrap -->
+            </div><!-- end contribs -->
+        </div><!-- end sideWrap -->
+        <?php echo $this->partial('sidesocial.phtml', array())?>
+        <div id="logform">
+            <?php echo $this->form?>
+        </div><!-- end logform -->
+        <?php echo $this->partial('sidebar.phtml', array('lc' => $this->lc))?>
+        <div class="sideWrap clearfix">
+            <h3>Read</h3>
+            <hr>
+            <?php
+            //$book_slice = array_slice($this->books,$this->limit['offset'],$this->limit['items']);
+            foreach ($this->bc as $b) {
+                $args = array(
+                    'author' => $b->get('author'),
+                    'title' => $b->get('title'),
+                    'image' => $b->get('image'),
+                    'link' => $b->get('link')
+                );
+                echo $this->partial('book.phtml',$args); 
+            }
+            echo $this->paginationControl($this->paginator,'Sliding','pagination_min.phtml'); ?>
+        </div><!-- end books -->
+    </div><!-- end sidebarRt -->
+    <div class="mainTitle">
+        <img id='logo' src="/images/logo2.png" height="160" width="100%"></img>
+    </div><!-- end mainTitle -->
+    <div class="twoCol">
+        <?php echo $this->layout()->content?>
+    </div> <!-- end midcol -->
+</div> <!-- end content -->

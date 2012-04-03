@@ -1,0 +1,356 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+source ~/.project~
+source $PROJECT_DIR/$PROJECT_NAME/sql/dbprofile
+
+UTIL_DIR="$PROJECT_DIR/$PROJECT_NAME/library/Local/Domain/Utils"
+MAPPER_DIR="$PROJECT_DIR/$PROJECT_NAME/library/Local/Domain/Mappers"
+cd $MAPPER_DIR
+
+if [[ $# < 2 ]];then
+  echo -e "\n$0 usage: 2 required arguments"
+  echo "1) class (i.e Domain_User)"
+  echo "2) table (i.e users)"
+  echo "3) [mysql db]"
+  echo "4) [mysql user]"
+  echo -e "5) [mysql pw]\n"
+  exit;
+fi
+
+perms=755
+owner="kmiller:www-data"
+
+class=$1
+table=$2
+[[ -z $db ]] && db=$3
+[[ -z $user ]] && user=$4
+[[ -z $pw ]] && pw=$5
+
+columns=$(/usr/bin/mysql -Nb -D$db -u$user -p$pw -e "show columns from $table"| cut -f1)
+colmax=-1
+for c in $columns;do
+  (( colmax = $colmax+1 ))
+done
+
+function genMapper {
+  echo "<?php"
+  echo "/**"
+  echo "* ${class} Mapper object definition"
+  echo "* @package Mapper"
+  echo "*/"
+  echo "/**"
+  echo "* ${class}Mapper class"
+  echo "* Maps ${class} objects to database"
+  echo "*/"
+  echo "class Local_Domain_Mappers_${class}Mapper extends Local_Domain_Mapper implements ${class}Finder  {"
+  echo "    /** Instantiate - prepares object specific sql statements*/"
+  echo "    function __construct() {"
+  echo "        parent::__construct(); //locates DB handle"
+  echo "        //Prepare sql statements specific to this object"
+  echo "        \$this->selectStmt = 'SELECT * FROM ${table} WHERE id = ?';"
+  echo "        \$this->selectAllStmt = 'SELECT * FROM ${table}';"
+  echo -n "        \$this->updateStmt = 'UPDATE ${table} SET "
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = $colcnt+1 ))
+    if [[ $colcnt != 0 ]];then
+      echo -n "$c=?"
+      if [[ $colcnt != $colmax ]];then
+       echo -n ","
+      fi
+    fi
+  done
+  echo " WHERE id=?';"
+  echo -n "        \$this->insertStmt = 'INSERT into ${table} ("
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = $colcnt+1 ))
+    if [[ $colcnt != 0 ]];then
+      echo -n "$c"
+      if [[ $colcnt != $colmax ]];then
+       echo -n ","
+      fi
+    fi
+  done
+  echo -n ") values ("
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = $colcnt+1 ))
+    if [[ $colcnt != 0 ]];then
+      echo -n "?"
+      if [[ $colcnt != $colmax ]];then
+       echo -n ","
+      fi
+    fi
+  done
+  echo -n ")';"
+  echo -e "\n        \$this->deleteStmt = 'DELETE FROM ${table} WHERE id = ?';"
+  echo "    }"
+  echo ""
+  echo "    /** Locate stored object by primary key"
+  echo "     *  @param integer \$id"
+  echo "     *  @return mixed DomainObject or null */"
+  echo "    function doFind(\$id) {"
+  echo "        \$result = \$this->doStatement(\$this->selectStmt,\$id);"
+  echo "        return \$this->load(\$result);"
+  echo "    }"
+  echo ""
+  echo "    /** Set object properties with retrieved values"
+  echo "     *  @param array \$array of properties"
+  echo "     *  @return object DomainObject */"
+  echo "    protected function doLoad(\$array) {"
+  echo "        \$obj = new Local_Domain_Models_${class}(\$array['id']);"
+  for c in $columns;do
+    echo "        \$obj->set('$c',(\$array['$c']));"
+  done
+  echo "        \$obj->markClean();"
+  echo "        return \$obj;"
+  echo "    }"
+  echo ""
+  echo "    /** Store new object"
+  echo "     *  @param object DomainObject"
+  echo "     *  @return boolean */"
+  echo "    protected function doInsert(Local_Domain_DomainObject \$obj) {"
+  echo "        \$values = array ("
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = colcnt+1 ))
+    if [[ $colcnt != 0 ]];then
+      echo -n "            \$obj->get('$c')"
+      if [[ $colcnt != $colmax ]];then
+       echo -n ","
+       echo ""
+      fi
+    fi
+  done
+  echo -e "\n        );"
+  echo "        return \$this->doStatement(\$this->insertStmt, \$values);"
+  echo "    }"
+  echo ""
+  echo "    /** Update existing object"
+  echo "     *  @param object DomainObject"
+  echo "     *  @return boolean */"
+  echo "    function doUpdate(Local_Domain_DomainObject \$obj) {"
+  echo "        \$values = array ("
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = colcnt+1 ))
+    if [[ $colcnt != 0 ]];then
+      echo "           \$obj->get('$c'),"
+    fi
+  done
+  echo -n "           \$obj->getId()"
+  echo -e "\n        );"
+  echo "        return \$this->doStatement(\$this->updateStmt, \$values);"
+  echo "    }"
+  echo ""
+  echo "    /** Delete existing object"
+  echo "     *  @param object DomainObject"
+  echo "     *  @return boolean */"
+  echo "    function doDelete(Local_Domain_DomainObject \$obj) {"
+  echo "        return \$this->doStatement(\$this->deleteStmt,array(\$obj->getId()));"
+  echo "    }"
+  echo ""
+  echo "    /** Retrieve all objects - limited - with options for where and sort"
+  echo "    *  @return mixed Collection object */"
+  echo "    function findAll(\$options=null) {"
+  echo "      \$where = (isset(\$options['where'])) ? ' where ' . \$options['where'] : null;"
+  echo "      \$sort = (isset(\$options['sort'])) ? ' order by ' . \$options['sort'] : null;"
+  echo "      \$limit = (isset(\$options['offset']) && isset(\$options['count'])) ? ' limit ' . \$options['offset'] . ',' . \$options['count'] : null;"
+  echo "      \$sql = \$this->selectAllStmt . \$where . \$sort . \$limit;"
+  echo "      return new Local_Domain_Mappers_Deferred${class}Collection(\$this, \$sql, array());"
+  echo "    }"
+  echo ""
+  echo "    /** return boolean result for query"
+  echo "    *  @param array \$options"
+  echo "    *  @return boolean */"
+  echo "    function exists(array \$options) {"
+  echo "      \$sql = 'select count(*) from ${table}' . ' where ' . \$options['field'] . ' = ' . \$options['value'];"
+  echo "      \$result =  \$this->doStatement(\$sql, array(), SINGLETON);"
+  echo "      return (\$result == 0) ? false : true;"
+  echo "    }"
+  echo ""
+  echo "    /**  Return class identifier */"
+  echo "    protected function targetClass() {"
+  echo "        return \"${class}\";"
+  echo "    }"
+  echo "    //==============================="
+  echo "    // Begin Customizations"
+  echo "    //==============================="
+}
+
+function genCollection {
+  echo "<?php"
+  echo "/**"
+  echo " * $class Collection object definition"
+  echo " * @package Mapper"
+  echo " */"
+  echo "/**"
+  echo " * include Collections interface"
+  echo " */"
+  echo "require_once (\"Interfaces/Collections.php\");"
+  echo "/**"
+  echo " * ${class}Collection class"
+  echo " * Operates on groups of Domain objects"
+  echo " */"
+  echo "class Local_Domain_Mappers_${class}Collection extends Local_Domain_Collection implements ${class}Collections"
+  echo "{"
+  echo "  /** Add to the collection"
+  echo "   *  @param object $class"
+  echo "   */"
+  echo "  function add(Local_Domain_Models_${class} \$$class)"
+  echo "  {"
+  echo "    \$this->doAdd(\$$class);"
+  echo "  }"
+  echo "  /** Delete object from collection"
+  echo "   *  @param integer \$pointer"
+  echo "   */"
+  echo "  function delete(\$pointer)"
+  echo "  {"
+  echo "    \$this->doDelete(\$pointer);"
+  echo "  }"
+  echo "}"
+}
+
+function genDeferred {
+  echo "<?php"
+  echo "/**"
+  echo " * Deferred ${class} Collection object definition"
+  echo " * @package Mapper"
+  echo " */"
+  echo "/**"
+  echo " * Deferred${class}Collection class"
+  echo " * Optimized (cached) object activity"
+  echo " */"
+  echo "class Local_Domain_Mappers_Deferred${class}Collection extends Local_Domain_Mappers_${class}Collection"
+  echo "{"
+  echo "  /** Prepared statement handle"
+  echo "   *  @var string"
+  echo "   */"
+  echo "  private \$stmt;"
+  echo "  /** Object property values"
+  echo "   *  @var array"
+  echo "   */"
+  echo "  private \$valueArray;"
+  echo "  /** Mapper object"
+  echo "   *  @var object"
+  echo "   */"
+  echo "  private \$mapper;"
+  echo "  /** Cached status flag"
+  echo "   *  @var boolean"
+  echo "   */"
+  echo "  private \$run = false;"
+  echo "  /** Instantiate Deferred Collection"
+  echo "   *  @param object Mapper"
+  echo "   *  @param handle \$stmt_handle"
+  echo "   *  @param array \$valueArray"
+  echo "   */"
+  echo "  function __construct(Local_Domain_Mapper \$mapper, \$stmt_handle, \$valueArray)"
+  echo "  {"
+  echo "    parent::__construct();"
+  echo "    \$this->stmt = \$stmt_handle;"
+  echo "    \$this->valueArray = \$valueArray;"
+  echo "    \$this->mapper = \$mapper;"
+  echo "  }"
+  echo "  /** Object not cached, retrieve from storage */"
+  echo "  function notifyAccess()"
+  echo "  {"
+  echo "    if (!\$this->run) {"
+  echo "      \$result = \$this->mapper->doStatement(\$this->stmt, \$this->valueArray);"
+  echo "      \$this->init_db(\$result, \$this->mapper);"
+  echo "    }"
+  echo "    \$this->run = true;"
+  echo "  }"
+  echo "}"
+}
+
+function genCollections {
+echo "<?php"
+echo "/**"
+echo " * Collections Interface Definition"
+echo " * @package Domain"
+echo " *"
+echo " */"
+echo "/** Collections interface."
+echo " *  Methods to manipulate groups of domain objects"
+echo "*/"
+}
+
+function genFinders {
+echo "<?php"
+echo "/**"
+echo " * Finders Interface Definition"
+echo " * @package Domain"
+echo " *"
+echo " */"
+echo "/** Methods to manipulate individual domain objects. */"
+echo "interface Finders {"
+echo "  function find(\$id);"
+echo "  function findAll(\$options=null);"
+echo "  function newId();"
+echo "  function update(Local_Domain_DomainObject \$obj);"
+echo "  function insert(Local_Domain_DomainObject \$obj);"
+echo "  function delete(Local_Domain_DomainObject \$obj);"
+echo "}"
+}
+
+function genCollectionInterface {
+echo "interface ${class}Collections extends Iterator "
+echo "{"
+echo "  function add(Local_Domain_Models_${class} \$obj);"
+echo "  function delete(\$pointer);"
+echo "}"
+}
+
+function genFinderInterface {
+echo "interface ${class}Finder extends Finders"
+echo "{"
+echo "}"
+}
+
+#
+# Execution...
+#
+
+# save any existing customizations
+if [[ -d ./Customizations/${class} ]];then
+  $UTIL_DIR/snip_custom ${class}Mapper.php > ./Customizations/${class}/${class}.methods
+fi
+
+# generate mapper template
+genMapper > ${class}Mapper.php;
+
+# housekeep mapper directories
+if [[ ! -d ./Customizations/${class} ]];then
+  mkdir ./Customizations/${class}
+  chmod 775 ./Customizations/${class}
+fi
+
+# append customizations
+if [[ -d ./Customizations/${class} ]];then
+  for f in $(find ./Customizations/${class} -type f);do
+   [[ -e $f ]] && cat $f >> ${class}Mapper.php;
+  done
+fi
+echo "}" >> ${class}Mapper.php;
+
+genCollection > ${class}Collection.php;
+genDeferred > Deferred${class}Collection.php;
+genCollectionInterface > ./Interfaces/Collections/${class}Collections.iface;
+genFinderInterface > ./Interfaces/Finders/${class}Finder.iface;
+
+genCollections > ../Interfaces/Collections.php
+for f in $(find ./Interfaces/Collections -type f);do
+  cat $f >> ../Interfaces/Collections.php
+done
+
+genFinders > ../Interfaces/Finders.php
+for f in $(find ./Interfaces/Finders -type f);do
+  cat $f >> ../Interfaces/Finders.php
+done
+
+sudo chmod -R $perms .
+sudo chown -R $owner .
+sudo chmod -R $perms ../Interfaces
+sudo chown -R $owner ../Interfaces
+

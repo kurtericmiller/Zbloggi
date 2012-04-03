@@ -1,0 +1,30 @@
+<div class="sideWrap clearfix">
+<div class="contribs">
+    <h3>Contributors</h3>
+    <hr>
+    <div class="linkWrap">
+        <ul>
+<?php
+$options['where'] = "role in ('admin','author')";
+$um = new Local_Domain_Mappers_UserMapper();
+$pm = new Local_Domain_Mappers_ProfileMapper();
+$uc = $um->findAll($options);
+foreach($uc as $u) {
+    $username = $u->get('username');
+    $p = $pm->findByUser($u->get('id'));
+    if ($p === null){
+        $first = $username;
+        $profile = '';
+    } else {
+        $first = $p->get('first') . ' ' . $p->get('last');
+        $profile = ' <a href="/profile/' . $p->get('user_id') . '" title="Profile"><img src="/images/user.png" width="16" height="16" alt="Profile"></img></a>';
+    }
+?>
+    <li><a href="/blog/author?author=<?php echo $u->get('id')?>" title="<?php echo $username?>"><?php echo $first?></a> <?php echo $profile?></li>
+<?php
+}
+?>
+        </ul>
+    </div>
+</div>
+</div>

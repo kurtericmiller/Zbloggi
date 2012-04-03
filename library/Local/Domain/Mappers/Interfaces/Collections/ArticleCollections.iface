@@ -1,0 +1,5 @@
+interface ArticleCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Article $obj);
+  function delete($pointer);
+}

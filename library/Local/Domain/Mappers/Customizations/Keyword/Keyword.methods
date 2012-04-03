@@ -1,0 +1,41 @@
+  function findByKeyword($keyword)
+  {
+    $sql = "select id from keywords where keyword = ?";
+    return $this->doStatement($sql, array($keyword), SINGLETON);
+  }
+  function addKeywords($article_id, array $keywords)
+  {
+    $sql = "delete from tag_join where article_id = ?";
+    $this->doStatement($sql, array($article_id));
+    $keyword_ids = array();
+    foreach ($keywords as $keyword) {
+      if (empty($keyword)) {
+        continue;
+      }
+      $k = new Local_Domain_Models_Keyword();
+      $k->set('keyword', $keyword);
+      try {
+        $k->finder()->insert($k);
+      }
+      catch(Exception $e) { /*ignore duplicate key exceptions*/
+      }
+      $keyword_ids[$keyword] = $this->findByKeyword($keyword);
+    }
+    foreach ($keywords as $keyword) {
+      if (empty($keyword)) {
+        continue;
+      }
+      $sql = "insert ignore into tag_join (article_id,keyword_id) values (?,?)";
+      $values = array($article_id, $keyword_ids[$keyword]);
+      $this->doStatement($sql, $values);
+    }
+    //Clear any unused keywords
+    $sql = "delete from keywords where id not in (select keyword_id from tag_join)";
+    $this->doStatement($sql, array());
+  }
+  function countKeyword()
+  {
+    $sql = "select count(keyword_id) as rank from tag_join where keyword_id = ? group by keyword_id";
+    $sql = "select k.keyword, count(j.keyword_id) as rank from keywords k, tag_join j where k.id = j.keyword_id group by k.keyword";
+    return $this->doStatement($sql, array());
+  }

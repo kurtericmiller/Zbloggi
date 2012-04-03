@@ -1,0 +1,3 @@
+interface MenuFinder extends Finders
+{
+}

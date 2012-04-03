@@ -1,0 +1,95 @@
+#!/usr/bin/zsh
+WHITE_F="\033[37m"
+GREEN_F="\033[32m"
+RED_F="\033[31m"
+YELLOW_F="\033[1m"
+RESET="\033[m"
+PHPUNIT='phpunit'
+function cleanup {
+ if [[ -e err.out ]];then
+   echo -e "\n==================================\n========== E R R O R S ===========\n==================================\n" >> tsts.out
+   cat err.out >> tsts.out
+ fi
+ rm -f err.out
+ rm -f tst.out
+ exit
+}
+
+function interrupt {
+ echo "Execution of $0 was interrupted."
+ cleanup 
+}
+
+trap interrupt INT
+trap cleanup EXIT TERM
+
+typeset -i cnt=0
+typeset -i tst=0
+typeset -i err=0
+
+arg=none
+[[ -n $1 ]] && arg=$1
+
+case $arg in
+  none) 
+    list=$(find . -type f -name '*[a-z]Test*.php' | sort);;
+    -h) echo -e "\ntsts (run all tests)"
+        echo "tsts [-e] re-run failed tests from a previous run"
+        echo -e "tsts <file> to run a single test\n"
+        exit;;
+    -e) 
+      if [[ -e tsts.err ]];then
+        list=$(cat tsts.err)
+        rm -f tsts.err
+      else
+        echo 'No error files (tsts.err) found'
+        exit
+      fi;;
+    *)
+      if [[ -e $1 ]];then
+        list=$1
+      else
+        echo "File not found: $1"
+        exit
+      fi;;
+esac
+
+TEST="test"
+TOTAL="Test was successful!"
+cnt=$(echo $list | wc -l)
+[[ $cnt > 1 ]] && TEST="tests"
+[[ $cnt > 1 ]] && TOTAL="All $cnt $TEST were successful!"
+
+setopt shwordsplit
+echo "Running $cnt $TEST..."
+rm -f tsts.out
+rm -f tsts.err
+for f in $list;do 
+  ((tst = $tst+1))
+  echo -e "\n--------" > tst.out
+  echo "Testing: $f" >> tst.out
+  echo "--------" >> tst.out
+  $PHPUNIT $f >> tst.out 2>&1;rc=$?
+  OUT_COLOR=${GREEN_F}
+  if [[ $rc != 0 ]];then
+    OUT_COLOR=${RED_F}
+    echo "$f" >> tsts.err
+    cat tst.out >> err.out
+    ((err = $err+1))
+  else
+    cat tst.out >> tsts.out
+  fi
+  echo -n "${WHITE_F}[${RESET}${YELLOW_F}"
+  printf '%02d of %02d' $tst $cnt
+  echo -n "${RESET}${WHITE_F}]${RESET}"
+  echo -e " ${OUT_COLOR}$f${RESET}"
+done
+if [[ $err != 0 ]];then
+  TOTERR="1 test had errors!"
+  [[ $err > 1 ]] && TEST="tests"
+  [[ $err > 1 ]] && TOTERR="$err $TEST had errors!"
+  echo $TOTERR
+  echo "run tsts -e to run failed tests"
+else
+  echo $TOTAL
+fi

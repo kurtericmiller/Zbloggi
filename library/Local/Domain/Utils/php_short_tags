@@ -1,0 +1,12 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+source ~/.project~
+APP=$PROJECT_DIR/$PROJECT_NAME
+list=$(find $APP -name '*.phtml')
+for f in $list;do
+  echo "file: $f"
+  sed -e 's/<?=/<?php echo /g' < $f > $f.new
+  mv $f $f.bak
+  mv $f.new $f
+  [[ $1 == 'del' ]] && rm $f.bak
+done

@@ -1,0 +1,2 @@
+phpdoc --title 'Test' -i */javascripts/* -t /opt/cruisecontrol/projects/ymozend/build/api -d /opt/cruisecontrol/projects/ymozend/source
+

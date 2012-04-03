@@ -1,0 +1,12 @@
+<div class="entity">
+<h3>Confirm Deletion:</h3>
+<p>User: <?php echo $this->title ?>
+<form action="<?php echo $this->url() ?>" method="post">
+    <div class="admin clearfix">
+        <input type="hidden" name="id" value="<?php echo $this->id ?>" />
+        <input type="submit" name="del" class="button" value="Yes" />
+        <input type="submit" name="del" class="button" value="No" />
+    </div>
+</form>
+<div class="clearfix"></div>
+</div>

@@ -1,0 +1,2 @@
+phpunit --log-junit /opt/cruisecontrol/projects/ymozend/build/logs/phpunit.xml --coverage-clover /opt/cruisecontrol/projects/ymozend/build/logs/phpunit.coverage.xml --configuration   /opt/cruisecontrol/projects/ymozend/source/tests/phpunit_ci.xml --coverage-html /opt/cruisecontrol/projects/ymozend/build/coverage 
+

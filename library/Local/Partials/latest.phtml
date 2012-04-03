@@ -1,0 +1,21 @@
+<div class="sideWrap clearfix">
+<div class="contribs">
+    <h3>Latest</h3>
+    <hr>
+    <div class="linkWrap">
+       <ul>
+<?php
+$am = new Local_Domain_Mappers_ArticleMapper();
+$options['offset'] = $this->offset;
+$options['count'] = $this->count;
+$options['where'] = 'published = 1';
+$options['sort'] = 'created_at desc';
+$ac = $am->findAll($options);
+foreach($ac as $a) { ?>
+  <li><a href="/blog/comment?id=<?php echo $a->get('id')?>" title="<?php echo $a->get('article_title')?>"><?php echo $a->get('article_title')?></a></li>
+<?php
+} ?>
+      </ul>
+    </div>
+</div>
+</div>

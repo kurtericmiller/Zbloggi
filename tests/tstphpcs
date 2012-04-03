@@ -1,0 +1,3 @@
+#phpcs --ignore=*/javascripts/* --report=checkstyle --standard=PEAR /opt/cruisecontrol/projects/ymozend/source
+phpcs --report=checkstyle --ignore=javascripts --standard=PEAR /opt/cruisecontrol/projects/ymozend/source
+

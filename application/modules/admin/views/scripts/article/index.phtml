@@ -1,0 +1,48 @@
+<?php
+$um = new Local_Domain_Mappers_UserMapper();
+echo '<div class="artWrap">';
+switch ($this->article_filter) {
+  case ("all"):
+    echo "<h2>Article Admin: <em>Displaying All Articles</em></h2>";
+    break;
+  case ("published"):
+    echo "<h2>Article Admin: <em>Displaying Published Articles</em></h2>";
+    break;
+  case ("pending"):
+    echo "<h2>Article Admin: <em>Displaying Pending Articles</em></h2>";
+    break;
+  default:
+    echo "<h2>Article Admin: <em>Displaying All Articles</em></h2>";
+}
+?>
+<div class="admin clearfix">
+  <a href=/admin/article?article_filter=all>All</a>
+  <a href=/admin/article?article_filter=published>Published</a>
+  <a href=/admin/article?article_filter=pending>Pending</a>
+</div>
+<div class="clearfix"></div>
+<hr>
+  <span class="title">New: </span>
+    <span class="createIt">(<a href=/admin/article/add>Create Article</a>)</span>
+<div class="clearfix"></div>
+<?php
+foreach ($this->ac as $a) {
+  $uid = $a->get('user_id');
+  if (!$this->UserIsAllowed($uid, $this->user)) {
+    continue;
+  }
+  $u = $um->find($uid);
+  $args = array(
+  'id' => $a->getId(),
+  'published' => $a->get('published'),
+  'username' => $u->get('username'),
+  'article_text' => $this->shortText($a->get('article_text')),
+  'article_title' => $a->get('article_title'),
+  'buttonset' => 'pedbuttons'
+  );
+  echo $this->partial('partials/article.phtml',$args);
+}
+  $filtration = array('select' => $this->select);
+  echo $this->paginationControl($this->paginator,'Sliding','pagination.phtml', $filtration); ?>
+<div class="clearfix"></div>
+</div>

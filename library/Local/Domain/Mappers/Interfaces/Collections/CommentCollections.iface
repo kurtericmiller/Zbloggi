@@ -1,0 +1,5 @@
+interface CommentCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Comment $obj);
+  function delete($pointer);
+}

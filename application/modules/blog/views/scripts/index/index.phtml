@@ -1,0 +1,37 @@
+<?php
+ $auth = Zend_Auth::getInstance();
+ if ($auth->hasIdentity()) {
+    if ($auth->getIdentity()->role == 'author') {
+        echo '<div class="art_link">';
+        echo '<span class="title">Authors: </span> <span class="createIt">(<a href=/admin/article>Manage Articles</a>)</span>';
+        echo '</div>';
+    }
+ }
+?>
+<p></p>
+<?php echo $this->selector?>
+<div class="articles">
+  <?php
+  foreach ($this->ac as $a) {
+    $am = new Local_Domain_Mappers_ArticleMapper();
+    $um = new Local_Domain_Mappers_UserMapper();
+    $uid = $a->get('user_id');
+    $user = $um->find($uid);
+    $args = array(
+      'article_text' => $this->shortText($a->get('article_text')),
+      'article_title' => $a->get('article_title'),
+      'username' => $user->get('username'),
+      'read_count' => $a->get('read_count'),
+      'comment_count' => $am->getCommentCount($a),
+      'published' => $a->get('updated_at'),
+      'id' => $a->getId(),
+      'uid' => $uid,
+      'keywords' => $am->getKeywords($a),
+      'continue' => true
+    );
+    echo $this->partial('article.phtml',$args);
+  } 
+  echo '<div class="clearfix"></div>';
+  $filtration = array('select' => $this->select);
+  echo $this->paginationControl($this->paginator,'Sliding','pagination.phtml', $filtration);?>
+</div>

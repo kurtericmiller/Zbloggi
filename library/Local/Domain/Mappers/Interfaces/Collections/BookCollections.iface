@@ -1,0 +1,5 @@
+interface BookCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Book $obj);
+  function delete($pointer);
+}

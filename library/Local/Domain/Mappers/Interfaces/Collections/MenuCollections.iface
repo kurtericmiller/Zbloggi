@@ -1,0 +1,5 @@
+interface MenuCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Menu $obj);
+  function delete($pointer);
+}

@@ -1,0 +1,5 @@
+interface UserCollections extends Iterator 
+{
+  function add(Local_Domain_Models_User $obj);
+  function delete($pointer);
+}

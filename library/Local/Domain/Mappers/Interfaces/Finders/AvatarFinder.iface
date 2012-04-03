@@ -1,0 +1,3 @@
+interface AvatarFinder extends Finders
+{
+}

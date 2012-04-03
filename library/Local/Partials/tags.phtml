@@ -1,0 +1,18 @@
+<div class="sideWrap clearfix">
+<div class="contribs">
+    <h3>Tags</h3>
+    <hr>
+    <div class="linkWrap aboutWrap">
+<?php
+$km = new Local_Domain_Mappers_KeywordMapper();
+$kw = $km->countKeyword();
+foreach ($kw as $k) {
+    $count = $k['rank'];
+    $keyword = $k['keyword'];
+    $size = $count * 10 + 75;
+    echo "<a href='/blog/tag?tag=" . $keyword . "' style='font-size: " . $size . "%;'>" . $keyword . "</a> ";
+}
+?>
+    </div>
+</div>
+</div>

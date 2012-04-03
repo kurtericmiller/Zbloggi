@@ -1,0 +1,108 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+source ~/.project~
+source $PROJECT_DIR/$PROJECT_NAME/sql/dbprofile
+
+MODEL_DIR="$PROJECT_DIR/$PROJECT_NAME/library/Local/Domain/Models"
+cd $MODEL_DIR
+
+if [[ $# < 2 ]];then
+  echo -e "\n$0 usage: 2 required arguments"
+  echo "1) class (i.e Domain_User)"
+  echo "2) table (i.e users)"
+  echo "3) [mysql db]"
+  echo "4) [mysql user]"
+  echo -e "5) [mysql pw]\n"
+  exit;
+fi
+
+class=$1
+table=$2
+[[ -z $db ]] && db=$3
+[[ -z $user ]] && user=$4
+[[ -z $pw ]] && pw=$5
+colmax=-1
+columns=''
+
+function init {
+  columns=$(/usr/bin/mysql -Nb -D$db -u$user -p$pw -e "show columns from $table"| cut -f1 )
+}
+
+function genModel {
+  for c in $columns;do
+    (( colmax = $colmax+1 ))
+  done
+  echo "<?php"
+  echo "/**"
+  echo " * User object definition"
+  echo " * @package Domain"
+  echo " */"
+  echo "/**"
+  echo " * ${class} class"
+  echo " *"
+  echo " * Contains table mappings and accessors"
+  echo " */"
+  echo ""
+  echo "class Local_Domain_Models_${class} extends Local_Domain_DomainObject {"
+  for c in $columns;do
+  echo "  private \$_$c;"
+  done
+  echo ""
+  echo "  function __construct ("
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = colcnt+1 ))
+     echo -n "    \$$c = null"
+     if [[ $colcnt != $colmax ]];then
+      echo ","
+     fi
+  done
+  echo -e "\n  ) { parent::__construct(\$id);"
+  echo "      \$defaults = \$this->getDefaults();"
+  colcnt=-1
+  for c in $columns;do
+    (( colcnt = colcnt+1 ))
+    if [[ $colcnt != 0 ]];then
+     echo "      \$this->_$c = is_null(\$$c) ? \$defaults['_$c'] : \$$c;"
+    fi
+  done
+  echo "    }"
+  echo ""
+  echo "  /** Set valid property to value (not null)"
+  echo "   *"
+  echo "   * @param string \$property"
+  echo "   * @param mixed \$value"
+  echo "   * @throws Exception for invalid property"
+  echo "   */"
+  echo "  function set(\$property, \$value) {"
+  echo "    \$property = '_' . \$property;"
+  echo "    if (key_exists(\$property, get_object_vars(\$this))) {"
+  echo "      if (isset(\$value)) {"
+  echo "       \$this->\$property = \$value;"
+  echo "      }"
+  echo "      \$this->markDirty();"
+  echo "    } else {"
+  echo "      throw new Local_Exceptions_AppException(__METHOD__ . \" says there was a call to the (set) method on a non-existent property: [ {\$property} ]\");"
+  echo "    }"
+  echo "  }"
+  echo "  /** Get valid property value"
+  echo "   *"
+  echo "   * @param string \$property"
+  echo "   * @param mixed \$value"
+  echo "   * @throws Exception for invalid property"
+  echo "   */"
+  echo "  function get(\$property) {"
+  echo "    \$property = '_' . \$property;"
+  echo "    if (key_exists(\$property, get_object_vars(\$this))) {"
+  echo "      return \$this->\$property;"
+  echo "    } else {"
+  echo "      throw new Local_Exceptions_AppException(__METHOD__ . \"says there was a call to the (get) method on a non-existent property: [ {\$property} ]\");"
+  echo "    }"
+  echo "  }"
+  echo "}"
+  echo "?>"
+}
+
+init
+genModel > ${class}.php
+

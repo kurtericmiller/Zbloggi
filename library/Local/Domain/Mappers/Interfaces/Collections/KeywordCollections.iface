@@ -1,0 +1,5 @@
+interface KeywordCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Keyword $obj);
+  function delete($pointer);
+}

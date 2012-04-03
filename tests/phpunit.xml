@@ -1,0 +1,21 @@
+<phpunit bootstrap="./bootstrap.php">
+  <testsuites> <testsuite name="ApplicationTestSuite">
+      <directory>./</directory>
+    </testsuite>
+  </testsuites>
+<filter>
+  <blacklist>
+    <directory suffix=".php">../library/Zend</directory>
+    <directory suffix=".php">../usr/local/zend</directory>
+    <directory suffix=".php">../public/javascripts/zend</directory>
+    <directory suffix=".php">./</directory>
+  </blacklist>
+</filter>
+<!--
+  <logging>
+    <log type="coverage-html" target="./reports/coverage" charset="UTF-8"
+         yui="true" highlight="false" lowUpperBound="35" highLowerBound="70"/>
+       <log type="testdox-text" target="./reports/testdox/testdox.txt"/>
+  </logging>
+-->
+</phpunit>

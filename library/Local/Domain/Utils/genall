@@ -1,0 +1,9 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+typeset -A MAPPERS
+MAPPERS=(Article articles Book books Comment comments User users Keyword keywords Profile profiles Avatar avatars Section sections Setting settings Registration registrations Menu menus)
+#printf '%s => %s\n' ${(kv)MAPPERS}
+for k in ${(k)MAPPERS};do
+   genmodel $k $MAPPERS[$k]
+   genmapper $k $MAPPERS[$k]
+done

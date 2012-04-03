@@ -1,0 +1,8 @@
+<?php if ($this->print_header) { ?>
+  <h3>Article: <em><?php echo $this->article_title?></em></h3>
+<?php } ?>
+<div class="admin">
+<a href="/admin/comment/delete?id=<?php echo $this->id?>">Delete</a>
+<p class="delComment"><?php echo substr($this->comment_text, 0, 110)?></p>
+</div>
+<div class="clearfix"></div>

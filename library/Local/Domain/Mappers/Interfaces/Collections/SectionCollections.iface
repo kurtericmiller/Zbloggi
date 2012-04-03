@@ -1,0 +1,5 @@
+interface SectionCollections extends Iterator 
+{
+  function add(Local_Domain_Models_Section $obj);
+  function delete($pointer);
+}

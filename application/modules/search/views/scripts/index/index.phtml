@@ -1,0 +1,30 @@
+<div class="admbody">
+<div class="entity">
+<h2>Results</h2>
+
+<p><?php echo count($this->results); ?> result(s) found.</p>
+<hr>
+<?php if (count($this->results)): ?>
+    <?php $x = 1; ?>
+    <table class="tsearch clearfix">
+        <tr class="theader">
+            <td class="tid">ID</td>
+            <td class="ttitle">Title</td>
+            <td class="tauthor">Author</td>
+            <td class="tpubdate">Pub. Date</td>
+        </tr>
+    <?php foreach ($this->results as $r): ?>
+        <tr>
+            <td><?php echo $r->RecordID?></td>
+            <td><a href="/blog/comment?id=<?php echo $r->RecordID?>"><?php echo $r->Title?></a></td>
+            <td><?php echo $r->Author?></td>
+            <td><?php echo $r->Published?></td>
+        </tr>
+        <?php $x++; ?>
+    <?php endforeach; ?>
+    </table>
+    <hr>
+<?php endif; ?>
+</div>
+</div>
+

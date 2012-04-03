@@ -1,0 +1,13 @@
+  function findByUser($id)
+  {
+    $options['field'] = 'user_id';
+    $options['value'] = $id;
+    if ($this->exists($options)) {
+      $profile = $this->doStatement('select id from profiles WHERE user_id = ?', array($id), SINGLETON);
+      if (isset($profile)) {
+        $result = $this->doStatement($this->selectStmt, $profile);
+        return $this->load($result);
+      }
+    }
+    return null;
+  }

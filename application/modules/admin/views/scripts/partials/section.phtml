@@ -1,0 +1,14 @@
+<?php
+if (1 == $this->published) {
+  $published = '<span class="pub">[Published]</span>';
+} else {
+  $published = '<span class="nopub">[Pending]</span>';
+}
+echo '<div class="entity">';
+echo $published . '<span class="titles"> ' . $this->section_title . '</span>';
+echo '<div class="artText clearfix">';
+echo $this->section_text;
+echo '</div>';
+echo $this->partial("partials/$this->buttonset.phtml",array('id' => $this->id, 'entity' => 'section')); ?>
+<div class="clearfix"></div>
+</div>

@@ -1,0 +1,5 @@
+    public function getMaxId(){
+      $sql = 'select MAX(id) from settings';
+      $result =  $this->doStatement($sql, array(), SINGLETON);
+      return $result;
+    }

@@ -1,0 +1,26 @@
+<?php
+?>
+<div class="artWrap">
+<h2>Book Admin:</h2>
+<div class="clearfix"></div>
+<hr>
+  <span class="title">New: </span>
+    <span class="createIt">(<a href=/admin/book/add>Add a Book</a>)</span>
+<div class="clearfix"></div>
+<div class="entity">
+<?php
+foreach ($this->bc as $b) {
+  $book_id = $b->getId();
+  $book_title = $b->get('title');
+  $book_author = $b->get('author');
+echo '<span class="titles"> ' . $book_title . '</span> <span class="author"> by: ' . $book_author . '</span>';
+echo '<div class="admin clearfix">';
+echo '<a href="/admin/book/edit?id=' . $book_id . '">Edit</a>';
+echo '<a href="/admin/book/delete?id=' . $book_id . '">Delete</a>';
+echo '</div>';
+echo '<div class="clearfix"></div>';
+}
+echo '</div>';
+echo '<div class="clearfix"></div>';
+?>
+</div>

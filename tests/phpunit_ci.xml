@@ -1,0 +1,19 @@
+<phpunit bootstrap="./bootstrap.php" 
+         backupGlobals="false" 
+         backupStaticAttributes="false"  
+         processIsolation="true"
+         cacheTokens="true">
+  <testsuites> 
+    <testsuite name="ApplicationTestSuite">
+      <directory>./</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <blacklist>
+      <directory suffix=".php">../library/Zend</directory>
+      <directory suffix=".php">../usr/local/zend</directory>
+      <directory suffix=".php">../public/javascripts</directory>
+      <directory suffix=".php">./</directory>
+    </blacklist>
+  </filter>
+</phpunit>

@@ -1,0 +1,11 @@
+<?php
+$am = new Local_Domain_Mappers_SectionMapper;
+$a = $am->find($this->section_id);
+$args = array(
+ 'id' => $a->getId(),
+ 'published' => $a->get('published'),
+ 'section_text' => $a->get('section_text'),
+ 'section_title' => $a->get('section_title'),
+ 'buttonset' => 'prebuttons'
+);
+echo $this->partial('partials/section.phtml',$args);
