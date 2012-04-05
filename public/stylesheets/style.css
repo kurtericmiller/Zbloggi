@@ -670,6 +670,7 @@ a:hover {
 
 .twoCol {
   padding: 0 10px 0 10px;
+  width: 1020px;
   margin: 0 auto;
   float: left;
 }

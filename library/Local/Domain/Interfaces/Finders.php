@@ -6,12 +6,12 @@
  */
 /** Methods to manipulate individual domain objects. */
 interface Finders {
-  function find($id);
-  function findAll($options=null);
-  function newId();
-  function update(Local_Domain_DomainObject $obj);
-  function insert(Local_Domain_DomainObject $obj);
-  function delete(Local_Domain_DomainObject $obj);
+    function find($id);
+    function findAll($options=null);
+    function newId();
+    function update(Local_Domain_DomainObject $obj);
+    function insert(Local_Domain_DomainObject $obj);
+    function delete(Local_Domain_DomainObject $obj);
 }
 interface BookFinder extends Finders
 {

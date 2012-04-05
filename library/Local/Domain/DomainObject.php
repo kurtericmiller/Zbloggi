@@ -19,75 +19,75 @@ require_once ("Interfaces/Collections.php");
  */
 abstract class Local_Domain_DomainObject
 {
-  private $id;
-  /** Instantiate a domain object.
-   *  If an id is passed in, it references an existing object.
-   *  Otherwise, an id is generated for a newly created object.
-   *
-   *  @param integer $id
-   */
-  function __construct($id = null)
-  {
-    $this->id = $id;
-    if (!$this->id) {
-      $this->id = $this->finder()->newId();
-      $this->markNew();
+    private $id;
+    /** Instantiate a domain object.
+     *  If an id is passed in, it references an existing object.
+     *  Otherwise, an id is generated for a newly created object.
+     *
+     *  @param integer $id
+     */
+    function __construct($id = null)
+    {
+        $this->id = $id;
+        if (!$this->id) {
+            $this->id = $this->finder()->newId();
+            $this->markNew();
+        }
     }
-  }
-  /** Return this object's id */
-  function getId()
-  {
-    return $this->id;
-  }
-  /** Find a domain object */
-  function finder()
-  {
-    return self::getFinder(get_class($this));
-  }
-  /** Return all objects of a given type */
-  function collection()
-  {
-    return self::getCollection(get_class($this));
-  }
-  /** Resolve domain objects */
-  static function getFinder($type)
-  {
-    return Local_Domain_HelperFactory::getFinder($type);
-  }
-  /** Resolve collection objects */
-  static function getCollection($type)
-  {
-    return Local_Domain_HelperFactory::getCollection($type);
-  }
-  /** Cache the object for addition (table insert) */
-  function markNew()
-  {
-    Local_Domain_ObjectWatcher::addNew($this);
-  }
-  /** Remove object from all pending activity lists. */
-  function markClean()
-  {
-    Local_Domain_ObjectWatcher::addClean($this);
-  }
-  /** Cached object changes will be applied. */
-  function markDirty()
-  {
-    Local_Domain_ObjectWatcher::addDirty($this);
-  }
-  /** Cached object will be deleted */
-  function markDeleted()
-  {
-    Local_Domain_ObjectWatcher::addDelete($this);
-  }
-  /** Return id for the last db operation */
-  function getLastId()
-  {
-    return $this->finder()->getInsertId();
-  }
-  /** Return the defaults settings for a db table */
-  function getDefaults()
-  {
-    return $this->finder()->getTableDefaults();
-  }
+    /** Return this object's id */
+    function getId()
+    {
+        return $this->id;
+    }
+    /** Find a domain object */
+    function finder()
+    {
+        return self::getFinder(get_class($this));
+    }
+    /** Return all objects of a given type */
+    function collection()
+    {
+        return self::getCollection(get_class($this));
+    }
+    /** Resolve domain objects */
+    static function getFinder($type)
+    {
+        return Local_Domain_HelperFactory::getFinder($type);
+    }
+    /** Resolve collection objects */
+    static function getCollection($type)
+    {
+        return Local_Domain_HelperFactory::getCollection($type);
+    }
+    /** Cache the object for addition (table insert) */
+    function markNew()
+    {
+        Local_Domain_ObjectWatcher::addNew($this);
+    }
+    /** Remove object from all pending activity lists. */
+    function markClean()
+    {
+        Local_Domain_ObjectWatcher::addClean($this);
+    }
+    /** Cached object changes will be applied. */
+    function markDirty()
+    {
+        Local_Domain_ObjectWatcher::addDirty($this);
+    }
+    /** Cached object will be deleted */
+    function markDeleted()
+    {
+        Local_Domain_ObjectWatcher::addDelete($this);
+    }
+    /** Return id for the last db operation */
+    function getLastId()
+    {
+        return $this->finder()->getInsertId();
+    }
+    /** Return the defaults settings for a db table */
+    function getDefaults()
+    {
+        return $this->finder()->getTableDefaults();
+    }
 }
 ?>
