@@ -52,7 +52,12 @@ class Local_Api_Blogger
         if (!$this->login($username, $password)) {
             return $blogInfo;
         }
-        $bi = array('blogid' => 'YMOZ', 'xmlrpc' => 'http://ymozend.com/xmlrpc', 'url' => 'http://ymozend.com', 'blogName' => 'Your Moment of Zend');
+        $localReg = Zend_Registry::get('local');
+        $bi = array(
+            'blogid' => 'ZBL',
+            'xmlrpc' => $localReg->get('site_url') . '/xmlrpc',
+            'url' => $localReg->get('site_url'),
+            'blogName' => $localReg->get('site_title'));
         $blogInfo[] = $bi;
         return $blogInfo;
     }
@@ -78,7 +83,14 @@ class Local_Api_Blogger
             $firstname = $p->get('first');
             $lastname = $p->get('last');
         }
-        $userInfo = array('userid' => $this->_user->id, 'firstname' => $firstname, 'lastname' => $lastname, 'nickname' => $this->_user->username, 'email' => $this->_user->email, 'url' => 'http://ymozend.com/profile/' . $this->_user->id);
+        $localReg = Zend_Registry::get('local');
+        $userInfo = array(
+            'userid' => $this->_user->id,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'nickname' => $this->_user->username,
+            'email' => $this->_user->email,
+            'url' => $localReg->get('site_url') . '/profile/' . $this->_user->id);
         return $userInfo;
     }
     /**

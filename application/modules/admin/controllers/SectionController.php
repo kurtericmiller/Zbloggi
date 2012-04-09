@@ -165,12 +165,13 @@ class Admin_SectionController extends Zend_Controller_Action
         plugin_ccSimpleUploader_upload_substitute_path : "/attachments/",
         
         // Theme options - button# indicated the row# only
-        theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,formatselect,|,pagebreak",
+        theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,fontselect,formatselect,|,pagebreak",
         theme_advanced_buttons2 : "cut,copy,paste,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,jbimages,|,code,preview,|,forecolor,backcolor",
         theme_advanced_buttons3 : "insertdate,inserttime,|,spellchecker,advhr,,removeformat,|,sub,sup,|,charmap,emotions,|,ccSimpleUploader",
         theme_advanced_toolbar_location : "top",
         theme_advanced_toolbar_align : "left",
         theme_advanced_statusbar_location : "bottom",
+        theme_advanced_blockformats : "p,pre,code,h1,h2,h3,h4,h5,h6,blockquote",
         theme_advanced_resizing : true
     });', 'text/javascript');
     }

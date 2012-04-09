@@ -37,7 +37,7 @@ echo '<div class="clearfix"></div><p></p>';
 ?>
     <h3>About: <?php echo $user->get('username')?></h3>
 <div class="bio clearfix">
-    <a href="/profile/<?php echo $profile->get('user_id')?>" alt="Profile"><img src="/images/avatars/<?php echo $profile->get('avatar')?>" width=100px height=100px title="Profile"></img></a>
+    <a href="/profile/<?php echo $profile->get('user_id')?>" alt="Profile"><img src="/images/avatars/<?php echo $profile->get('avatar')?>" width=100px height=100px title="Profile" /></a>
     <p><?php echo $profile->get('bio_text')?></p>
     <p>Web site: <a href="<?php echo $profile->get('website')?>" target=_blank><?php echo $profile->get('website')?></a></p>
 </div>

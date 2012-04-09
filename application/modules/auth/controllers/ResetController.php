@@ -42,8 +42,12 @@ class Auth_ResetController extends Zend_Controller_Action
             $salt = $opts['salt'];
             $pw = SHA1($newpw . $salt);
             $u->set('password', $pw);
+            $localReg = Zend_Registry::get('local');
+            $protocols = array('http://','https://');
+            $domain = str_replace($protocols, "", $localReg->get('site_url'));
+            $from = 'noreply@' . $domain;
             $body = 'Your request for a new access code has been received. Please use "' . $newpw . '" to log in. Note: There are no numbers in this new code.';
-            $this->_helper->mailer('noreply@ymozend.com', $values['email'], $body, 'Information from YMOZ');
+            $this->_helper->mailer($from, $values['email'], $body, 'Information from ' . $localReg->get('site_title'));
             return true;
         } else {
             return false;

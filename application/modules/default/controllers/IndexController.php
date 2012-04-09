@@ -52,7 +52,7 @@ class Default_IndexController extends Zend_Controller_Action
                 $sendee = $defemail;
                 $body = $values['bodytext'];
                 $body.= "\n\nThis email sent by: " . $sender . "\n";
-                $subject = 'YMOZ Contact';
+                $subject = $this->_localReg->get('site_title') . ' Contact';
                 $this->_helper->mailer($sender, $sendee, $body, $subject);
                 $this->_helper->getHelper('FlashMessenger')->addMessage('<span class="fmessage">Thank you. Message sent.</span>');
             } else {

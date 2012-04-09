@@ -58,7 +58,8 @@ SyntaxHighlighter.all();", 'text/javascript');
         $um = new Local_Domain_Mappers_UserMapper();
         $c = new Local_Domain_Models_Comment();
         if (APPLICATION_ENV !== 'testing') {
-            $akismet = new Zend_Service_Akismet('eac1c60a2b8b', 'http://www.ymozend.com/blog/');
+            $localReg = Zend_Registry::get('local');
+            $akismet = new Zend_Service_Akismet('eac1c60a2b8b', $localReg->get('site_url') . '/blog/');
             $data = array('user_ip' => $_SERVER['REMOTE_ADDR'], 'user_agent' => $_SERVER['HTTP_USER_AGENT'], 'comment_content' => $values['comment_text']);
             $result = $akismet->isSpam($data);
         } else {

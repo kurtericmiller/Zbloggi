@@ -34,8 +34,12 @@ class User_RegistrationController extends Zend_Controller_Action
         $user->set('role', 'guest');
         $user->finder()->insert($user);
         $reg_string = $this->_helper->rand_string(20);
-        $body = "Welcome to 'Your Moment of Zend'. Thank you for registering.\n" . "\n" . "Please complete the registration process by clicking on the following link:\n" . "\n" . "http://www.ymozend.com/user/registration/confirm?reg=" . $reg_string . "\n" . "\n" . "or cut and paste the above in to your browser.\n" . "\n" . "Be sure to fill out your profile once you've logged in. See you soon.\n";
-        $this->_helper->mailer('noreply@www.ymozend.com', $values['email'], $body, 'Your Moment of Zend');
+        $localReg = Zend_Registry::get('local');
+        $protocols = array('http://','https://');
+        $domain = str_replace($protocols, "", $localReg->get('site_url'));
+        $from = 'noreply@' . $domain;
+        $body = "Welcome to '" . $localReg->get('site_title') . "'. Thank you for registering.\n" . "\n" . "Please complete the registration process by clicking on the following link:\n" . "\n" . $localReg->get('site_url') . "/user/registration/confirm?reg=" . $reg_string . "\n" . "\n" . "or cut and paste the above in to your browser.\n" . "\n" . "Be sure to fill out your profile once you've logged in. See you soon.\n";
+        $this->_helper->mailer($from, $values['email'], $body, $localReg->get('site_title'));
         $reg = new Local_Domain_Models_Registration();
         $um = new Local_Domain_Mappers_UserMapper();
         $uid = $um->findByEmail($values['email']);

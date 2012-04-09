@@ -234,10 +234,11 @@ class Local_Api_MetaWeblog
         if (!$this->login($username, $password)) {
             return $categories;
         }
+        $localReg = Zend_Registry::get('local');
         $km = new Local_Domain_Mappers_KeywordMapper();
         $kc = $km->findAll();
         foreach ($kc as $k) {
-            $category = array('title' => $k->get('keyword'), 'description' => $k->get('keyword'), 'htmlUrl' => 'http://ymozend.com/blog/tag?tag=' . $k->get('keyword'), 'rssUrl' => '', 'categoryName' => $k->get('keyword'), 'categoryId' => $k->get('id'));
+            $category = array('title' => $k->get('keyword'), 'description' => $k->get('keyword'), 'htmlUrl' => $localReg->get('site_url') . '/blog/tag?tag=' . $k->get('keyword'), 'rssUrl' => '', 'categoryName' => $k->get('keyword'), 'categoryId' => $k->get('id'));
             $categories[] = $category;
         }
         return $categories;

@@ -17,7 +17,7 @@ foreach($uc as $u) {
         $profile = '';
     } else {
         $first = $p->get('first') . ' ' . $p->get('last');
-        $profile = ' <a href="/profile/' . $p->get('user_id') . '" title="Profile"><img src="/images/user.png" width="16" height="16" alt="Profile"></img></a>';
+        $profile = ' <a href="/profile/' . $p->get('user_id') . '" title="Profile"><img src="/images/user.png" width="16" height="16" alt="Profile" /></a>';
     }
 ?>
     <li><a href="/blog/author?author=<?php echo $u->get('id')?>" title="<?php echo $username?>"><?php echo $first?></a> <?php echo $profile?></li>

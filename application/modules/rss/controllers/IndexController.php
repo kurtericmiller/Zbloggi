@@ -2,17 +2,24 @@
 class Rss_IndexController extends Zend_Rest_Controller
 {
     private $_apiBaseUrl;
+    private $_localReg;
     // disable layouts and rendering
     public function init()
     {
-        $this->_apiBaseUrl = 'http://ymozend.com/blog';
+        $this->_localReg = Zend_Registry::get('local');
+        $this->_apiBaseUrl = $this->_localReg->get('site_url') . '/blog';
         $this->_helper->layout->disableLayout();
         $this->getHelper('viewRenderer')->setNoRender(true);
     }
     public function indexAction()
     {
         // set feed elements
-        $output = array('title' => 'Your Moment of Zend articles', 'link' => $this->_apiBaseUrl, 'author' => 'ymozend API/1.0', 'charset' => 'UTF-8', 'entries' => array());
+        $output = array(
+            'title' => $this->_localReg->get('site_title') . ' articles',
+            'link' => $this->_apiBaseUrl,
+            'author' => 'zbloggi API/1.0',
+            'charset' => 'UTF-8',
+            'entries' => array());
         // get records from database
         $am = new Local_Domain_Mappers_ArticleMapper();
         $options['where'] = 'published = 1';
@@ -43,22 +50,27 @@ class Rss_IndexController extends Zend_Rest_Controller
         // set entry elements
         if (count($ac) == 1) {
             // set feed elements
-            $output = array('title' => 'YMOZend article for ID: ' . $id, 'link' => $this->_apiBaseUrl . '/comment?id=' . $id, 'author' => 'ymozend API/1.0', 'charset' => 'UTF-8', 'entries' => array());
+            $output = array(
+                'title' => $this->_localReg->get('site_title') . ' article for ID: ' . $id,
+                'link' => $this->_apiBaseUrl . '/comment?id=' . $id,
+                'author' => 'zbloggi API/1.0',
+                'charset' => 'UTF-8',
+                'entries' => array());
             // set entry elements
             $output['entries'][0] = array('title' => $ac->get('article_title'), 'link' => $this->_apiBaseUrl . '/comment?id=' . $id, 'description' => 'This is an article.', 'created' => strtotime($ac->get('created_at')), 'updated' => strtotime($ac->get('updated_at')));
             // import array into atom feed
             $feed = Zend_Feed::importArray($output, 'rss');
-            Zend_Feed::registerNamespace('ymozend', 'http://ymozend.com');
+            Zend_Feed::registerNamespace('zbloggi', $this->_localReg->get('site_url') . '/rss');
             // set custom namespaced elements
             $feed->rewind();
             $entry = $feed->current();
             if ($entry) {
-                $entry->{'ymozend:id'} = $ac->get('id');
-                $entry->{'ymozend:title'} = $ac->get('article_title');
-                $entry->{'ymozend:description'} = 'This is an article.';
-                $entry->{'ymozend:content'} = $ac->get('article_text');
-                $entry->{'ymozend:created'} = strtotime($ac->get('created_at'));
-                $entry->{'ymozend:updated'} = strtotime($ac->get('updated_at'));
+                $entry->{'zbloggi:id'} = $ac->get('id');
+                $entry->{'zbloggi:title'} = $ac->get('article_title');
+                $entry->{'zbloggi:description'} = 'This is an article.';
+                $entry->{'zbloggi:content'} = $ac->get('article_text');
+                $entry->{'zbloggi:created'} = strtotime($ac->get('created_at'));
+                $entry->{'zbloggi:updated'} = strtotime($ac->get('updated_at'));
             }
             // output to client
             $feed->send();

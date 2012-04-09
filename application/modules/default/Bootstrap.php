@@ -34,6 +34,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initView()
     {
         $localReg = Zend_Registry::get('local');
+        $site_url = $localReg->get('site_url');
         $view = new Zend_View();
         $view->doctype('HTML5');
         $view->setEncoding('UTF-8');
@@ -51,13 +52,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         */
         $view->headLink(array('rel' => 'favicon', 'href' => '/favicon.ico', 'type' => 'image/icon'));
         $view->headLink(array('rel' => 'profile', 'href' => 'http://qmpg.org/xfn/11'));
-        $view->headLink()->appendAlternate('http://www.ymozend.com/rss/', 'application/rss+xml', 'Your Moment of Zend » Feed');
+        $view->headLink()->appendAlternate($site_url . '/rss/', 'application/rss+xml', $localReg->get('site_title') . ' » Feed');
         //$view->headLink(array(
         //        'rel' => 'canonical',
         //        'href' => 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']));
-        $view->headLink(array('rel' => 'canonical', 'href' => 'http://www.ymozend.com/'));
-        $view->headLink(array('rel' => 'prev', 'href' => 'http://www.ymozend.com/about/', 'title' => 'About'));
-        $view->headLink(array('rel' => 'next', 'href' => 'http://www.ymozend.com/blog/', 'title' => 'Blog'));
+        $view->headLink(array('rel' => 'canonical', 'href' => $site_url));
+        $view->headLink(array('rel' => 'prev', 'href' => $site_url . '/about/', 'title' => 'About'));
+        $view->headLink(array('rel' => 'next', 'href' => $site_url . '/blog/', 'title' => 'Blog'));
         $view->addHelperPath(APPLICATION_ROOT . '/library/Local/Helpers/View', 'View_Helper');
         $view->addScriptPath(APPLICATION_ROOT . '/library/Local/Partials/');
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
