@@ -2,6 +2,10 @@
 /* Dimensions */
 /* Fonts */
 /***** Accordion Title  default state *****/
+.dijitAccordionTitleFocus {
+  outline: #000 none 0;
+}
+
 .claro .dijitAccordionTitle {
   background-color: #5c1916 !important;
   color: #fff8dc !important;
@@ -52,5 +56,5 @@
 .claro .dijitAccordionContainer-dijitContentPane {
   background-color: #bbab93 !important;
   border-color: #bbab93 !important;
-  font-size: 140%;
+  font-size: 130%;
 }

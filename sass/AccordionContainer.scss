@@ -1,5 +1,9 @@
 @import "vars";
 /***** Accordion Title  default state *****/
+.dijitAccordionTitleFocus {
+  outline: #000 none 0;
+}
+
 .claro .dijitAccordionTitle {
   background-color: $articleTitleLinkBgColor !important;
   color: $articleTitleLinkFgColor !important;
@@ -42,5 +46,5 @@
 .claro .dijitAccordionContainer-dijitContentPane {
   background-color: $articleBgColor !important;
   border-color: $articleBgColor !important;
-  font-size: 140%;
+  font-size: 130%;
 }
