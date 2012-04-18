@@ -1,13 +1,13 @@
-  
-  /** Return user id for this email address */
-  function findByEmail($email)
-  {
-    return $this->doStatement('select id from users WHERE email = ?', array($email), SINGLETON);
-  }
-  /** Return user proper name for this user */
-  function getProperName(Local_Domain_DomainObject $user)
-  {
-    $id = $user->getId();
-    $result = $this->doStatement('select CONCAT(first," ",last) from profiles WHERE user_id = ?', array($id), SINGLETON);
-    return (strlen($result) > 0) ? $result : 'anonymous user';
-  }
+    
+    /** Return user id for this email address */
+    function findByEmail($email)
+    {
+        return $this->doStatement('select id from users WHERE email = ?', array($email), SINGLETON);
+    }
+    /** Return user proper name for this user */
+    function getProperName(Local_Domain_DomainObject $user)
+    {
+        $id = $user->getId();
+        $result = $this->doStatement('select CONCAT(first," ",last) from profiles WHERE user_id = ?', array($id), SINGLETON);
+        return (strlen($result) > 0) ? $result : 'anonymous user';
+    }

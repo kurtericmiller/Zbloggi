@@ -1,14 +1,18 @@
-<?php /* @var $this Zend_View */ ?> 
+<?php /* @var $this Zend_View */ ?>
 <?php $localReg = Zend_Registry::get('local'); ?>
+<?php $config = Zend_Registry::get('config'); ?>
 <?php echo $this->doctype() . "\n"?>
-<html> 
-<head> 
+<html>
+<head>
  <?php echo $this->headTitle()?>
  <?php echo $this->headMeta()?>
+ <?php if ($this->dojo()->isEnabled()): ?>
+ <?php   echo $this->dojo() ?>
+ <?php endif ?>
  <?php echo $this->headLink()?>
  <?php echo $this->headStyle()?>
-</head> 
-<body class = "tundra"> 
+</head>
+<body class = "<?php echo $config["dojo"]["theme"] ?>">
     <div class="container">
         <div id="topWrap">
             <div id="logged-in-as">
@@ -22,7 +26,7 @@
                 <h3><?php echo $localReg->get('site_tagline') ?></h3>
             </div><!-- end header -->
         </div><!-- end topWrap -->
-        <?php /* NESTED LAYOUT SUPPORT */ ?> 
+        <?php /* NESTED LAYOUT SUPPORT */ ?>
         <?php if ($this->layout()->nestedLayout): ?>
         <?php
             $this->layout()->setLayout($this->layout()->nestedLayout)?>
@@ -66,7 +70,6 @@
                 <strong>Location:</strong><br />
                 <address>
                 San Francisco/Bay Area, CA<br />
-                (Available for travel)
                 </address>
                 <p></p>
                 <ul>
@@ -75,6 +78,7 @@
                     <li><a href="/terms">Terms of Use</a></li>
                     <li><a href="/privacy">Privacy</a></li>
                     <li><a href="/credits">Credits</a></li>
+                    <li><a href="http://github.com/kurtericmiller/">On GitHub</a></li>
                 </ul>
             </div><!-- footWrap4 -->
             <div class="clearfix"></div>
@@ -86,7 +90,7 @@
             </div><!-- end copyright -->
         </div><!-- end footer -->
     </div><!-- end container -->
-    <?php /* OUTPUT JAVASCRIPT */ ?> 
+    <?php /* OUTPUT JAVASCRIPT */ ?>
     <?php echo $this->headScript()?>
     <?php echo $this->inlineScript()?>
 <script type="text/javascript">
@@ -102,5 +106,5 @@
   })();
 
 </script>
-</body> 
+</body>
 </html>

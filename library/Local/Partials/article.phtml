@@ -1,8 +1,9 @@
 <?php
 $mysqlDate = $this->published;
 $date = date("F j, Y", strtotime($mysqlDate)); 
-$args = array('title' => $this->article_title); ?>
-<div class = "articleItem"> 
+$args = array('title' => $this->article_title); 
+$article_max = ($this->article_count > 2) ? 'articleHidden' : ''; ?>
+<div class = "<?php echo $article_max; ?> articleItem"> 
  <div class = "articleTitle"> 
   <h2><a href="/blog/comment?id=<?php echo $this->id?>"> <?php echo $args['title']?></a></h2>
   <p>By: <a class="author" href="/blog/author?author=<?php echo $this->uid?>"><?php echo $this->username?></a> - Published: <?php echo $date?></p>
@@ -26,5 +27,4 @@ $args = array('title' => $this->article_title); ?>
  } ?>
  <span class="tagsList">- Tags: <?php echo $taglist?></span>
  </div>
- <hr>
 </div>

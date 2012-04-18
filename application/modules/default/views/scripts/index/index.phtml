@@ -1,54 +1,40 @@
 <?php
+$this->dojo()->enable();
+?>
+<div id="accordionStack" class="accordion"></div>
+<?php
 $am = new Local_Domain_Mappers_ArticleMapper();
 $cm = new Local_Domain_Mappers_CommentMapper();
 $um = new Local_Domain_Mappers_UserMapper();
 ?>
 <div class="headline">
-<p></p>
+</br>
 <?php
-    $a = $am->find($this->headlineId);
-    $uid = $a->get('user_id');
-    $user = $um->find($uid);
-    $args = array(
-      'article_text' => $this->shortText($a->get('article_text')),
-      'article_title' => $a->get('article_title'),
-      'username' => $user->get('username'),
-      'read_count' => $a->get('read_count'),
-      'comment_count' => $am->getCommentCount($a),
-      'published' => $a->get('updated_at'),
-      'id' => $a->getId(),
-      'uid' => $uid,
-      'keywords' => $am->getKeywords($a),
-      'continue' => true
-    );
-    echo $this->partial('article.phtml',$args);
+$a = $am->find($this->headlineId);
+$uid = $a->get('user_id');
+$user = $um->find($uid);
+$args = array('article_text' => $this->shortText($a->get('article_text')), 'article_title' => $a->get('article_title'), 'username' => $user->get('username'), 'read_count' => $a->get('read_count'), 'comment_count' => $am->getCommentCount($a), 'published' => $a->get('updated_at'), 'id' => $a->getId(), 'uid' => $uid, 'keywords' => $am->getKeywords($a), 'continue' => true);
+echo $this->partial('article.phtml', $args);
 ?>
 </div><!-- end headline -->
 
 <?php
-    $options['sort'] = 'created_at desc';
-    $options['where'] = 'published = 1 and id != ' . $this->headlineId;
-    $options['offset'] = 0;
-    $options['count'] = 2;
-    $ac = $am->findAll($options);
-    foreach($ac as $a) {
-        echo '<div class="arty">';
-        $uid = $a->get('user_id');
-        $user = $um->find($uid);
-        $args = array(
-          'article_text' => $this->shortText($a->get('article_text')),
-          'article_title' => $a->get('article_title'),
-          'username' => $user->get('username'),
-          'read_count' => $a->get('read_count'),
-          'comment_count' => $am->getCommentCount($a),
-          'published' => $a->get('updated_at'),
-          'id' => $a->getId(),
-          'uid' => $uid,
-          'keywords' => $am->getKeywords($a),
-          'continue' => true
-        );
-        echo $this->partial('article.phtml',$args);
-        echo '</div><!-- end arty -->';
-    }
+$options['sort'] = 'created_at desc';
+$options['where'] = 'published = 1 and id != ' . $this->headlineId;
+$options['offset'] = 0;
+$options['count'] = $this->num_articles;
+$article_count = 1;
+$ac = $am->findAll($options);
+foreach ($ac as $a) {
+  echo '<div class="arty">';
+  $uid = $a->get('user_id');
+  $user = $um->find($uid);
+  $args = array('article_count' => $article_count++, 'article_text' => $this->shortText($a->get('article_text')), 'article_title' => $a->get('article_title'), 'username' => $user->get('username'), 'read_count' => $a->get('read_count'), 'comment_count' => $am->getCommentCount($a), 'published' => $a->get('updated_at'), 'id' => $a->getId(), 'uid' => $uid, 'keywords' => $am->getKeywords($a), 'continue' => true);
+  echo $this->partial('article.phtml', $args);
+  echo '</div><!-- end arty -->';
+}
 ?>
 <div class="clearfix"></div>
+<?php
+$this->headScript()->appendFile('/javascripts/accordian.js');
+?>

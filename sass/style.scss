@@ -244,10 +244,6 @@ a {
     &:hover { color: $navLinkHvColor; }
 }
 
-.nav.adminmenu {
-    border-top: 1px solid $borderColor;
-}
-
 .nav.adminmenu a {
     background-color: $navAdmLinkFgColor;
     &:hover { color: $navAdmLinkHvColor; }
@@ -261,6 +257,7 @@ a {
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    background: url('/images/textureBG.png');
     background-color: $containerColor;
 }
 
@@ -420,6 +417,10 @@ form button {
 }
 
 .arty .articleItem {
+}
+
+.arty .articleHidden {
+  display: none;
 }
 
 .arty.first .articleItem {
@@ -618,7 +619,7 @@ form button {
     margin: 0 0 5px;
 }
 
-.artWrap .admin {
+.buttonset.app {
     float: right;
     display: inline;
     height: 34px;
@@ -629,8 +630,10 @@ form button {
 }
 
 .artWrap .title {
+    float: left;
     font-size: $artWrapTitleFontSize;
     font-weight: $artLinkTitleWeight;
+    margin: 0 10px 0 0;
 }
 
 .entity {
@@ -1043,7 +1046,9 @@ form button {
     margin: 10px;
 }
 
-
+.buttonset {
+  margin-left: 5px;
+}
 
 /* ==|== non-semantic helper classes ========================================
    Please define your styles before this section.

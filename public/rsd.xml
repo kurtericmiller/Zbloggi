@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd">
+  <service>
+    <engineName>Zbloggi</engineName>
+    <engineLink>http://zbloggi.com/</engineLink>
+    <homePageLink>http://bruce.dev</homePageLink>
+    <apis>
+      <api name="MetaWeblog" blogID="ZBL" preferred="true" apiLink="http://bruce.dev/xmlrpc" />
+      <api name="Blogger" blogID="ZBL" preferred="false" apiLink="http://bruce.dev/xmlrpc" />
+      <api name="WordPress" blogID="ZBL" preferred="false" apiLink="http://bruce.dev/xmlrpc" />
+    </apis>
+  </service>
+</rsd>

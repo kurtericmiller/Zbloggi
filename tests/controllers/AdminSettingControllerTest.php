@@ -30,7 +30,7 @@ class AdminSettingControllerTest extends TestInit
     public function test_indexAction()
     {
         $this->loginUser();
-        $this->request->setMethod('POST')->setPost(array('site_title' => 'Your Moment of Zend', 'site_tagline' => 'Walk this way', 'site_url' => 'http://ymozend.com', 'headlineId' => '33', 'articleCount' => '3', 'bookCount' => '3', 'latestArticleCount' => '6', 'amazonLU' => 'zendX', 'admArtCnt' => '5', 'admComCnt' => '4', 'admUserCnt' => '10', 'defemail' => 'admin@mail.com', 'submit' => ''));
+        $this->request->setMethod('POST')->setPost(array('site_title' => 'Your Moment of Zend', 'site_tagline' => 'Walk this way', 'site_url' => 'http://ymozend.com', 'headlineId' => '33', 'homeArticleCount' => '3', 'articleCount' => '3', 'bookCount' => '3', 'latestArticleCount' => '6', 'amazonLU' => 'zendX', 'admArtCnt' => '5', 'admComCnt' => '4', 'admUserCnt' => '10', 'defemail' => 'admin@mail.com', 'submit' => ''));
         $this->dispatch('/admin/setting');
         $this->assertRedirectTo('/admin/setting');
         $this->resetRequest()->resetResponse();

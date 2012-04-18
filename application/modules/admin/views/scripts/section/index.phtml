@@ -15,14 +15,12 @@ switch ($this->section_filter) {
 }
 ?>
 <div class="admin clearfix">
-  <a href=/admin/section?section_filter=all>All</a>
-  <a href=/admin/section?section_filter=published>Published</a>
-  <a href=/admin/section?section_filter=pending>Pending</a>
+<?php echo $this->partial('partials/appbuttons.phtml');?>
 </div>
 <div class="clearfix"></div>
 <hr>
   <span class="title">New: </span>
-    <span class="createIt">(<a href=/admin/section/add>Create Section</a>)</span>
+    <span class="admin"><a href=/admin/section/add>Create Section</a></span>
 <div class="clearfix"></div>
 <?php
 foreach ($this->ac as $a) {

@@ -6,7 +6,7 @@
     <?php echo $this->getMenu('admin') ?>
   </div>
     <div class="admbody">
-    <h1><?php echo "ZBLoggi <small>(v" . $version . ")</small> - ";?>Admin Dashboard</h1>
+    <h1><?php echo "ZBLoggi <small>(v" . trim($version) . ")</small> - ";?>Admin Dashboard</h1>
         <?php echo "<dd> Run mode: $mode</dd>"; ?>
         <?php echo $this->layout()->content?> 
     </div> 

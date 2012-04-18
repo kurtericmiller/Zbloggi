@@ -24,7 +24,6 @@
             <h3>Read</h3>
             <hr>
             <?php
-            //$book_slice = array_slice($this->books,$this->limit['offset'],$this->limit['items']);
             foreach ($this->bc as $b) {
                 $args = array(
                     'author' => $b->get('author'),
@@ -43,4 +42,4 @@
     <div class="midcol">
         <?php echo $this->layout()->content?>
     </div> <!-- end midcol -->
-</div> <!-- end content -->
+</div> <!--end content -->

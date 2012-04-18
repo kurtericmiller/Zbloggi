@@ -33,15 +33,15 @@ class DefaultIndexControllerTest extends TestInit
         $this->assertQuery('div.sidebarLt');
         $this->assertQuery('div.sidebarRt');
         $this->assertQuery('form[name="loginForm"]');
-        $this->assertQueryCount('div.articleItem', 3);
+        $this->assertQueryCount('div.articleItem', 4);
     }
     public function test_indexActionLoggedIn()
     {
         $this->loginUser('gussy', 'password');
         $this->dispatch('/');
         $this->assertNotQuery('form[name="loginForm"]');
-        $this->assertQueryCount('div.articleItem', 3);
-        $this->assertQueryCount('div.arty', 2);
+        $this->assertQueryCount('div.articleItem', 4);
+        $this->assertQueryCount('div.arty', 3);
         $this->assertNotQueryContentContains('a', 'Admin');
     }
     public function test_indexActionLoggedInAdmin()
@@ -49,8 +49,8 @@ class DefaultIndexControllerTest extends TestInit
         $this->loginUser();
         $this->dispatch('/');
         $this->assertNotQuery('form[name="loginForm"]');
-        $this->assertQueryCount('div.articleItem', 3);
-        $this->assertQueryCount('div.arty', 2);
+        $this->assertQueryCount('div.articleItem', 4);
+        $this->assertQueryCount('div.arty', 3);
         $this->assertQueryContentContains('a', 'Admin');
     }
     public function test_contactAction()

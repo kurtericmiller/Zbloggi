@@ -1,7 +1,7 @@
-  
-  /** Return comments associated with article */
-  function getArticleComments($article_id)
-  {
-    $select = "select * from comments where article_id = ?";
-    return new Local_Domain_Mappers_DeferredCommentCollection($this, $select, array($article_id));
-  }
+    
+    /** Return comments associated with article */
+    function getArticleComments($article_id)
+    {
+        $select = "select * from comments where article_id = ?";
+        return new Local_Domain_Mappers_DeferredCommentCollection($this, $select, array($article_id));
+    }

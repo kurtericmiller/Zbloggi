@@ -23,13 +23,12 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (11,'User2','youremail2@mail.com','admin','dd002afa986524378fdf2251272b9c5ee12379ec','2012-01-07 12:08:13','2012-01-31 18:21:38'),(14,'bucky','youremail1@mail.com','admin','dd002afa986524378fdf2251272b9c5ee12379ec','2012-01-10 08:37:33','2012-02-10 12:04:17'),(25,'gussy','gs@mail.com','author','fd717d411976a2d48f261721de2300c439f71549','2012-01-14 09:22:26','2012-01-24 15:02:02'),(26,'user','user4@email.com','user','70de41cba073f4efca39528e4a40522c5461abc8','2012-01-19 00:40:19','2012-01-19 00:40:19'),(29,'nancy','nn@mail.com','user','fd717d411976a2d48f261721de2300c439f71549','2012-01-21 10:21:55','2012-01-21 10:21:55'),(30,'herby','hb@mail.com','author','fd717d411976a2d48f261721de2300c439f71549','2012-01-23 12:52:09','2012-01-23 12:52:09'),(31,'dham','dh@mail.com','author','fd717d411976a2d48f261721de2300c439f71549','2012-02-01 18:08:24','2012-02-01 18:08:24'),(32,'testing','testing@gmail.com','admin','dd002afa986524378fdf2251272b9c5ee12379ec','2012-02-27 10:05:43','2012-02-27 10:05:43');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

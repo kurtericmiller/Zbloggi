@@ -13,18 +13,18 @@ require_once ("Interfaces/Collections.php");
  */
 class Local_Domain_Mappers_RegistrationCollection extends Local_Domain_Collection implements RegistrationCollections
 {
-    /** Add to the collection
-     *  @param object Registration
-     */
-    function add(Local_Domain_Models_Registration $Registration)
-    {
-        $this->doAdd($Registration);
-    }
-    /** Delete object from collection
-     *  @param integer $pointer
-     */
-    function delete($pointer)
-    {
-        $this->doDelete($pointer);
-    }
+  /** Add to the collection
+   *  @param object Registration
+   */
+  function add(Local_Domain_Models_Registration $Registration)
+  {
+    $this->doAdd($Registration);
+  }
+  /** Delete object from collection
+   *  @param integer $pointer
+   */
+  function delete($pointer)
+  {
+    $this->doDelete($pointer);
+  }
 }

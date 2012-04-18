@@ -1,11 +1,7 @@
 @charset "UTF-8";
 /* Colors */
-/* $articleTitleLinkBgColor: #5E727D; */
-/* $titleColor: #A89E8B; */
-/* $containerColor: #D3CDBF; */
-/* $articleBgColor: #C8C2B5; */
-/* Fonts */
 /* Dimensions */
+/* Fonts */
 /* 
  * HTML5 ✰ Boilerplate
  *
@@ -598,10 +594,6 @@ a:hover {
   color: #ccddbb;
 }
 
-.nav.adminmenu {
-  border-top: 1px solid #dddddd;
-}
-
 .nav.adminmenu a {
   background-color: #a4a190;
 }
@@ -617,6 +609,7 @@ a:hover {
   -moz-border-radius-topright: 5px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  background: url("/images/textureBG.png");
   background-color: #a18b69;
 }
 
@@ -696,11 +689,11 @@ a:hover {
 }
 
 .headline hr {
-  color: #dddddd;
+  color: #5c1916;
   padding: 0;
   margin: 0;
   height: 1px;
-  background-color: #dddddd;
+  background-color: #5c1916;
   border: none;
 }
 
@@ -709,11 +702,11 @@ a:hover {
 }
 
 .static hr {
-  color: #dddddd;
+  color: #5c1916;
   padding: 0;
   margin: 0;
   height: 1px;
-  background-color: #dddddd;
+  background-color: #5c1916;
   border: none;
 }
 
@@ -757,9 +750,9 @@ form button {
 }
 
 .articles hr {
-  color: #dddddd;
+  color: #5c1916;
   border: none;
-  background-color: #dddddd;
+  background-color: #5c1916;
   height: 1px;
   margin: 0;
 }
@@ -773,8 +766,12 @@ form button {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
+.arty .articleHidden {
+  display: none;
+}
+
 .arty.first .articleItem {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #5c1916;
   padding-right: 10px;
 }
 
@@ -850,9 +847,9 @@ form button {
 }
 
 .articleItem hr {
-  color: #dddddd;
+  color: #5c1916;
   border: none;
-  background-color: #dddddd;
+  background-color: #5c1916;
   height: 1px;
   padding: 0;
   margin: 4px 0;
@@ -865,7 +862,7 @@ form button {
 }
 
 .bio {
-  border: 1px solid #dddddd;
+  border: 1px solid #5c1916;
   background-color: #a89e8b;
   color: #eeeeee;
   padding: 10px;
@@ -942,7 +939,7 @@ form button {
 }
 
 .artWrap {
-  border: 1px solid #dddddd;
+  border: 1px solid #5c1916;
   border-radius: 10px;
   margin: 15px 0;
   padding: 15px 15px 0;
@@ -964,14 +961,14 @@ form button {
 }
 
 .artWrap hr {
-  color: #dddddd;
+  color: #5c1916;
   border: none;
-  background-color: #dddddd;
+  background-color: #5c1916;
   height: 1px;
   margin: 0 0 5px;
 }
 
-.artWrap .admin {
+.buttonset.app {
   float: right;
   display: inline;
   height: 34px;
@@ -982,12 +979,14 @@ form button {
 }
 
 .artWrap .title {
+  float: left;
   font-size: 160%;
   font-weight: bold;
+  margin: 0 10px 0 0;
 }
 
 .entity {
-  border: 1px solid #dddddd;
+  border: 1px solid #5c1916;
   border-radius: 10px;
   margin: 15px 0 15px 10px;
   padding: 15px 15px 0;
@@ -1029,8 +1028,8 @@ form button {
 }
 
 .entity hr {
-  color: #dddddd;
-  background-color: #dddddd;
+  color: #5c1916;
+  background-color: #5c1916;
   height: 1px;
   border: none;
   margin: 0;
@@ -1102,8 +1101,8 @@ form button {
 }
 
 .user hr {
-  color: #dddddd;
-  background-color: #dddddd;
+  color: #5c1916;
+  background-color: #5c1916;
   height: 1px;
   border: none;
   margin: 0;
@@ -1122,8 +1121,8 @@ form button {
 }
 
 .comadm hr {
-  color: #dddddd;
-  background-color: #dddddd;
+  color: #5c1916;
+  background-color: #5c1916;
   height: 1px;
   border: none;
   margin: 0;
@@ -1404,6 +1403,10 @@ form button {
 .fmessage {
   color: #ff88ff;
   margin: 10px;
+}
+
+.buttonset {
+  margin-left: 5px;
 }
 
 /* ==|== non-semantic helper classes ========================================

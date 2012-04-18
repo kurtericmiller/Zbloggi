@@ -25,7 +25,12 @@ class Default_IndexController extends Zend_Controller_Action
         $bc = $bm->findAll($option);
         $bc->notifyAccess();
         $bcount = $bc->count();
-        $headlineId = $this->_localReg->get('headlineId');
+        if ($this->_localReg->get('headlineId') > 0) {
+            $headlineId = $this->_localReg->get('headlineId');
+        } else {
+            $am = new Local_Domain_Mappers_ArticleMapper();
+            $headlineId = $am->getLatestArticleId();
+        }
         $lc = $this->_localReg->get('latestArticleCount');
         $page = $this->_getParam('page', 1);
         $this->view->paginator = $this->_helper->Pager($bcount, $items);
@@ -36,6 +41,7 @@ class Default_IndexController extends Zend_Controller_Action
         $this->view->bc = $bm->findAll($options);
         $this->view->lc = $lc;
         $this->view->headlineId = $headlineId;
+        $this->view->num_articles = $this->_localReg->get('homeArticleCount');
     }
     public function indexAction()
     {
@@ -64,6 +70,9 @@ class Default_IndexController extends Zend_Controller_Action
         } else {
             $this->_redirect($_SERVER['HTTP_REFERER']);
         }
+    }
+    public function dojoAction()
+    {
     }
     public function aboutAction()
     {

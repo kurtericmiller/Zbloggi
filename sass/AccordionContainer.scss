@@ -1,0 +1,46 @@
+@import "vars";
+/***** Accordion Title  default state *****/
+.claro .dijitAccordionTitle {
+  background-color: $articleTitleLinkBgColor !important;
+  color: $articleTitleLinkFgColor !important;
+}
+
+.claro .dijitAccordionTitle a {
+  color: $articleTitleLinkFgColor !important;
+  text-decoration: none !important;
+  &:focus { color: $articleTitleLinkHvColor !important; }
+  &:hover { color: $articleTitleLinkHvColor !important; }
+}
+
+/* Title hover state */
+.claro .dijitAccordionInnerContainerHover .dijitAccordionTitle {
+  color: $articleTitleLinkBgColor !important;
+  background-color: $articleTitleLinkFgColor !important;
+}
+
+.claro .dijitAccordionInnerContainerHover .dijitAccordionTitle a {
+  color: $articleTitleLinkBgColor !important;
+  &:focus { color: $articleTitleLinkHvColor !important; }
+  &:hover { color: $articleTitleLinkHvColor !important; }
+}
+
+.claro .dijitAccordionInnerContainerSelected {
+  background-color: $articleBgColor !important;
+  border-color: $borderColor !important;
+}
+
+.claro .dijitAccordionInnerContainerSelected a {
+  text-decoration: none !important;
+}
+
+.claro .dijitAccordionContainer .dijitAccordionChildWrapper {
+  background-color: $articleBgColor !important;
+  border-color: $articleBgColor !important;
+}
+
+/* Pane Settings */
+.claro .dijitAccordionContainer-dijitContentPane {
+  background-color: $articleBgColor !important;
+  border-color: $articleBgColor !important;
+  font-size: 140%;
+}

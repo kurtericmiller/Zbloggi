@@ -35,6 +35,7 @@ class Admin_SettingController extends Zend_Controller_Action
                 $setting->set('site_tagline', $formData['site_tagline']);
                 $setting->set('site_url', $formData['site_url']);
                 $setting->set('headlineId', $formData['headlineId']);
+                $setting->set('homeArticleCount', $formData['homeArticleCount']);
                 $setting->set('articleCount', $formData['articleCount']);
                 $setting->set('bookCount', $formData['bookCount']);
                 $setting->set('latestArticleCount', $formData['latestArticleCount']);
@@ -53,6 +54,7 @@ class Admin_SettingController extends Zend_Controller_Action
             $data['site_url'] = $setting->get('site_url');
             $data['headlineId'] = $setting->get('headlineId');
             $data['articleCount'] = $setting->get('articleCount');
+            $data['homeArticleCount'] = $setting->get('homeArticleCount');
             $data['bookCount'] = $setting->get('bookCount');
             $data['latestArticleCount'] = $setting->get('latestArticleCount');
             $data['amazonLU'] = $setting->get('amazonLU');

@@ -1,4 +1,4 @@
-  public function findByReg($reg)
-  {
-    return $this->doStatement('select id from registrations WHERE reg_string = ?', array($reg), SINGLETON);
-  }
+    public function findByReg($reg)
+    {
+        return $this->doStatement('select id from registrations WHERE reg_string = ?', array($reg), SINGLETON);
+    }
