@@ -19,7 +19,7 @@ class Blog_CommentController extends Zend_Controller_Action
         $this->view->headLink()->appendStylesheet('/stylesheets/shCore.css')->appendStylesheet('/stylesheets/shThemeDefault.css');
         $this->view->headScript()->appendFile('/javascripts/shCore.js')->appendFile('/javascripts/shBrushes.js')->appendFile('http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f6107897913656f', 'text/javascript');
         $this->view->headScript()->appendScript("SyntaxHighlighter.defaults['toolbar'] = false;
-SyntaxHighlighter.all();", 'text/javascript');
+                                                 SyntaxHighlighter.all();", 'text/javascript');
         $this->_auth = Zend_Auth::getInstance();
         $this->_article_id = $this->_request->getParam('id');
         $this->view->article_id = $this->_article_id;

@@ -1,8 +1,5 @@
 <?php
-$this->dojo()->enable();
-?>
-<div id="accordionStack" class="accordion"></div>
-<?php
+echo $this->partial('accordion.phtml');
 $am = new Local_Domain_Mappers_ArticleMapper();
 $cm = new Local_Domain_Mappers_CommentMapper();
 $um = new Local_Domain_Mappers_UserMapper();
@@ -35,6 +32,3 @@ foreach ($ac as $a) {
 }
 ?>
 <div class="clearfix"></div>
-<?php
-$this->headScript()->appendFile('/javascripts/accordian.js');
-?>

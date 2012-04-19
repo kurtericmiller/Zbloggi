@@ -31,7 +31,7 @@ class Admin_ArticleController extends Zend_Controller_Action
         $this->view->headLink()->appendStylesheet('/stylesheets/shCore.css')->appendStylesheet('/stylesheets/shThemeDefault.css');
         $this->view->headScript()->appendFile('/javascripts/shCore.js')->appendFile('/javascripts/shBrushes.js');
         $this->view->headScript()->appendScript("SyntaxHighlighter.defaults['toolbar'] = false;
-SyntaxHighlighter.all();", 'text/javascript');
+                                                 SyntaxHighlighter.all();", 'text/javascript');
     }
     public function indexAction()
     {
