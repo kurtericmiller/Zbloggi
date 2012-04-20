@@ -6,54 +6,54 @@
   outline: #000 none 0;
 }
 
-.claro .dijitAccordionTitle {
+.dijitAccordionTitle {
   background-color: #5c1916 !important;
   color: #fff8dc !important;
 }
 
-.claro .dijitAccordionTitle a {
+.dijitAccordionTitle a {
   color: #fff8dc !important;
   text-decoration: none !important;
 }
-.claro .dijitAccordionTitle a:focus {
+.dijitAccordionTitle a:focus {
   color: #888888 !important;
 }
-.claro .dijitAccordionTitle a:hover {
+.dijitAccordionTitle a:hover {
   color: #888888 !important;
 }
 
 /* Title hover state */
-.claro .dijitAccordionInnerContainerHover .dijitAccordionTitle {
+.dijitAccordionInnerContainerHover .dijitAccordionTitle {
   color: #5c1916 !important;
   background-color: #fff8dc !important;
 }
 
-.claro .dijitAccordionInnerContainerHover .dijitAccordionTitle a {
+.dijitAccordionInnerContainerHover .dijitAccordionTitle a {
   color: #5c1916 !important;
 }
-.claro .dijitAccordionInnerContainerHover .dijitAccordionTitle a:focus {
+.dijitAccordionInnerContainerHover .dijitAccordionTitle a:focus {
   color: #888888 !important;
 }
-.claro .dijitAccordionInnerContainerHover .dijitAccordionTitle a:hover {
+.dijitAccordionInnerContainerHover .dijitAccordionTitle a:hover {
   color: #888888 !important;
 }
 
-.claro .dijitAccordionInnerContainerSelected {
+.dijitAccordionInnerContainerSelected {
   background-color: #bbab93 !important;
   border-color: #5c1916 !important;
 }
 
-.claro .dijitAccordionInnerContainerSelected a {
+.dijitAccordionInnerContainerSelected a {
   text-decoration: none !important;
 }
 
-.claro .dijitAccordionContainer .dijitAccordionChildWrapper {
+.dijitAccordionContainer .dijitAccordionChildWrapper {
   background-color: #bbab93 !important;
   border-color: #bbab93 !important;
 }
 
 /* Pane Settings */
-.claro .dijitAccordionContainer-dijitContentPane {
+.dijitAccordionContainer-dijitContentPane {
   background-color: #bbab93 !important;
   border-color: #bbab93 !important;
   font-size: 130%;
