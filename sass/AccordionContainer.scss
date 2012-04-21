@@ -7,6 +7,15 @@
 .dijitAccordionTitle {
   background-color: $articleTitleLinkBgColor !important;
   color: $articleTitleLinkFgColor !important;
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: .5s;
+  -moz-transition-duration: .5s;
+  transition-duration: .5s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
 }
 
 .dijitAccordionTitle a {
@@ -20,6 +29,15 @@
 .dijitAccordionInnerContainerHover .dijitAccordionTitle {
   color: $articleTitleLinkBgColor !important;
   background-color: $articleTitleLinkFgColor !important;
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: .5s;
+  -moz-transition-duration: .5s;
+  transition-duration: .5s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
 }
 
 .dijitAccordionInnerContainerHover .dijitAccordionTitle a {

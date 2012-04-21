@@ -736,6 +736,12 @@ a:hover {
   margin: 3px 0;
 }
 
+.books {
+  width: 775px;
+  height: 1528px;
+  border-radius: 3px;
+}
+
 form label {
   font-weight: bold;
 }
