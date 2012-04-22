@@ -104,7 +104,7 @@ a {
 
 .sidebarRt {
     width: $rightColWidth;
-    padding: 16px 0;
+    padding: 10px 0;
     float: right;
 }
 
@@ -170,7 +170,7 @@ a {
 #logform .zend_form {
     background-color: $logformBgColor;
     padding: 10px 20px;
-    margin: 0 10px 20px;
+    margin: 0 10px 10px;
     border-radius: 6px;
 }
 
@@ -242,6 +242,10 @@ a {
     text-decoration: none;
     color: $navLinkFgColor;
     &:hover { color: $navLinkHvColor; }
+}
+
+.nav.mainmenu {
+    padding: 5px 0;
 }
 
 .nav.adminmenu a {
@@ -399,7 +403,7 @@ form button {
 /* --------- */
 
 .articles {
-    padding: 0px 10px 10px 0;
+    padding: 0 0 10px;
 }
 
 .articles hr {
@@ -442,11 +446,11 @@ form button {
     border-radius: 3px;
     background-color: $articleTitleLinkBgColor;
     padding: 5px 10px 7px 10px;
-    margin: 5px 0 0 10px;
+    margin: 5px 0 0;
 }
 
 .articleItem .articleTitle p {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 10px;
 }
 
 .articleItem .articleTitle a {
@@ -465,7 +469,7 @@ form button {
 }
 
 .articleItem .articleClip {
-    margin: 0 0 6px 10px;
+    margin: 0 0 6px;
     padding: 0 20px 4px;
     background-color: $articleBgColor;
     border-radius: 3px;
