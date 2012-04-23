@@ -361,10 +361,6 @@ body {
   font-family: 'Ubuntu', 'Arial', sans-serif;
 }
 
-#topWrap {
-  background: #5e727d url("/images/bg.jpg") repeat-x top;
-}
-
 p {
   padding: 0 0 10px 0;
 }
@@ -383,6 +379,10 @@ a:hover {
   color: #888888;
 }
 
+#topWrap {
+  background: #5e727d url("/images/bg.jpg") repeat-x top;
+}
+
 .zend_form {
   padding: 20px 0;
 }
@@ -397,7 +397,6 @@ a:hover {
   height: 66px;
   padding: 0 15px;
 }
-
 .header h1 {
   font-family: "Jura", sans-serif;
   font-size: 200%;
@@ -406,7 +405,6 @@ a:hover {
   line-height: 2.4;
   float: left;
 }
-
 .header h3 {
   font-family: "Jura", sans-serif;
   font-size: 150%;
@@ -414,7 +412,6 @@ a:hover {
   margin-top: 25px;
   float: right;
 }
-
 .header a {
   text-decoration: none;
   color: white;
@@ -426,7 +423,6 @@ a:hover {
   padding: 0 15px;
   height: 30px;
 }
-
 #logged-in-as a {
   text-decoration: none;
   color: #999999;
@@ -434,38 +430,21 @@ a:hover {
 #logged-in-as a:hover {
   color: white;
 }
-
 #logged-in-as p {
   margin-top: 3px;
 }
-
 #logged-in-as img {
   margin-top: -7px;
-}
-
-/* --------------------------- */
-.sidebarLt {
-  width: 151px;
-  margin-left: 5px;
-  float: left;
-}
-
-.sidebarRt {
-  width: 250px;
-  padding: 10px 0;
-  float: right;
 }
 
 #regform {
   max-width: 300px;
 }
-
 #regform legend {
   font-size: 120%;
   font-weight: bold;
   padding-bottom: 15px;
 }
-
 #regform #captcha-input {
   margin-top: 10px;
 }
@@ -476,16 +455,13 @@ a:hover {
   border-radius: 10px;
   width: 100%;
 }
-
 #commentform .zend_form {
   padding: 10px 20px;
 }
-
 #commentform .zend_form .element {
   text-align: left;
   padding-top: 10px;
 }
-
 #commentform .zend_form textarea {
   width: 90%;
 }
@@ -494,34 +470,29 @@ a:hover {
   text-align: left;
   padding-top: 10px;
 }
-
-#configform .zend_form label {
+#configform .zend_form .element .zend_form label {
   float: left;
   width: 260px;
 }
-
-#configform .zend_form legend {
+#configform .zend_form .element .zend_form legend {
   font-size: 140%;
   font-weight: bold;
   padding-bottom: 8px;
   text-decoration: underline;
 }
-
-#configform .zend_form input {
+#configform .zend_form .element .zend_form input {
   margin: 0 0 5px 0;
 }
 
 #logform {
   max-width: 250px;
 }
-
 #logform .zend_form {
   background-color: #a4a190;
   padding: 10px 20px;
   margin: 0 10px 10px;
   border-radius: 6px;
 }
-
 #logform legend {
   font-size: 140%;
   font-family: "Ubuntu", sans-serif;
@@ -530,12 +501,10 @@ a:hover {
   padding: 0 0 8px;
   text-align: center;
 }
-
 #logform .formFields dd {
   padding-bottom: 8px;
   margin: 0 0 0 10px;
 }
-
 #logform input {
   width: 90%;
 }
@@ -545,40 +514,12 @@ a:hover {
   text-align: left;
 }
 
-.sidebarRt .searchBox {
-  margin: 0;
-  padding: 0;
-}
-
-.sidebarRt .zend_form {
-  padding: 2px 0 0;
-  margin: 0;
-}
-
-.sidebarRt .zend_form input[type="text"] {
-  padding: 2px 0;
-  border-radius: 4px;
-  width: 116px;
-}
-
-.sidebarRt .zend_form input[type="submit"] {
-  background-color: #584e3b;
-  color: #cccccc;
-  border-radius: 3px;
-  padding: 2px 5px;
-}
-.sidebarRt .zend_form input[type="submit"]:hover {
-  background-color: #a89e8b;
-  color: #666666;
-}
-
 .nav {
   width: 151px;
-  padding: 10px 0 0;
+  padding: 5px 0 0;
   margin: 0;
   float: left;
 }
-
 .nav a {
   font-size: 12pt;
   padding: 5px 10px;
@@ -593,15 +534,13 @@ a:hover {
 .nav a:hover {
   color: #ccddbb;
 }
-
-.nav.mainmenu {
+.nav .mainmenu {
   padding: 5px 0;
 }
-
-.nav.adminmenu a {
+.nav .adminmenu a {
   background-color: #a4a190;
 }
-.nav.adminmenu a:hover {
+.nav .adminmenu a:hover {
   color: #dddddd;
 }
 
@@ -616,7 +555,6 @@ a:hover {
   background: url("/images/textureBG.png");
   background-color: #a18b69;
 }
-
 .content pre {
   background-color: #888888;
   color: white;
@@ -626,7 +564,6 @@ a:hover {
 .art_link {
   padding-top: 15px;
 }
-
 .art_link .title {
   margin-left: 10px;
   font-size: 120%;
@@ -638,12 +575,6 @@ a:hover {
   font-size: 140%;
 }
 
-.midcol {
-  padding: 0px 5px 0 0;
-  width: 775px;
-  float: right;
-}
-
 .mainTitle {
   display: inline-block;
   float: left;
@@ -651,12 +582,17 @@ a:hover {
 }
 
 .mainTitle img {
-  height: 114px;
+  height: 109px;
   width: 622px;
-  padding: 11px 1px 1px 6px;
+  padding: 10px 1px 1px 6px;
   margin: 0px;
 }
 
+.midcol {
+  padding: 0px 5px 0 0;
+  width: 775px;
+  float: right;
+}
 .midcol .mainTitle h2 {
   font-size: 300%;
   font-family: "Ubuntu", sans-serif;
@@ -664,7 +600,6 @@ a:hover {
   background-color: #1d2029;
   text-align: center;
 }
-
 .midcol .articleItem .articleClip {
   background-color: #bbab93;
 }
@@ -675,7 +610,6 @@ a:hover {
   margin: 0 auto;
   float: left;
 }
-
 .twoCol iframe {
   text-align: center;
   margin: 0 auto;
@@ -691,7 +625,6 @@ a:hover {
   font-weight: normal;
   text-shadow: 0px 2px 3px #555;
 }
-
 .headline hr {
   color: #5c1916;
   padding: 0;
@@ -700,7 +633,6 @@ a:hover {
   background-color: #5c1916;
   border: none;
 }
-
 .headline .articleClip {
   font-size: 150%;
 }
@@ -718,16 +650,13 @@ a:hover {
   padding: 0 10px;
   margin: 0px 0 0 0;
 }
-
 .book .pic {
   text-align: center;
   margin: 8px auto 0;
 }
-
 .book .title {
   padding-bottom: 5px;
 }
-
 .book .title a {
   text-decoration: none;
   color: #1d2029;
@@ -735,7 +664,6 @@ a:hover {
 .book .title a:hover {
   color: #666666;
 }
-
 .book hr {
   margin: 3px 0;
 }
@@ -758,7 +686,6 @@ form button {
 .articles {
   padding: 0 0 10px;
 }
-
 .articles hr {
   color: #5c1916;
   border: none;
@@ -771,16 +698,13 @@ form button {
   padding: 10px 0 0 0;
   font-family: "Ubuntu", sans-serif;
 }
-
 .arty .articleTitle p {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
-
 .arty .articleHidden {
   display: none;
 }
-
-.arty.first .articleItem {
+.arty .first .articleItem {
   border-bottom: 1px solid #5c1916;
   padding-right: 10px;
 }
@@ -795,11 +719,9 @@ form button {
   padding: 5px 10px 7px 10px;
   margin: 5px 0 0;
 }
-
 .articleItem .articleTitle p {
   margin: 0 0 0 10px;
 }
-
 .articleItem .articleTitle a {
   text-decoration: none;
   color: #fff8dc;
@@ -807,25 +729,21 @@ form button {
 .articleItem .articleTitle a:hover {
   color: #888888;
 }
-
 .articleItem .articleTitle a.author {
   color: #2174a1;
 }
 .articleItem .articleTitle a.author:hover {
   color: #888888;
 }
-
 .articleItem .articleMgmt {
   margin-bottom: 10px;
 }
-
 .articleItem .articleClip {
   margin: 0 0 6px;
   padding: 0 20px 4px;
   background-color: #bbab93;
   border-radius: 3px;
 }
-
 .articleItem a.clipLink {
   font-size: 90%;
   font-family: "Pontano Sans", sans-serif;
@@ -837,25 +755,20 @@ form button {
 .articleItem a.clipLink:hover {
   color: #888888;
 }
-
 .articleItem .articleClip p {
   padding: 10px 0;
 }
-
 .articleItem .articleMeta {
   margin: 10px;
   color: #222222;
 }
-
 .articleItem .tagsList {
   margin: 10px 0 0 0px;
   color: #333333;
 }
-
 .articleItem .tagsList a {
   text-decoration: none;
 }
-
 .articleItem hr {
   color: #5c1916;
   border: none;
@@ -877,7 +790,6 @@ form button {
   color: #eeeeee;
   padding: 10px;
 }
-
 .bio img {
   float: left;
   margin: 0px 10px 0px 0;
@@ -892,7 +804,6 @@ form button {
   width: 720px;
   clear: both;
 }
-
 #avatar-element label {
   background-color: #a4a190;
   float: left;
@@ -902,12 +813,10 @@ form button {
   margin: 3px;
   padding: 0 0 5px;
 }
-
 #avatar-element input {
   margin: 5px auto;
   display: block;
 }
-
 #avatar-element img {
   margin: 5px;
 }
@@ -916,21 +825,17 @@ form button {
   background-color: #bbbbbb;
   margin: 4px 0;
 }
-
 .comment .comheader {
   color: white;
   background-color: #333333;
   padding: 3px;
 }
-
 .comment .comcounter {
   float: right;
 }
-
 .comment .combody {
   padding: 8px;
 }
-
 .comment .combody img {
   margin: 0 8px 0 0;
   float: left;
@@ -954,22 +859,18 @@ form button {
   margin: 15px 0;
   padding: 15px 15px 0;
 }
-
 .artWrap h2 {
   float: left;
   display: inline;
 }
-
 .artWrap h3 {
   padding-bottom: 10px;
   float: left;
   display: inline;
 }
-
 .artWrap em {
   color: #993333;
 }
-
 .artWrap hr {
   color: #5c1916;
   border: none;
@@ -977,17 +878,9 @@ form button {
   height: 1px;
   margin: 0 0 5px;
 }
-
-.buttonset.app {
-  float: right;
-  display: inline;
-  height: 34px;
-}
-
 .artWrap .admin a {
   margin-top: 0;
 }
-
 .artWrap .title {
   float: left;
   font-size: 160%;
@@ -1003,40 +896,32 @@ form button {
   float: left;
   width: 95%;
 }
-
 .entity .admin {
   float: left;
   display: inline;
   height: 34px;
 }
-
 .entity .titles {
   font-size: 140%;
   font-weight: bold;
 }
-
 .entity .author {
   font-weight: bold;
 }
-
 .entity .pub {
   background-color: #cceecc;
 }
-
 .entity .nopub {
   background-color: #eeccee;
 }
-
 .entity .artText {
   padding: 10px 0 0 30px;
   margin: 6px;
   background-color: #bbab93;
 }
-
 .entity h2 {
   padding-bottom: 10px;
 }
-
 .entity hr {
   color: #5c1916;
   background-color: #5c1916;
@@ -1057,7 +942,6 @@ form button {
   margin: 0;
   padding: 0;
 }
-
 .admin a {
   padding: 0 10px;
   height: 20px;
@@ -1109,7 +993,6 @@ form button {
   color: #993333;
   width: 400px;
 }
-
 .user hr {
   color: #5c1916;
   background-color: #5c1916;
@@ -1121,15 +1004,12 @@ form button {
 .comadm h2 {
   padding: 0 0 10px;
 }
-
 .comadm h3 {
   padding: 10px 0 0;
 }
-
 .comadm h3 em {
   color: #993333;
 }
-
 .comadm hr {
   color: #5c1916;
   background-color: #5c1916;
@@ -1165,31 +1045,24 @@ form button {
   padding: 15px;
   margin: 15px;
 }
-
 .tsearch td {
   padding: 4px 0;
 }
-
 .tsearch a {
   text-decoration: none;
 }
-
 .tsearch .theader {
   font-weight: bold;
 }
-
 .tsearch .tid {
   width: 30px;
 }
-
 .tsearch .ttitle {
   width: 230px;
 }
-
 .tsearch .tauthor {
   width: 90px;
 }
-
 .tsearch .tpubdate {
   width: 130px;
 }
@@ -1199,17 +1072,14 @@ form button {
   margin: 10px;
   font-weight: bold;
 }
-
 .paginationControl .disabled {
   font-weight: normal;
 }
-
 .paginationControl .pageNum {
   border: 1px solid #1d2029;
   padding: 2px 2px 2px 5px;
   margin: 10px 4px;
 }
-
 .paginationControl a {
   text-decoration: none;
   color: #1d2029;
@@ -1219,6 +1089,41 @@ form button {
 }
 
 /* sidebar stuff */
+.sidebarLt {
+  width: 151px;
+  margin-left: 5px;
+  float: left;
+}
+
+.sidebarRt {
+  width: 250px;
+  padding: 10px 0;
+  float: right;
+}
+.sidebarRt .searchBox {
+  margin: 0;
+  padding: 0;
+}
+.sidebarRt .zend_form {
+  padding: 2px 0 0;
+  margin: 0;
+}
+.sidebarRt .zend_form input[type="text"] {
+  padding: 2px 0;
+  border-radius: 4px;
+  width: 116px;
+}
+.sidebarRt .zend_form input[type="submit"] {
+  background-color: #584e3b;
+  color: #cccccc;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+.sidebarRt .zend_form input[type="submit"]:hover {
+  background-color: #a89e8b;
+  color: #666666;
+}
+
 .sideWrap {
   background-color: #a4a190;
   border-radius: 6px;
@@ -1226,7 +1131,6 @@ form button {
   margin: 0 10px 10px;
   display: block;
 }
-
 .sideWrap h3 {
   padding: 5px 0 0px 0;
   font-family: "Ubuntu", sans-serif;
@@ -1234,12 +1138,10 @@ form button {
   color: white;
   background-color: #a89e8b;
 }
-
 .sideWrap hr {
   padding: 0;
   margin: 0;
 }
-
 .sideWrap .linkWrap a {
   text-decoration: none;
   color: #1d2029;
@@ -1254,7 +1156,6 @@ form button {
   text-align: center;
   margin: 0 auto;
 }
-
 .follow a {
   background-image: url("/images/social.png");
   background-repeat: no-repeat;
@@ -1265,35 +1166,30 @@ form button {
   height: 32px;
   width: 32px;
 }
-
 .follow a.fb {
   background-position: 0px 0px;
 }
 .follow a.fb:hover {
   background-position: 0px -32px;
 }
-
 .follow a.tw {
   background-position: -32px 0px;
 }
 .follow a.tw:hover {
   background-position: -32px -32px;
 }
-
 .follow a.gp {
   background-position: -64px 0px;
 }
 .follow a.gp:hover {
   background-position: -64px -32px;
 }
-
 .follow a.li {
   background-position: -96px 0px;
 }
 .follow a.li:hover {
   background-position: -96px -32px;
 }
-
 .follow a.gh {
   background-position: -128px 0px;
 }
@@ -1323,31 +1219,26 @@ form button {
   border-bottom-right-radius: 5px;
   width: 100%;
 }
-
 .footer p {
   margin-left: 20px;
   color: #999999;
 }
-
 .footer .zp {
   float: right;
   margin-right: 20px;
   display: inline;
 }
-
 .footer .footWrap {
   width: 220px;
   float: left;
   padding: 10px 0 10px 20px;
   margin-left: 10px;
 }
-
 .footer .footWrap ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-
 .footer .footWrap a {
   color: #999999;
   text-decoration: none;
@@ -1356,14 +1247,12 @@ form button {
   color: #cccccc;
   text-decoration: none;
 }
-
 .footer .footWrap hr {
   color: #333333;
   background-color: #333333;
   height: 1px;
   border: none;
 }
-
 .footer .footWrap li {
   border-bottom: 1px dotted #333333;
   margin-bottom: 3px;
@@ -1372,7 +1261,9 @@ form button {
 .footer .footWrap li:hover {
   border-bottom: 1px dashed #cccccc;
 }
-
+.footer .copyright {
+  padding-top: 10px;
+}
 .footer .copyright hr {
   margin: 0 20px 10px 20px;
   color: #333333;
@@ -1381,30 +1272,22 @@ form button {
   border: none;
 }
 
-.footer .copyright {
-  padding-top: 10px;
-}
-
 .contactForm input[type="text"] {
   width: 140px;
   margin: 0 0 10px;
 }
-
 .contactForm textarea {
   width: 140px;
   height: 84px;
 }
-
 .contactForm label {
   padding: 0;
   width: 70px;
   float: left;
 }
-
 .contactForm .zend_form {
   padding: 0;
 }
-
 .contactForm .zend_form button {
   margin: -23px 0 0 0;
   float: left;
@@ -1417,6 +1300,11 @@ form button {
 
 .buttonset {
   margin-left: 5px;
+}
+.buttonset .app {
+  float: right;
+  display: inline;
+  height: 34px;
 }
 
 /* ==|== non-semantic helper classes ========================================
