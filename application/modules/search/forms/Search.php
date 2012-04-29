@@ -12,7 +12,7 @@ class Search_Form_Search extends Zend_Form
         $search_text->setDecorators(array(array('ViewHelper'), array('Errors'),));
         // create submit button
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Search')->setOptions(array('class' => 'submit'));
+        $submit->setLabel('Search YMOZ')->setOptions(array('class' => 'submit'));
         $submit->setDecorators(array(array('ViewHelper'),));
         // attach elements to form
         $this->addElement($search_text)->addElement($submit);

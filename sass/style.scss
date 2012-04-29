@@ -622,8 +622,11 @@ form button {
   .zend_form input[type="text"] {
     padding: 2px 0;
     border-radius: 4px;
-    width: 116px; }
+    width: auto; }
   .zend_form input[type="submit"] {
+    display: block;
+    clear: both;
+    margin: 8px auto;
     background-color: $sbarRtSubmitBgColor;
     color: $sbarRtSubmitFgColor;
     border-radius: 3px;

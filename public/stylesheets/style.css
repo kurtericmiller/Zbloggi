@@ -2,6 +2,7 @@
 /* Colors */
 /* Dimensions */
 /* Fonts */
+/* $sbarRtSubmitBgColor: #584E3B; */
 /* 
  * HTML5 ✰ Boilerplate
  *
@@ -356,6 +357,7 @@ td {
 /* ==|== primary styles =====================================================
    Author: 
    ========================================================================== */
+/** Globals **/
 body {
   background: #5e727d url("/images/bg.jpg") repeat-x top;
   font-family: 'Ubuntu', 'Arial', sans-serif;
@@ -379,42 +381,9 @@ a:hover {
   color: #888888;
 }
 
+/** ID's **/
 #topWrap {
   background: #5e727d url("/images/bg.jpg") repeat-x top;
-}
-
-.zend_form {
-  padding: 20px 0;
-}
-
-.container {
-  margin: 0 auto 5px;
-  padding: 0;
-  width: 1040px;
-}
-
-.header {
-  height: 66px;
-  padding: 0 15px;
-}
-.header h1 {
-  font-family: "Jura", sans-serif;
-  font-size: 200%;
-  text-shadow: 0px 2px 3px #555;
-  color: white;
-  line-height: 2.4;
-  float: left;
-}
-.header h3 {
-  font-family: "Jura", sans-serif;
-  font-size: 150%;
-  color: #cccccc;
-  margin-top: 25px;
-  float: right;
-}
-.header a {
-  text-decoration: none;
-  color: white;
 }
 
 #logged-in-as {
@@ -507,6 +476,62 @@ a:hover {
 }
 #logform input {
   width: 90%;
+}
+
+#avatar-element {
+  width: 720px;
+  clear: both;
+}
+#avatar-element label {
+  background-color: #a4a190;
+  float: left;
+  display: inline;
+  text-align: center;
+  width: 130px;
+  margin: 3px;
+  padding: 0 0 5px;
+}
+#avatar-element input {
+  margin: 5px auto;
+  display: block;
+}
+#avatar-element img {
+  margin: 5px;
+}
+
+/** Classes **/
+.zend_form {
+  padding: 20px 0;
+}
+
+.container {
+  margin: 0 auto 5px;
+  padding: 0;
+  width: 1040px;
+}
+
+.header {
+  height: 66px;
+  padding: 0 15px;
+}
+.header h1 {
+  font-family: "Jura", sans-serif;
+  font-size: 200%;
+  text-shadow: 0px 2px 3px #555;
+  color: white;
+  line-height: 2.4;
+  float: left;
+}
+.header h3 {
+  font-family: "Jura", sans-serif;
+  font-size: 150%;
+  color: #cccccc;
+  margin-top: 25px;
+  float: right;
+}
+.header a {
+  text-decoration: none;
+  color: white;
 }
 
 .element.reg {
@@ -800,27 +825,6 @@ form button {
   padding-top: 10px;
 }
 
-#avatar-element {
-  width: 720px;
-  clear: both;
-}
-#avatar-element label {
-  background-color: #a4a190;
-  float: left;
-  display: inline;
-  text-align: center;
-  width: 130px;
-  margin: 3px;
-  padding: 0 0 5px;
-}
-#avatar-element input {
-  margin: 5px auto;
-  display: block;
-}
-#avatar-element img {
-  margin: 5px;
-}
-
 .comment {
   background-color: #bbbbbb;
   margin: 4px 0;
@@ -848,7 +852,6 @@ form button {
   padding-top: 12px;
 }
 
-/* --------- */
 .userName {
   color: white;
 }
@@ -1111,17 +1114,20 @@ form button {
 .sidebarRt .zend_form input[type="text"] {
   padding: 2px 0;
   border-radius: 4px;
-  width: 116px;
+  width: auto;
 }
 .sidebarRt .zend_form input[type="submit"] {
-  background-color: #584e3b;
+  display: block;
+  clear: both;
+  margin: 8px auto;
+  background-color: #5e727d;
   color: #cccccc;
   border-radius: 3px;
   padding: 2px 5px;
 }
 .sidebarRt .zend_form input[type="submit"]:hover {
   background-color: #a89e8b;
-  color: #666666;
+  color: #fffffe;
 }
 
 .sideWrap {

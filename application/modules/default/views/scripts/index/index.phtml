@@ -7,10 +7,21 @@ $um = new Local_Domain_Mappers_UserMapper();
 <div class="headline">
 </br>
 <?php
+if ($this->headlineId == 0) {
+ $this->headlineId = $am->getLatestArticleID();
+}
 $a = $am->find($this->headlineId);
 $uid = $a->get('user_id');
 $user = $um->find($uid);
-$args = array('article_text' => $this->shortText($a->get('article_text')), 'article_title' => $a->get('article_title'), 'username' => $user->get('username'), 'read_count' => $a->get('read_count'), 'comment_count' => $am->getCommentCount($a), 'published' => $a->get('updated_at'), 'id' => $a->getId(), 'uid' => $uid, 'keywords' => $am->getKeywords($a), 'continue' => true);
+$args = array('article_text' => $this
+  ->shortText($a
+  ->get('article_text')), 'article_title' => $a
+  ->get('article_title'), 'username' => $user
+  ->get('username'), 'read_count' => $a
+  ->get('read_count'), 'comment_count' => $am
+  ->getCommentCount($a), 'published' => $a
+  ->get('updated_at'), 'id' => $a
+  ->getId(), 'uid' => $uid, 'keywords' => $am->getKeywords($a), 'continue' => true);
 echo $this->partial('article.phtml', $args);
 ?>
 </div><!-- end headline -->
@@ -26,7 +37,15 @@ foreach ($ac as $a) {
   echo '<div class="arty">';
   $uid = $a->get('user_id');
   $user = $um->find($uid);
-  $args = array('article_count' => $article_count++, 'article_text' => $this->shortText($a->get('article_text')), 'article_title' => $a->get('article_title'), 'username' => $user->get('username'), 'read_count' => $a->get('read_count'), 'comment_count' => $am->getCommentCount($a), 'published' => $a->get('updated_at'), 'id' => $a->getId(), 'uid' => $uid, 'keywords' => $am->getKeywords($a), 'continue' => true);
+  $args = array('article_count' => $article_count++, 'article_text' => $this
+    ->shortText($a
+    ->get('article_text')), 'article_title' => $a
+    ->get('article_title'), 'username' => $user
+    ->get('username'), 'read_count' => $a
+    ->get('read_count'), 'comment_count' => $am
+    ->getCommentCount($a), 'published' => $a
+    ->get('updated_at'), 'id' => $a
+    ->getId(), 'uid' => $uid, 'keywords' => $am->getKeywords($a), 'continue' => true);
   echo $this->partial('article.phtml', $args);
   echo '</div><!-- end arty -->';
 }

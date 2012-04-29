@@ -19,7 +19,7 @@ class Admin_Form_Article extends Zend_Form
         $keywords = new Zend_Form_Element_Text('keywords');
         $keywords->setLabel('Keywords:')->addValidator('NotEmpty', true)->addFilter('HtmlEntities')->addFilter('StringTrim');
         $this->addElement($article_title)->addElement($article_text)->addElement($keywords);
-        $this->addElement('button', 'submit', array('type' => 'submit', 'label' => 'Submit', 'class' => 'button', 'decorators' => array('ViewHelper',),));
+        $this->addElement('button', 'submit', array('type' => 'submit', 'label' => 'Save', 'class' => 'button', 'decorators' => array('ViewHelper',),));
         $this->addElement('button', 'cancel', array('type' => 'submit', 'label' => 'Cancel', 'class' => 'button', 'decorators' => array('ViewHelper',),));
         $this->addElement('button', 'preview', array('type' => 'submit', 'label' => 'Preview', 'class' => 'button', 'decorators' => array('ViewHelper',),));
         $this->addDisplayGroup(array('submit', 'cancel', 'preview'), 'submitButtons', array('order' => 4, 'decorators' => array('FormElements', array('HtmlTag', array('tag' => 'div', 'class' => 'element')),),));
