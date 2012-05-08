@@ -11,24 +11,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-DROP TABLE IF EXISTS `registrations`;
+DROP TABLE IF EXISTS `testmodels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `registrations` (
+CREATE TABLE `testmodels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `reg_string` varchar(50) NOT NULL,
+  `testfield` varchar(500) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-LOCK TABLES `registrations` WRITE;
-/*!40000 ALTER TABLE `registrations` DISABLE KEYS */;
-INSERT INTO `registrations` VALUES (4,44,'gg50GtOy1cs3qRkYaqcV','2012-02-15 15:39:12','2012-02-15 15:39:12'),(5,32,'fV75ypryAmTqtuxEUwh3','2012-02-27 10:05:43','2012-02-27 10:05:43');
-/*!40000 ALTER TABLE `registrations` ENABLE KEYS */;
+LOCK TABLES `testmodels` WRITE;
+/*!40000 ALTER TABLE `testmodels` DISABLE KEYS */;
+/*!40000 ALTER TABLE `testmodels` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

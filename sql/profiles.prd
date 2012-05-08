@@ -22,19 +22,18 @@ CREATE TABLE `profiles` (
   `middle` varchar(30) DEFAULT NULL,
   `occupation` varchar(50) DEFAULT NULL,
   `website` varchar(50) DEFAULT NULL,
-  `bio_text` text,
+  `bio_text` varchar(500) DEFAULT NULL,
   `avatar` varchar(50) NOT NULL DEFAULT 'default.jpg',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=MEMORY AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES (1,14,'User1','Findleton','','This and that, but mostly the other thing...','http://www.arbalestmedia.com','With over 30 years experience in the tech industry, User1 still thinks this stuff is pretty cool. Building this site is his first in-depth foray into the worlds of PHP and Zend Framework. Let\'s just say it\'s been character building and leave it at that. You can contact User1 on his personal website.','_9tE0STdr1tbE/headshotMd-150x150.jpg','2012-02-09 02:00:59','2012-02-09 02:00:59'),(2,11,'Kurt','Miller','Eric','programmer','http://www.ymozend.com','Developed Your Moment of Zend blogging site to assist the Zend Framework community members with PHP coding techniques. Site provides examples, tutorials, and discussion of best practices for site development, testing, and deployment with PHP and Zend Framework. YMOZ utilizes HTML5, CSS3/Sass, Dojo, JQuery, a custom domain layer with MySQL back end, and PHPUnit/Selinium for testing.  Currently deploying to www.ymozend.com.','18.jpg','2012-02-09 16:47:28','2012-02-09 20:06:30');
+INSERT INTO `profiles` VALUES (1,14,'User1','Findleton','','Lowly code scrubber','http://arbalestmedia.com','User1 is a former Navy Squeal, expert rated small craft pilot, discredited creator of Facebook and is an all around mensch. You can contact him on his site.','D55BqczsEGIe/myShot.jpg','2012-02-09 18:00:59','2012-02-09 18:00:59'),(2,11,'Kurt','Miller','Eric','programmer','www.ymozend.com','Too long without a job; I\'ve taken to robbing banks and convenience stores.','01.jpg','2012-02-10 08:47:28','2012-02-10 12:06:30'),(6,25,'Gus','Schwartz','','','','','default.jpg','2012-02-28 12:29:45','2012-02-28 12:29:45');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

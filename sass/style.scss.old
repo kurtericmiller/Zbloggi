@@ -1,0 +1,1073 @@
+@import "vars";
+@import "base";
+/* ==|== primary styles =====================================================
+   Author: 
+   ========================================================================== */
+
+@mixin background-gradient($begin, $end, $style: linear) {
+  background-image: -webkit-gradient($style, from($begin), to($end));
+  background-image: -webkit-#{$style}-gradient(top, $begin, $end);
+  background-image:    -moz-#{$style}-gradient(top, $begin, $end);
+  background-image:     -ms-#{$style}-gradient(top, $begin, $end);
+  background-image:      -o-#{$style}-gradient(top, $begin, $end);
+  background-repeat: no-repeat;
+}
+
+body {
+    background: $bodyBgColor url('/images/bg.jpg') repeat-x top;
+    font-family: 'Ubuntu', 'Arial', sans-serif;
+}
+
+#topWrap {
+    background: $bodyBgColor url('/images/bg.jpg') repeat-x top;
+}
+
+p {
+    padding: 0 0 10px 0;
+}
+
+form .element {
+    text-align: center;
+}
+
+a {
+  color: $baseLinkFgColor;
+  &:visited { color: $baseLinkFgColor; }
+  &:hover { color: $baseLinkHvColor; }
+}
+
+.zend_form {
+    padding: 20px 0;
+}
+
+.container {
+    margin: 0 auto 5px;
+    padding: 0;
+    width: $container;
+}
+
+.header {
+    height: 66px;
+    padding: 0 15px;
+}
+
+.header h1 {
+    font-family: $headerFont;
+    font-size: $headerFontSize;
+    text-shadow: 0px 2px 3px #555;
+    color: $headerFontColor;
+    line-height: 2.4;
+    float: left;
+}
+
+.header h3 {
+    font-family: $headerFont;
+    font-size: $subHeaderFontSize;
+    color: $subHeaderFontColor;
+    margin-top: 25px;
+    float: right;
+}
+
+.header a {
+    text-decoration: none;
+    color: $headerLinkFgColor;
+}
+
+#logged-in-as {
+    line-height: 2;
+    color: $loggedInFgColor;
+    padding: 0 15px;
+    height: 30px;
+}
+
+#logged-in-as a {
+    text-decoration: none;
+    color: $loggedInLinkFgColor;
+    &:hover { color: $loggedInLinkHvColor; }
+}
+
+#logged-in-as p {
+    margin-top: 3px;
+}
+
+#logged-in-as img {
+    margin-top: -7px;
+}
+
+/* --------------------------- */
+
+.sidebarLt {
+    width: $leftColWidth;
+    margin-left: 5px;
+    float: left;
+}
+
+.sidebarRt {
+    width: $rightColWidth;
+    padding: 16px 0;
+    float: right;
+}
+
+#regform {
+    max-width: 300px;
+}
+
+#regform legend {
+    font-size: $regFormLegendFontSize;
+    font-weight: $regFormLegendWeight;
+    padding-bottom: 15px;
+}
+
+#regform #captcha-input {
+    margin-top: 10px;
+}
+
+#commentform {
+    background-color: $commentBgColor;
+    margin: 20px 0 20px 0;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#commentform .zend_form {
+    padding: 10px 20px;
+}
+
+#commentform .zend_form .element {
+    text-align: left;
+    padding-top: 10px;
+}
+
+#commentform .zend_form textarea {
+    width: 90%
+}
+
+#configform .zend_form .element {
+    text-align: left;
+    padding-top: 10px;
+}
+
+#configform .zend_form label {
+    float: left;
+    width: 260px;
+}
+
+#configform .zend_form legend {
+    font-size: $configFormLegendFontSize;
+    font-weight: $configFormLegendWeight;
+    padding-bottom: 8px;
+    text-decoration: underline;
+}
+
+#configform .zend_form input {
+    margin: 0 0 5px 0;
+}
+
+#logform {
+    max-width: 250px;
+}
+
+#logform .zend_form {
+    background-color: $logformBgColor;
+    padding: 10px 20px;
+    margin: 0 10px 20px;
+    border-radius: 6px;
+}
+
+#logform legend {
+    font-size: $logformLegendFontSize;
+    font-family: $logformLegendFont;
+    font-weight: $logformLegendWeight;
+    color: $logformLegendFontColor;
+    padding: 0 0 8px;
+    text-align: center;
+}
+
+#logform .formFields dd {
+    padding-bottom: 8px;
+    margin: 0 0 0 10px;
+}
+
+#logform input {
+    width: 90%;
+}
+
+.element.reg {
+    padding-top: 20px;
+    text-align: left;
+}
+
+.sidebarRt .searchBox {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebarRt .zend_form {
+    padding: 2px 0 0;
+    margin:0;
+}
+
+.sidebarRt .zend_form input[type="text"] {
+    padding: 2px 0;
+    border-radius: 4px;
+    width: 116px;
+}
+
+.sidebarRt .zend_form input[type="submit"] {
+    background-color: $sbarRtSubmitBgColor;
+    color: $sbarRtSubmitFgColor;
+    border-radius: 3px;
+    padding: 2px 5px;
+    &:hover { 
+      background-color: $sbarRtSubmitHvBgColor;
+      color: $sbarRtSubmitHvFgColor;
+    }
+}
+
+.nav {
+    width: $leftColWidth;
+    padding: 10px 0 0;
+    margin: 0;
+    float: left;
+}
+
+.nav a {
+    font-size: $adminLinkFontSize + 2 ;
+    padding: 5px 10px;
+    background-color: $titleColor;
+    margin: 5px;
+    width: 120px;
+    float: left;
+    border-radius: 4px;
+    text-decoration: none;
+    color: $navLinkFgColor;
+    &:hover { color: $navLinkHvColor; }
+}
+
+.nav.adminmenu {
+    border-top: 1px solid $borderColor;
+}
+
+.nav.adminmenu a {
+    background-color: $navAdmLinkFgColor;
+    &:hover { color: $navAdmLinkHvColor; }
+}
+
+.content {
+    padding: 0;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: $containerColor;
+}
+
+.content pre {
+    background-color: $preBgColor;
+    color: $preFgColor;
+    padding: 15px;
+}
+
+.art_link {
+    padding-top: 15px;
+}
+
+.art_link .title {
+    margin-left: 10px;
+    font-size: $artLinkTitleFontSize;
+    font-weight: $artWrapTitleWeight;
+}
+
+.articleClip {
+    font-family: $articleClipFont;
+    font-size: $articleClipFontSize;
+}
+
+.midcol {
+    padding: 0px 10px 10px 0;
+    width: $twoColWidth - 10;
+    float: right;
+}
+
+.mainTitle {
+    display: inline-block;
+    float: left;
+    width: $container - $rightColWidth - $leftColWidth - 6;
+}
+
+.mainTitle img {
+  height:114px;
+  width:622px;
+  padding: 11px 1px 1px 6px;
+  margin: 0px;
+}
+
+.midcol .mainTitle h2 {
+    font-size: $midColMainTitleFontSize;
+    font-family: $midColMainTitleFont;
+    color: $midColMainTitleFontColor;
+    background-color: $midColMainTitleFontBgColor;
+    text-align: center;
+}
+
+.midcol .articleItem .articleClip {
+    background-color: $articleBgColor;
+}
+
+.twoCol {
+    padding: 0 10px 0 10px;
+    width: 1020px;
+    margin: 0 auto;
+    float: left;
+}
+
+.twoCol iframe {
+    text-align: center;
+    margin: 0 auto;
+    float: none;
+}
+
+.headline h2 {
+    padding: 2px 10px 2px 10px;
+    border-radius: 6px;
+    background-color: $articleTitleLinkBgColor;
+    font-family: $headLineArticleTitleFont;
+    font-size: $headLineArticleTitleFontSize;
+    font-weight: $articleTitleWeight;
+    text-shadow: 0px 2px 3px #555;
+}
+
+.headline hr {
+    color: $borderColor;
+    padding: 0;
+    margin: 0;
+    height: 1px;
+    background-color: $borderColor;
+    border: none;
+}
+
+.headline .articleClip {
+    font-size: $headLineArticleClipFontSize;
+}
+
+.static hr {
+    color: $borderColor;
+    padding: 0;
+    margin: 0;
+    height: 1px;
+    background-color: $borderColor;
+    border: none;
+}
+
+.book {
+    padding:  0 10px;
+    margin: 0px 0 0 0;
+}
+
+.book .pic {
+    text-align: center;
+    margin: 8px auto 0;
+}
+
+.book .title {
+    padding-bottom: 5px;
+}
+
+.book .title a {
+    text-decoration: none;
+    color: $bookTitleFgColor;
+    &:hover { color: $bookTitleHvColor; }
+}
+
+.book hr {
+    margin: 3px 0;
+}
+
+form label {
+    font-weight: $formLabelWeight;
+}
+
+form button {
+    padding: 2px 5px;
+}
+
+/* --------- */
+
+.articles {
+    padding: 0px 10px 10px 0;
+}
+
+.articles hr {
+    color: $borderColor;
+    border: none;
+    background-color: $borderColor;
+    height: 1px;
+    margin: 0;
+}
+
+.arty {
+}
+
+.arty .articleTitle {
+    padding: 10px 0 0 0;
+    font-family: $headLineArticleTitleFont;
+}
+
+.arty .articleTitle p {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.arty .articleItem {
+}
+
+.arty.first .articleItem {
+    border-bottom: 1px solid $borderColor;
+    padding-right: 10px;
+}
+
+.articleItem .articleTitle h2 {
+    font-family: $headLineArticleTitleFont;
+    font-weight: $articleTitleWeight;
+    color: $articleTitleLinkFgColor;
+    text-shadow: 0px 2px 3px #555;
+    border-radius: 6px;
+    background-color: $articleTitleLinkBgColor;
+    padding: 5px 10px 7px 10px;
+    margin: 5px 0 0 10px;
+}
+
+.articleItem .articleTitle p {
+    margin: 0 0 0 20px;
+}
+
+.articleItem .articleTitle a {
+    text-decoration: none;
+    color: $articleTitleLinkFgColor;
+    &:hover { color: $authorTitleLinkHvColor; }
+}
+
+.articleItem .articleTitle a.author {
+    color: $authorTitleLinkFgColor;
+    &:hover { color: $authorTitleLinkHvColor; }
+}
+
+.articleItem .articleMgmt {
+    margin-bottom: 10px;
+}
+
+.articleItem .articleClip {
+    margin: 0 0 6px 10px;
+    padding: 0 20px 4px;
+    background-color: $articleBgColor;
+    border-radius: 6px;
+}
+
+.articleItem a.clipLink {
+    font-size: $articleItemClipLinkFontSize;
+    font-family: $articleItemClipLinkFont;
+    margin: 0 0 10px 0;
+    padding: 0 0 5px 0;
+    text-decoration: none;
+    color: $articleClipLinkColor;
+    &:hover { color: $articleClipLinkHvColor; }
+}
+
+.articleItem .articleClip p {
+    padding: 10px 0;
+}
+
+.articleItem .articleMeta {
+    margin: 10px;
+    color: $articleMetaFgColor;
+}
+
+.articleItem .tagsList {
+    margin: 10px 0 0 0px;
+    color: $articleTagsFgColor;
+}
+
+.articleItem .tagsList a {
+    text-decoration: none;
+}
+
+.articleItem hr {
+    color: $borderColor;
+    border: none;
+    background-color: $borderColor;
+    height: 1px;
+    padding: 0;
+    margin: 4px 0;
+}
+
+.article {
+    background-color: $articleBgColor;
+    padding: 10px;
+    margin: 0 0 15px 0;
+}
+
+.bio {
+    border: 1px solid $borderColor;
+    background-color: $titleColor;
+    color: $bioFgColor;
+    padding: 10px;
+}
+
+.bio h3 {
+}
+
+.bio img {
+    float: left;
+    margin: 0px 10px 0px 0;
+}
+
+.avatarform .zend_form .element {
+    text-align: left;
+    padding-top: 10px;
+}
+
+#avatar-element {
+    width: 720px;
+    clear: both;
+}
+
+#avatar-element label {
+    background-color: $avatarElementLabelColor;
+    float: left;
+    display: inline;
+    text-align: center;
+    width: 130px;
+    margin: 3px;
+    padding: 0 0 5px;
+}
+
+#avatar-element input {
+    margin: 5px auto;
+    display: block;
+}
+
+#avatar-element img {
+    margin: 5px;
+}
+
+.comment {
+    background-color: $commentBgColor;
+    margin: 4px 0;
+}
+
+.comment .comheader {
+    color: $commentHdrFgColor;
+    background-color: $commentHdrBgColor;
+    padding: 3px;
+}
+
+.comment .comcounter {
+    float: right;
+}
+
+.comment .combody {
+    padding: 8px;
+}
+
+.comment .combody img {
+    margin: 0 8px 0 0;
+    float: left;
+}
+
+.delComment {
+    float: left;
+    display: block;
+    width: 700px;
+    padding-top: 12px;
+}
+
+/* --------- */
+
+.userName {
+    color: $usernameFgColor;
+}
+
+.artWrap {
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 15px 15px 0;
+}
+
+.artWrap h2 {
+    float: left;
+    display: inline;
+}
+
+.artWrap h3 {
+    padding-bottom: 10px;
+    float: left;
+    display: inline;
+}
+
+.artWrap em {
+    color: $artWrapEmFgColor;
+}
+
+.artWrap hr {
+    color: $borderColor;
+    border: none;
+    background-color: $borderColor;
+    height: 1px;
+    margin: 0 0 5px;
+}
+
+.artWrap .admin {
+    float: right;
+    display: inline;
+    height: 34px;
+}
+
+.artWrap .admin a {
+    margin-top: 0;
+}
+
+.artWrap .title {
+    font-size: $artWrapTitleFontSize;
+    font-weight: $artLinkTitleWeight;
+}
+
+.entity {
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    margin: 15px 0 15px 10px;
+    padding: 15px 15px 0;
+    float: left;
+    width: 95%;
+}
+
+.entity .admin {
+    float: left;
+    display: inline;
+    height: 34px;
+}
+
+.entity .titles {
+    font-size: $entityTitlesFontSize;
+    font-weight: $entityTitlesWeight;
+}
+
+.entity .author {
+    font-weight: $entityAuthorWeight;
+}
+
+.entity .pub {
+    background-color: $entityPubFgColor;
+}
+
+.entity .nopub {
+    background-color: $entityNoPubFgColor;
+}
+
+.entity .artText {
+    padding: 10px 0 0 30px;
+    margin: 6px;
+    background-color: $articleBgColor;
+}
+
+.entity h2 {
+    padding-bottom: 10px;
+}
+
+.entity hr {
+    color:$borderColor;
+    background-color:$borderColor;
+    height:1px;
+    border:none;
+    margin: 0;
+}
+
+.admbody {
+    padding: 10px;
+    width: 848px;
+    float: right;
+    display: inline;
+}
+
+.admin {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.admin a {
+    padding: 0 10px;
+    height: 20px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    font-family: $adminLinkFont ;
+    font-weight: $adminLinkWeight ;
+    font-size: $adminLinkFontSize ;
+    float: left;
+    margin: 10px 8px 10px 0;
+    background-color: $adminLinkBgColor;
+    border: 1px solid $adminLinkBrdrColor;
+    -moz-box-shadow:inset 0px 0px 1px rgba(187,187,187,1);
+    -webkit-box-shadow:inset 0px 0px 1px rgba(187,187,187,1);
+    box-shadow:inset 0px 0px 1px rgba(187,187,187,1);
+    background-image: -o-linear-gradient(90deg , rgb(238,238,238) 0%, rgb(254,254,254) 100%);
+    background-image: -moz-linear-gradient(90deg , rgb(238,238,238) 0%, rgb(254,254,254) 100%);
+    background-image: -webkit-linear-gradient(90deg , rgb(238,238,238) 0%, rgb(254,254,254) 100%);
+    background-image: -ms-linear-gradient(90deg , rgb(238,238,238) 0%, rgb(254,254,254) 100%);
+    background-image: linear-gradient(90deg , rgb(238,238,238) 0%, rgb(254,254,254) 100%);
+    color: $adminLinkFontColor;
+    text-shadow: rgba(254,254,254,0.5) 0px 1px 0px;
+    &:hover {
+     background-color: $adminLinkHvColor;
+     background-image: -o-linear-gradient(90deg , rgb(246,246,246) 0%, rgb(254,254,254) 100%);
+     background-image: -moz-linear-gradient(90deg , rgb(246,246,246) 0%, rgb(254,254,254) 100%);
+     background-image: -webkit-linear-gradient(90deg , rgb(246,246,246) 0%, rgb(254,254,254) 100%);
+     background-image: -ms-linear-gradient(90deg , rgb(246,246,246) 0%, rgb(254,254,254) 100%);
+     background-image: linear-gradient(90deg , rgb(246,246,246) 0%, rgb(254,254,254) 100%);
+    } 
+    &:active {
+      background-color: $adminLinkActvBgColor;
+      -moz-box-shadow:inset 0px 0px 5px rgba(187,187,187,1);
+      -webkit-box-shadow:inset 0px 0px 5px rgba(187,187,187,1);
+      box-shadow:inset 0px 0px 5px rgba(187,187,187,1);
+      background-image: -o-linear-gradient(90deg , rgb(254,254,254) 0%, rgb(246,246,246) 100%);
+      background-image: -moz-linear-gradient(90deg , rgb(254,254,254) 0%, rgb(246,246,246) 100%);
+      background-image: -webkit-linear-gradient(90deg , rgb(254,254,254) 0%, rgb(246,246,246) 100%);
+      background-image: -ms-linear-gradient(90deg , rgb(254,254,254) 0%, rgb(246,246,246) 100%);
+      background-image: linear-gradient(90deg , rgb(254,254,254) 0%, rgb(246,246,246) 100%);
+      text-shadow: none;
+    }
+}
+
+.user h3 {
+    padding-top: 1em;
+    color: $userTitleFgColor;
+    width: 400px;
+}
+
+.user hr {
+    color:$borderColor;
+    background-color:$borderColor;
+    height:1px;
+    border:none;
+    margin: 0;
+}
+
+.comadm h2 {
+    padding: 0 0 10px;
+}
+
+.comadm h3 {
+    padding: 10px 0 0;
+}
+
+.comadm h3 em {
+    color: $commentAdmTitleFgColor;
+}
+
+.comadm hr {
+    color:$borderColor;
+    background-color:$borderColor;
+    height:1px;
+    border:none;
+    margin: 0;
+}
+
+.addthis_toolbox {
+    text-align: center;
+    margin: 10px auto 0;
+    padding: 0 300px;
+}
+
+.addthis_small {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.floatRt {
+    float:right;
+    padding: 0;
+    margin: 0;
+}
+
+.floatLt {
+    float:left;
+    padding: 0;
+    margin: 0;
+}
+
+.tsearch {
+    padding: 15px;
+    margin: 15px;
+}
+
+.tsearch td {
+    padding: 4px 0;
+}
+
+.tsearch a {
+    text-decoration: none;
+}
+
+.tsearch .theader {
+    font-weight: $searchHeaderWeight;
+}
+
+.tsearch .tid {
+    width: 30px;
+}
+
+.tsearch .ttitle {
+    width: 230px;
+}
+
+.tsearch .tauthor {
+    width: 90px;
+}
+
+.tsearch .tpubdate {
+    width: 130px;
+}
+
+.paginationControl {
+    text-align: center;
+    margin: 10px;
+    font-weight: $paginationControlWeight;
+}
+
+.paginationControl .disabled {
+    font-weight: $paginationControlDisabledWeight;
+}
+
+.paginationControl .pageNum {
+    border: 1px solid $loginColor;
+    padding: 2px 2px 2px 5px;
+    margin: 10px 4px;
+}
+
+.paginationControl a {
+    text-decoration: none;
+    color: $paginatorLinkFgColor;
+    &:hover { color: $paginatorLinkHvColor; }
+}
+
+/* sidebar stuff */
+
+.sideWrap {
+    background-color: $sideWrapBgColor;
+    border-radius: 6px;
+    padding: 0 0 10px 0;
+    margin: 0 10px 10px;
+    display: block;
+}
+
+.sideWrap h3 {
+    padding: 5px 0 0px 0;
+    font-family: $sideWrapFont;
+    text-align: center;
+    color: $sideWrapFontColor;
+    background-color: $titleColor;
+}
+
+.sideWrap hr {
+    padding: 0;
+    margin: 0;
+}
+
+.sideWrap .linkWrap a {
+    text-decoration: none;
+    color: $loginColor;
+    &:hover { color: $sidewrapLinkHvColor; }
+}
+
+.follow {
+}
+
+.follow .glifs {
+    height:40px;
+    width:164px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.follow a {
+    background-image: url('/images/social.png');
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    padding:0;
+    margin:15px 0;
+    height:32px;
+    width:32px;
+}
+
+.follow a.fb { 
+   background-position: 0px 0px; 
+    &:hover { background-position: 0px -32px; }
+ }
+
+.follow a.tw { 
+   background-position: -32px 0px; 
+   &:hover { background-position: -32px -32px; }
+ }
+
+.follow a.gp { 
+  background-position: -64px 0px; 
+   &:hover { background-position: -64px -32px; }
+}
+
+.follow a.li { 
+   background-position: -96px 0px; 
+   &:hover { background-position: -96px -32px; }
+ }
+
+.follow a.gh { 
+   background-position: -128px 0px; 
+   &:hover { background-position: -128px -32px; }
+ }
+
+.contribs .linkWrap ul {
+    padding:0 10px 0 40px;
+    margin:6px 0 0 0;
+}
+
+.aboutWrap {
+    padding: 5px 25px;
+}
+
+.footer {
+    padding: 10px 0 2px;
+    margin: 0 auto;
+    background-color: $footerBgColor;
+    color: $footerFgColor;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: $footerWidth;
+}
+
+.footer p {
+    margin-left: 20px;
+    color: $footerFgColor;
+}
+
+.footer .zp {
+    float: right;
+    margin-right: 20px;
+    display:inline;
+}
+
+.footer .footWrap {
+    width: 220px;
+    float: left;
+    padding: 10px 0 10px 20px;
+    margin-left: 10px;
+}
+
+.footer .footWrap ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer .footWrap a {
+    color: $footerLinkFgColor;
+    text-decoration: none;
+    &:hover { 
+      color: $footerLinkHvColor;
+      text-decoration: none;
+    }
+}
+
+.footer .footWrap hr {
+    color: $footerRuleFgColor;
+    background-color:$footerRuleBgColor;
+    height:1px;
+    border:none;
+}
+
+.footer .footWrap li {
+    border-bottom: 1px dotted $footerRuleBgColor;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    &:hover { 
+      border-bottom: 1px dashed $footerLinkHvColor;
+    }
+}
+
+.footer .copyright hr {
+    margin: 0 20px 10px 20px;
+    color: $footerRuleFgColor;
+    background-color: $footerRuleBgColor;
+    height:1px;
+    border: none;
+}
+
+.footer .copyright {
+    padding-top: 10px;
+}
+
+.contactForm input[type="text"] {
+    width: 140px;
+    margin: 0 0 10px;
+}
+
+.contactForm textarea {
+    width: 140px;
+    height: 84px;
+}
+
+.contactForm label {
+    padding:0;
+    width: 70px;
+    float: left;
+}
+
+.contactForm .zend_form {
+    padding:0;
+}
+
+.contactForm .zend_form button {
+    margin: -23px 0 0 0;
+    float: left;
+}
+
+.fmessage {
+    color: $fmsgFgColor;
+    margin: 10px;
+}
+
+
+
+/* ==|== non-semantic helper classes ========================================
+   Please define your styles before this section.
+   ========================================================================== */
+
+/* For image replacement */
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden { display: none !important; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Contain floats: h5bp.com/q */ 
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+@import "mqueries";

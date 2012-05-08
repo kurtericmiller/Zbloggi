@@ -1114,7 +1114,7 @@ form button {
 .sidebarRt .zend_form input[type="text"] {
   padding: 2px 0;
   border-radius: 4px;
-  width: auto;
+  width: 95%;
 }
 .sidebarRt .zend_form input[type="submit"] {
   display: block;

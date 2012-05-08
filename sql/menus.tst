@@ -23,12 +23,13 @@ CREATE TABLE `menus` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MEMORY DEFAULT CHARSET=latin1;
+) ENGINE=MEMORY AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
 LOCK TABLES `menus` WRITE;
 /*!40000 ALTER TABLE `menus` DISABLE KEYS */;
+INSERT INTO `menus` VALUES (1,'main','Home','/',1,'0000-00-00 00:00:00','2012-03-25 05:35:59'),(2,'main','Blog','/blog',2,'2012-03-25 06:12:02','2012-03-25 06:12:02'),(3,'main','Books','/books',3,'2012-03-25 06:13:09','2012-03-25 06:13:09'),(4,'admin','Articles','/admin/article',1,'2012-03-25 07:22:10','2012-03-25 07:22:10'),(5,'admin','Comments','/admin/comment',2,'2012-03-25 07:24:13','2012-03-25 07:24:13'),(6,'admin','Users','/admin/user',3,'2012-03-25 07:24:46','2012-03-25 07:24:46'),(7,'admin','Sections','/admin/section',4,'2012-03-25 07:25:34','2012-03-25 07:25:34'),(8,'admin','Config','/admin/setting',6,'2012-03-25 07:26:07','2012-03-25 07:26:07'),(9,'admin','Books','/admin/book',7,'2012-03-25 07:26:48','2012-03-25 07:26:48'),(12,'admin','Search','/admin/index/search',8,'2012-03-25 07:31:49','2012-03-25 07:31:49'),(11,'admin','Menus','/admin/menu',5,'2012-03-25 07:30:19','2012-03-25 07:30:19');
 /*!40000 ALTER TABLE `menus` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

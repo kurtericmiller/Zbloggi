@@ -26,7 +26,7 @@ class User_Form_Register extends Zend_Form
         $password->setLabel('Password:')->setRequired(true)->addValidator('StringLength', true, array(6, 20))->addErrorMessage("A password between 6-20 in length is required.")->addFilter('HtmlEntities')->addFilter('StringTrim');
         $pwmatch = new Zend_Form_Element_Password('pwmatch');
         $pwmatch->setLabel('Confirm Password:')->setRequired(true)->addValidator('NotEmpty', true)->addValidator('Identical', false, array('token' => 'password'))->addErrorMessage("Password must match")->addFilter('HtmlEntities')->addFilter('StringTrim');
-        $captcha = new Zend_Form_Element_Captcha('captcha', array('label' => 'Human or Bot?:', 'captcha' => 'Image', 'captchaOptions' => array('captcha' => 'Image', 'wordLen' => 4, 'fontSize' => 30, 'font' => '/font/arial.ttf', 'dotNoiseLevel' => 10, 'lineNoiseLevel' => 1)));
+        $captcha = new Zend_Form_Element_Captcha('captcha', array('label' => 'Human or Bot?:', 'captcha' => 'Image', 'captchaOptions' => array('captcha' => 'Image', 'wordLen' => 4, 'fontSize' => 30, 'font' => './font/arial.ttf', 'dotNoiseLevel' => 10, 'lineNoiseLevel' => 1)));
         $this->addElement($username)->addElement($email)->addElement($password)->addElement($pwmatch)->addElement($captcha);
         $this->addElement('button', 'cancel', array('type' => 'submit', 'label' => 'Cancel', 'class' => 'button', 'decorators' => array('ViewHelper',),));
         $this->addElement('button', 'submit', array('type' => 'submit', 'label' => 'Submit', 'class' => 'button', 'decorators' => array('ViewHelper',),));

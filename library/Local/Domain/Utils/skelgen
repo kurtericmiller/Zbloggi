@@ -1,0 +1,299 @@
+#!/usr/bin/zsh
+setopt shwordsplit
+source ~/.project~
+APPDIR=$PROJECT_DIR/$PROJECT_NAME
+TESTDIR=$PROJECT_DIR/$PROJECT_NAME/tests 
+TMPDIR=/tmp
+UTIL_DIR="$PROJECT_DIR/$PROJECT_NAME/library/Local/Domain/Utils"
+OLDIFS="$IFS"
+[[ ! -d $TESTDIR ]] && mkdir $TESTDIR
+
+cat > $TESTDIR/phpunit.xml<<EOF
+<phpunit bootstrap="./bootstrap.php">
+  <testsuites> <testsuite name="ApplicationTestSuite">
+      <directory>./</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist>
+       <directory suffix=".php">./controllers</directory>
+       <directory suffix=".php">./library</directory>
+    </whitelist>
+  </filter>
+</phpunit>
+EOF
+
+cat > $TESTDIR/bootstrap.php<<EOF
+<?php
+defined('SINGLETON') || define('SINGLETON', true);
+error_reporting( E_ALL | E_STRICT );
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+date_default_timezone_set('America/Los_Angeles');
+
+defined('APPLICATION_ROOT') || define('APPLICATION_ROOT', realpath(dirname(__FILE__) . '/../'));
+defined('APPLICATION_PATH')
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV',  'testing');
+
+\$library = realpath(APPLICATION_ROOT . '/library');
+\$domain = realpath(APPLICATION_ROOT . '/library/Local/Domain');
+\$tests = realpath(APPLICATION_ROOT . '/tests');
+
+\$path = array(
+    \$library,
+    \$domain,
+    \$tests,
+    get_include_path()
+);
+set_include_path(implode(PATH_SEPARATOR, \$path));
+
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance();
+//require_once 'TestInit.php';
+unset(\$library, \$domain);
+EOF
+
+cat > $TESTDIR/TestInit.php<<EOF
+<?php
+require_once 'Zend/Application.php';
+require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
+class TestInit extends Zend_Test_PHPUnit_ControllerTestCase
+{
+  
+  public function setUp()
+  {
+    \$this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+    parent::setUp();
+    \$frontController = \$this->getFrontController();
+    \$frontController->setParam('bootstrap', \$this->bootstrap->getBootstrap());
+    \$router = \$frontController->getRouter();
+    \$router->addDefaultRoutes();
+  }
+
+  public function tearDown()
+  {
+    system(APPLICATION_ROOT . "/library/Local/Domain/Utils/clear_testdb");
+  }
+  
+  public function loginUser(\$user = 'testing', \$password = 'testing')
+  {
+    \$this->request->setMethod('POST')->setPost(array('email' => \$user, 'password' => \$password));
+    \$this->dispatch('/auth');
+    \$this->resetRequest()->resetResponse();
+    \$this->request->setPost(array());
+  }
+}
+EOF
+
+[[ ! -d $TESTDIR/controllers ]] && mkdir $TESTDIR/controllers
+[[ ! -d $TESTDIR/local ]] && mkdir $TESTDIR/local
+
+list=($( \
+find $APPDIR  \
+\( -name '.git' -prune \) -o \
+\( -name '.settings' -prune \) -o \
+\( -name '.buildpath' -prune \) -o \
+\( -name '.metadata' -prune \) -o \
+\( -name '.project' -prune \) -o \
+\( -name 'public' -prune \) -o \
+\( -name 'misc' -prune \) -o \
+\( -name 'javascripts' -prune \) -o \
+\( -name 'Markdown' -prune \) -o \
+\( -name 'Bootstrap.php' -prune \) -o \
+\( -name 'tests' -prune \) -o \
+\( -name 'Zend' -prune \)  -o \( -name '*.php' \) -print 
+))
+
+for fn in $list;do
+  controllers=$(echo $fn | grep -i '/controllers/')
+  for cfn in $controllers;do
+    class=$(egrep '^abstract|^class' $cfn | sed -e 's/class//g' -e 's/extends.*//g' -e 's/_//g' | tr -d '[:space:]')
+    [[ -z $class ]] && continue
+    echo $class
+    funcs=$(egrep -i '.*function.*action' $cfn | sed -e 's/.*function /public function test_/g')
+    if [[ -f ${TESTDIR}/controllers/${class}Test.php ]];then
+      setup=$(${UTIL_DIR}/snip_setup ${TESTDIR}/controllers/${class}Test.php)
+      [[ -n $setup ]] && echo ">>> found existing setup <<<"
+      tests=$(${UTIL_DIR}/snip_tests ${TESTDIR}/controllers/${class}Test.php)
+      [[ -n $tests ]] && echo ">>> found existing tests <<<"
+    fi
+    cat > ${TESTDIR}/controllers/${class}Test.php<<____EOF
+<?php
+// Call ${class}Test::main() if this source file is executed directly.
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "${class}Test::main");
+}
+
+require_once 'TestInit.php';
+
+/**
+ * @group Controllers
+ */
+class ${class}Test extends TestInit
+{
+  public static function main()
+  {
+    require_once 'PHPUnit/Autoload.php';
+    require_once 'bootstrap.php';
+    \$suite  = new PHPUnit_Framework_TestSuite("${class}Test");
+    \$result = PHPUnit_TextUI_TestRunner::run(\$suite);
+  }
+/* Begin Actual Setup */
+____EOF
+  IFS="
+"
+  if [[ -n $setup ]];then
+    for line in $setup;do
+      echo "$line"
+    done >> $TESTDIR/controllers/${class}Test.php
+  else
+    cat >> ${TESTDIR}/controllers/${class}Test.php<<____EOF
+  public function setUp()
+  {
+    parent::setUp();
+  }
+  
+  public function tearDown()
+  {
+    parent::tearDown();
+  }
+____EOF
+  fi
+  cat >> $TESTDIR/controllers/${class}Test.php<<____EOF
+/* End Actual Setup */
+/* Begin Actual Tests */
+____EOF
+  if [[ -n $tests ]];then
+    for line in $tests;do
+      echo "$line"
+    done >> $TESTDIR/controllers/${class}Test.php
+    cat >> $TESTDIR/controllers/${class}Test.php<<____EOF
+/* End Actual Tests */
+____EOF
+  else
+    cat >> $TESTDIR/controllers/${class}Test.php<<____EOF
+/* End Actual Tests */
+/* Candidate Tests */
+____EOF
+    for func in $funcs;do
+    cat >> $TESTDIR/controllers/${class}Test.php<<____EOF
+  ${func}
+  {
+    \$this->markTestIncomplete();
+  }
+____EOF
+   done
+  fi
+  cat >> $TESTDIR/controllers/${class}Test.php<<____EOF
+}
+if (PHPUnit_MAIN_METHOD == '${class}Test::main') {
+ ${class}Test::main();
+}
+____EOF
+  done
+done
+IFS="$OLDIFS"
+
+#skip individual models,mappers,and collections - tests are aggregated in a single mapper/collection tests
+for fn in $list;do
+  local=$(echo $fn | grep -i '/local/')
+  for lfn in $local;do
+    class=$(egrep '^abstract|^class' $lfn | tr -d '[:space:]' | sed -e 's/class//g' -e 's/abstract//g' -e 's/implements.*//g' -e 's/extends.*//g' -e 's/_//g')
+    [[ -z $class ]] && continue
+    skip=$(echo $class | egrep -i 'models|mappers|collections')
+    [[ -n $skip ]] && continue
+    echo $class
+    funcs=$(egrep '^[a-z ]*function' $lfn | egrep -v 'private' | sed -e 's/^.*function//g' -e 's/ //g' -e 's/\(.*\)(.*/public function test_\1()/g')
+    if [[ -f ${TESTDIR}/local/${class}Test.php ]];then
+      setup=$(${UTIL_DIR}/snip_setup ${TESTDIR}/local/${class}Test.php)
+      [[ -n $setup ]] && echo ">>> found existing setup <<<"
+      tests=$(${UTIL_DIR}/snip_tests ${TESTDIR}/local/${class}Test.php)
+      [[ -n $tests ]] && echo ">>> found existing tests <<<"
+    fi
+    cat > ${TESTDIR}/local/${class}Test.php<<____EOF
+<?php
+// Call ${class}Test::main() if this source file is executed directly.
+if (!defined("PHPUnit_MAIN_METHOD")) {
+    define("PHPUnit_MAIN_METHOD", "${class}Test::main");
+}
+
+require_once 'TestInit.php';
+
+/**
+ * @group Local
+ */
+class ${class}Test extends TestInit
+{
+  public static function main()
+  {
+    require_once 'PHPUnit/Autoload.php';
+    require_once 'bootstrap.php';
+    \$suite  = new PHPUnit_Framework_TestSuite("${class}Test");
+    \$result = PHPUnit_TextUI_TestRunner::run(\$suite);
+  }
+/* Begin Actual Setup */
+____EOF
+  IFS="
+"
+  if [[ -n $setup ]];then
+    for line in $setup;do
+      echo "$line"
+    done >> $TESTDIR/local/${class}Test.php
+  else
+    cat >> ${TESTDIR}/local/${class}Test.php<<____EOF
+  public function setUp()
+  {
+    parent::setUp();
+  }
+  
+  public function tearDown()
+  {
+    parent::tearDown();
+  }
+____EOF
+  fi
+  cat >> $TESTDIR/local/${class}Test.php<<____EOF
+/* End Actual Setup */
+/* Begin Actual Tests */
+____EOF
+  if [[ -n $tests ]];then
+    for line in $tests;do
+      echo "$line"
+    done >> $TESTDIR/local/${class}Test.php
+    cat >> $TESTDIR/local/${class}Test.php<<____EOF
+/* End Actual Tests */
+____EOF
+  else
+    cat >> $TESTDIR/local/${class}Test.php<<____EOF
+/* End Actual Tests */
+/* Candidate Tests */
+____EOF
+    for func in $funcs;do
+    cat >> $TESTDIR/local/${class}Test.php<<____EOF
+  ${func}
+  {
+    \$this->markTestIncomplete();
+  }
+____EOF
+   done
+  fi
+  cat >> $TESTDIR/local/${class}Test.php<<____EOF
+}
+if (PHPUnit_MAIN_METHOD == '${class}Test::main') {
+ ${class}Test::main();
+}
+____EOF
+  done
+done
+IFS="$OLDIFS"
+
+stack='Pear Fluent ArrayNested NewLines(before=public:private:protected)'
+echo "Beautifying...."
+for fn in $(find $TESTDIR -type f -name '*.php');do
+  dir=$(dirname $fn)
+  name=$(basename $fn .php)
+  cat $fn | php_beautifier --filters "$stack" > $dir/$name.new
+  mv $dir/$name.new $dir/$name.php
+done

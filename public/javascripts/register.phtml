@@ -1,0 +1,86 @@
+<?php
+$this->dojo()->enable();
+?>
+
+<script type="text/javascript">
+    dojo.require("dijit.form.Form");
+    dojo.require("dijit.form.Button");
+    dojo.require("dijit.Dialog");
+    dojo.require("dijit.form.TextBox");
+    dojo.require("dijit.form.DateTextBox");
+    dojo.require("dijit.form.TimeTextBox");
+    dojo.addOnLoad(function() {
+        var registerDialog = dijit.byId("formRegister");
+        dijit.byId("formRegister").show();
+    });
+</script>
+
+<div dojoType="dijit.Dialog" id="formRegister" title="Register..."
+	style="display: none">
+	<form dojoType="dijit.form.Form">
+		<script type="dojo/event" event="onSubmit" args="e">
+			dojo.stopEvent(e);
+			if (!this.isValid()) {
+        dijit.byId('formRegister').set('title','Invalid form values...');
+			  return;
+			}
+       var first = dijit.byId("first").get('value');
+       var last = dijit.byId("last").get('value');
+       var email = dijit.byId("email").get('value');
+       var pw = dijit.byId("password").get('value');
+			 dojo.xhrPost({
+			  url:"/admin/registration/register",
+			  sync: true,
+			  content:{first: first,last: last,email: email,password: pw},
+			  preventCache:true,
+			  handleAs:"json",
+			  handle: function(response, ioArgs) {
+			   auth_successful = dojo.fromJson(ioArgs.xhr.responseText);
+         if (auth_successful == "true") {
+				  dijit.byId('formRegister').hide();
+          window.location = '/';
+         } else {
+          dijit.byId('formRegister').set('title','Invalid form values...');
+         }
+			  },
+			   error: function(response, ioArgs) {
+			   console.debug("Error status:" + ioArgs.xhr.statusText);
+			  }
+			 });
+    </script>
+		<div class="dijitDialogPaneContentArea">
+			<table>
+				<tr>
+					<td><label for='first'> First Name: </label>
+						<div dojoType="dijit.form.ValidationTextBox" id="first"
+							name="first" required="true" style="float: right"></div></td>
+				</tr>
+				<tr>
+					<td><label for='last'> Last Name: </label>
+						<div dojoType="dijit.form.ValidationTextBox" id="last" name="last"
+							required="true" style="float: right"></div></td>
+				</tr>
+				<tr>
+					<td><label for='email'> Email: </label>
+						<div dojoType="dijit.form.ValidationTextBox" id="email"
+							name="email" required="true" style="float: right"></div></td>
+				</tr>
+				<tr>
+					<td><label for='password'> Password: </label>
+						<div dojoType="dijit.form.ValidationTextBox" id="password"
+							type="password" name="password" required="true"
+							style="float: right"></div></td>
+				</tr>
+			</table>
+		</div>
+		<div class="dijitDialogPaneActionBar">
+			<button dojoType="dijit.form.Button" id="buttonSubmit" type="submit">Register</button>
+			<button dojoType="dijit.form.Button" type="button"
+				onClick="dijit.byId('formRegister').hide();window.location='/';">Cancel</button>
+			<label for='buttonRegister'> Registered? </label>
+			<button dojoType="dijit.form.Button" type="button"
+				id="buttonRegister"
+				onClick="dijit.byId('formRegister').hide();window.location='/auth/login';">Login</button>
+		</div>
+	</form>
+</div>

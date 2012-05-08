@@ -23,13 +23,13 @@ CREATE TABLE `books` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (1,'PHP Objects, Patterns and Practice','Matt Zandstra','/images/amz/PHPObjects.jpg','/books','2012-03-09 01:18:21','2012-03-09 01:18:21'),(3,'Zend Framework, A Beginner\'s Guide','Vikram Vaswani','/images/amz/ZFBG.jpg','/books','2012-03-09 02:55:53','2012-03-09 02:55:53'),(6,'Zend Framework 1.8 Web Application Development','Keith Pope','/images/amz/ZFWAD.jpg','/books','2012-03-09 02:58:46','2012-03-09 02:58:46'),(5,'Beginning PHP and MySQL','W. Jason Gilmore','/images/amz/PHPandMYSQL.jpg','/books','2012-03-09 02:57:23','2012-03-09 02:57:23'),(7,'Building PHP Applications with Symfony, CakePHP an','Bartosz Porebski, Karol Przystalski, Leszek Nowak','/images/amz/BuildingPHP.jpg','/books','2012-03-10 18:25:30','2012-03-10 18:25:30'),(8,'Pro PHP: Patterns, Frameworks, Testing and More','Kevin McArthur','/images/amz/ProPHP.jpg','/books','2012-03-10 18:27:35','2012-03-10 18:27:35');
+INSERT INTO `books` VALUES (1,'PHP Objects, Patterns and Practice','Matt Zandstra','/images/amz/PHPObjects.jpg','/store','2012-03-09 17:18:21','2012-03-09 17:18:21'),(3,'Zend Framework, A Beginner\'s Guide','Vikram Vaswani','/images/amz/ZFBG.jpg','/store','2012-03-09 18:55:53','2012-03-09 18:55:53'),(6,'Zend Framework 1.8 Web Application Development','Keith Pope','/images/amz/ZFWAD.jpg','/store','2012-03-09 18:58:46','2012-03-09 18:58:46'),(5,'Beginning PHP and MySQL','W. Jason Gilmore','/images/amz/PHPandMYSQL.jpg','/store','2012-03-09 18:57:23','2012-03-09 18:57:23');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
