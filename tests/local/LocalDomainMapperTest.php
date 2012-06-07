@@ -4,7 +4,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Local
+ * @group Domain
  */
 class LocalDomainMapperTest extends TestInit
 {
@@ -24,7 +24,7 @@ class LocalDomainMapperTest extends TestInit
     private $concrete = array(array('Local_Domain_Models_Article', 'Local_Domain_Mappers_ArticleMapper', 'article_text'), array('Local_Domain_Models_Comment', 'Local_Domain_Mappers_CommentMapper', 'comment_text'), array('Local_Domain_Models_Section', 'Local_Domain_Mappers_SectionMapper', 'section_text'), array('Local_Domain_Models_Avatar', 'Local_Domain_Mappers_AvatarMapper', 'image_name'), array('Local_Domain_Models_Keyword', 'Local_Domain_Mappers_KeywordMapper', 'keyword'), array('Local_Domain_Models_Profile', 'Local_Domain_Mappers_ProfileMapper', 'first'), array('Local_Domain_Models_Registration', 'Local_Domain_Mappers_RegistrationMapper', 'reg_string'));
     public function setTable($model)
     {
-        $table = split('_', strtolower($model));
+        $table = preg_split('/_/', strtolower($model));
         $this->table = $table[3] . 's';
     }
     public function setUp()

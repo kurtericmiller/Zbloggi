@@ -5,7 +5,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Controllers
+ * @group Blog
  */
 class BlogCommentControllerTest extends TestInit
 {

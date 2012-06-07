@@ -5,7 +5,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Controllers
+ * @group Default
  */
 class DefaultIndexControllerTest extends TestInit
 {

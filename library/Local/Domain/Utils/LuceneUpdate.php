@@ -1,5 +1,5 @@
 <?php
-define(SITE, "/var/local/workspaces/ymozend");
+const SITE = "/var/local/workspaces/ymozend";
 include SITE . "/public/cli.php";
 $indexPath = APPLICATION_PATH . "/../data/indexes";
 $index = Zend_Search_Lucene::create($indexPath);

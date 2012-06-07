@@ -5,10 +5,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Controllers
+ * @group User
  */
 class UserRegistrationControllerTest extends TestInit
 {
+    const CC = '/opt/cruisecontrol/projects/ymozend/source';
+
     public static function main()
     {
         require_once 'PHPUnit/Autoload.php';
@@ -20,16 +22,23 @@ class UserRegistrationControllerTest extends TestInit
     public function setUp()
     {
         parent::setUp();
+        $i = $this::CC . '/public/images';
+        $f = $this::CC . '/public/font';
+        system("ln -s $i ./images");
+        system("ln -s $f ./font");
     }
     public function tearDown()
     {
         parent::tearDown();
+        system("unlink ./images");
+        system("unlink ./font");
     }
     /* End Actual Setup */
     /* Begin Actual Tests */
     public function test_indexAction()
     {
         $this->dispatch('/user/registration');
+        sleep(1);
         $html = $this->response->getBody();
         $this->assertQuery('form[name="registerForm"]');
     }
@@ -37,11 +46,13 @@ class UserRegistrationControllerTest extends TestInit
     {
         $this->request->setMethod('POST')->setPost(array('cancel' => 'cancel'));
         $this->dispatch('/user/registration');
+        sleep(1);
         $this->assertRedirectTo('/');
     }
     public function test_indexActionSubmit()
     {
         $this->dispatch('/user/registration');
+        sleep(1);
         $captcha = $this->getCaptcha();
         $this->resetRequest()->resetResponse();
         $postreq = array('username' => 'regtest', 'email' => 'rt@mail.com', 'password' => 'asdfasdf', 'pwmatch' => 'asdfasdf', 'captcha' => $captcha, 'submit' => 'submit');

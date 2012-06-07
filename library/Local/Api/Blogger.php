@@ -1,43 +1,7 @@
 <?php
-class Local_Api_Blogger
+class Local_Api_Blogger extends Local_Api_XmlRpc
 {
     protected $_user;
-    /**
-     * This is the function login
-     *
-     * @param string $username
-     * @param string $password
-     * @return boolean
-     */
-    private function login($username, $password)
-    {
-        $dbAdapter = Zend_Db_Table::getDefaultAdapter();
-        $adapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
-        $opts = Zend_Registry::getInstance();
-        $salt = $opts['config']['salt'];
-        $adapter->setTableName('users')->setIdentityColumn('email')->setCredentialColumn('password')->setCredentialTreatment("SHA1(CONCAT(?,'" . $salt . "'))");
-        $adapter->setIdentity($username);
-        $adapter->setCredential($password);
-        $auth = Zend_Auth::getInstance();
-        $result = $auth->authenticate($adapter);
-        if ($result->isValid()) {
-            $user = $adapter->getResultRowObject();
-            $this->_user = $user;
-            return true;
-        } else {
-            throw new Local_Api_Exception('Authorization failed', 401);
-            return false;
-        }
-    }
-    /**
-     * This is the Blogger function test
-     *
-     * @return boolean
-     */
-    public function test()
-    {
-        return true;
-    }
     /**
      * This is the Blogger function getUsersBlogs
      *

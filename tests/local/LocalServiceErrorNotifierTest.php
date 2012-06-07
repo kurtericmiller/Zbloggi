@@ -5,7 +5,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Local
+ * @group Service
  */
 class LocalServiceErrorNotifierTest extends TestInit
 {

@@ -20,6 +20,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     Zend_Registry::set('db', $db);
     Zend_Db_Table_Abstract::setDefaultAdapter($db);
   }
+  protected function _initCaching()
+  {
+    $frontend = array('lifetime' => 7200, 'automatic_seralization' => true);
+    $backend = array('cache_dir' => '/tmp');
+    $cache = Zend_Cache::factory('core', 'File', $frontend, $backend);
+    Zend_Registry::set('cache',$cache);
+  }
   protected function _initLocal()
   {
     $sm = new Local_Domain_Mappers_SettingMapper();
@@ -104,7 +111,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
   {
     $CDN_BASE_GOOGLE = 'https://ajax.googleapis.com/ajax/libs/dojo/';
     $CDN_DOJO_PATH_GOOGLE = '/dojo/dojo.js';
-    $theme = "dijit.themes." . $this->options["dojo"]["theme"];
+    $theme = 'dijit.themes.' . $this->options['dojo']['theme'];
     $this->bootstrap('view');
     $view = $this->getResource('view');
     Zend_Dojo::enableView($view);
@@ -112,7 +119,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
       ->dojo()
       ->setCdnBase($CDN_BASE_GOOGLE)
       ->setCdnDojoPath($CDN_DOJO_PATH_GOOGLE)
-      ->setCdnVersion("1.7.1")
+      ->setCdnVersion('1.7.1')
       ->addStyleSheetModule($theme)
       ->setDjConfigOption('parseOnLoad', true)
       ->setDjConfigOption('locale', 'en-US')

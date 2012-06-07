@@ -1,3 +1,11 @@
 #!/usr/bin/zsh
-SQLDIR=$1
-/usr/bin/mysql -Nb -Dymozend_testing -uyour_mysql_user -pyour_mysql_pw < ${SQLDIR}/clear_testdb.sql
+if [[ -n $1 ]];then
+    SQLDIR=$1
+else
+    SQLDIR=~/workspaces/current_project/sql
+fi
+if [[ -e ${SQLDIR}/clear_testdb.sql ]];then
+    /usr/bin/mysql -Nb -Dymozend_testing -uyour_mysql_user -pyour_mysql_pw < ${SQLDIR}/clear_testdb.sql
+else
+    echo "Unable to locate: ${SQLDIR}/clear_testdb.sql"
+fi

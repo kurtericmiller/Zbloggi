@@ -110,7 +110,7 @@ class Local_Domain_Mappers_ArticleMapper extends Local_Domain_Mapper implements 
     //===============================
     // Begin Customizations
     //===============================
-    
+
     /** Return list of articles associated with this tag */
     function getTagArticles($tag, $options = null)
     {

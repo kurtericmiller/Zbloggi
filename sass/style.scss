@@ -48,6 +48,8 @@ a {
     font-size: $regFormLegendFontSize;
     font-weight: $regFormLegendWeight;
     padding-bottom: 15px; }
+  & #captcha-element>img {
+    width: 69%; }
   & #captcha-input {
     margin-top: 10px; } }
 

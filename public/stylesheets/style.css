@@ -1,8 +1,6 @@
-@charset "UTF-8";
 /* Colors */
 /* Dimensions */
 /* Fonts */
-/* $sbarRtSubmitBgColor: #584E3B; */
 /* 
  * HTML5 ✰ Boilerplate
  *
@@ -413,6 +411,9 @@ a:hover {
   font-size: 120%;
   font-weight: bold;
   padding-bottom: 15px;
+}
+#regform #captcha-element > img {
+  width: 69%;
 }
 #regform #captcha-input {
   margin-top: 10px;

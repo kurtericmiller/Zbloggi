@@ -12,14 +12,6 @@ class Default_IndexController extends Zend_Controller_Action
         }
         $this->_localReg = Zend_Registry::get('local');
         $items = $this->_localReg->get('bookCount');
-        //$amazonLU = $this->_localReg->get('amazonLU');
-        //$bookarray = array();
-        //$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
-        //$query->category('Books')->AssociateTag('AMAZON_ASSOCIATES_TAG')->Keywords($amazonLU)->ResponseGroup('Small,Images');
-        //$results = $query->search();
-        //foreach ($results as $result) {
-        //  $bookarray[] = $result;
-        //}
         $bm = new Local_Domain_Mappers_BookMapper();
         $option['sort'] = 'created_at desc';
         $bc = $bm->findAll($option);

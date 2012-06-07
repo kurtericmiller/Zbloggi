@@ -5,7 +5,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Local
+ * @group Plugin
  */
 class LocalPluginACLOwnerTest extends TestInit
 {

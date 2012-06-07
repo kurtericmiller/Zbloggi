@@ -11,9 +11,10 @@
   <filter>
     <blacklist>
       <directory suffix=".php">../library/Zend</directory>
-      <directory suffix=".php">../usr/local/zend</directory>
       <directory suffix=".php">../public/javascripts</directory>
       <directory suffix=".php">./</directory>
     </blacklist>
   </filter>
 </phpunit>
+
+

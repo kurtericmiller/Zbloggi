@@ -4,7 +4,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 require_once 'TestInit.php';
 /**
- * @group Local
+ * @group Domain
  */
 class LocalDomainCollectionTest extends TestInit
 {
@@ -23,7 +23,7 @@ class LocalDomainCollectionTest extends TestInit
     private $concrete = array(array('Local_Domain_Models_Article'), array('Local_Domain_Models_Comment'), array('Local_Domain_Models_Section'), array('Local_Domain_Models_Avatar'), array('Local_Domain_Models_Keyword'), array('Local_Domain_Models_Profile'), array('Local_Domain_Models_Registration'));
     public function setTable($model)
     {
-        $table = split('_', strtolower($model));
+        $table = preg_split('/_/', strtolower($model));
         $this->table = $table[3] . 's';
     }
     public function setUp()

@@ -72,11 +72,13 @@ class Auth_IndexController extends Zend_Controller_Action
             $session->lastRequestUri = null;
         }
         $this->_redirect('/'); // back to index
-        
+
     }
     /* Courtesy of www.webtoolkit.info */
     protected function isValidEmail($email)
     {
-        return eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email);
+        /* return eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email); */
+        $validEmail="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
+        return preg_match($validEmail, $email);
     }
 }
