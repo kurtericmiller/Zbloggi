@@ -13,7 +13,7 @@ class Xmlrpc_IndexController extends Zend_Controller_Action
         $server->setClass('Local_Api_Wp', 'wp');
         $response = $server->handle();
         $request = $server->getRequest();
-        if (true) {
+        if (false) {
             $log = new Zend_Log();
             $stream = @fopen(APPLICATION_ROOT . '/logs/xmlrpc.log', 'a');
             if ($stream) {

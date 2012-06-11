@@ -12,6 +12,7 @@ class Local_Plugin_ACL_Acl extends Zend_Acl
         $this->addRole(new Zend_Acl_Role('admin'));
         // setup resources
         $this->add(new Zend_Acl_Resource('blog:comment:index:post'));
+        $this->add(new Zend_Acl_Resource('xmlrpc:client:index'));
         $this->add(new Zend_Acl_Resource('admin:article:add'));
         $this->add(new Zend_Acl_Resource('admin:article:index'));
         $this->add(new Zend_Acl_Resource('admin:article:index:post'));

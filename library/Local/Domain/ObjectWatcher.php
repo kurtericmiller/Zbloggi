@@ -116,14 +116,18 @@ class Local_Domain_ObjectWatcher
      */
     function clearPending()
     {
+
         try {
             foreach ($this->dirty as $key => $obj) {
+                $call = 'dirty';
                 $result = $obj->finder()->update($obj);
             }
             foreach ($this->delete as $key => $obj) {
+                $call = 'delete';
                 $result = $obj->finder()->delete($obj);
             }
             foreach ($this->new as $key => $obj) {
+                $call = 'new';
                 $result = $obj->finder()->insert($obj);
             }
             $this->new = array();
@@ -131,7 +135,7 @@ class Local_Domain_ObjectWatcher
             $this->delete = array();
         }
         catch(Exception $e) {
-            throw new Local_Exceptions_SqlException(__METHOD__ . " says the DB is having problems. " . $e);
+            throw new Local_Exceptions_SqlException(__METHOD__ . " (when calling: $call) - says the DB is having problems. " . $e);
         }
     }
     /** Perform any cached operations upon garbage collection */

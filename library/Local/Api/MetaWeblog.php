@@ -124,13 +124,8 @@ class Local_Api_MetaWeblog extends Local_Api_XmlRpc
         $article->set('published', $pub);
         $article->finder()->insert($article);
         $article_id = $article->getLastId();
-        $keywords = '';
-        while (count($content['categories']) > 0) {
-            $word = array_pop($content['categories']);
-            $keywords = $word . ' ' . $keywords;
-        }
         $km = new Local_Domain_Mappers_KeywordMapper();
-        $km->addKeywords($article_id, explode(' ', $keywords));
+        $km->addKeywords($article_id, $content['categories']);
         return $article_id;
     }
     /**
@@ -205,16 +200,16 @@ class Local_Api_MetaWeblog extends Local_Api_XmlRpc
      * @param struct $mObj
      * @return struct
      */
-    public function newMediaObject($blogid, $username, $password, $mo)
+    public function newMediaObject($blogid, $username, $password, $mediaObject)
     {
         if (!$this->login($username, $password)) {
             return $mediaObjectInfo = array('url' => 'blank');
         }
         $good_types = array('image/jpeg', 'image/gif', 'image/png');
         $upload_dest = $_SERVER['DOCUMENT_ROOT'] . '/images/uploads';
-        $file_name = $mo['name'];
-        $file_type = $mo['type'];
-        $file_content = $mo['bits'];
+        $file_name = $mediaObject['name'];
+        $file_type = $mediaObject['type'];
+        $file_content = $mediaObject['bits'];
         $upload_file = $upload_dest . '/' . $file_name;
         while (file_exists($upload_file)) {
             $file_name = substr(sha1(rand()), 0, 5) . $file_name;
@@ -222,7 +217,6 @@ class Local_Api_MetaWeblog extends Local_Api_XmlRpc
         }
         if (in_array($file_type, $good_types)) {
             $handle = fopen($upload_file, 'wb');
-            stream_filter_append($handle, 'convert.base64-decode');
             fwrite($handle, $file_content);
             fclose($handle);
             $mediaObjectInfo = array('url' => 'http://' . $_SERVER['SERVER_NAME'] . '/images/uploads/' . $file_name);

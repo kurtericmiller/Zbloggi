@@ -8,9 +8,10 @@ class Local_Plugin_ACL extends Zend_Controller_Plugin_Abstract
         $this->_article = null;
         $this->_user = null;
         $module = $request->getModuleName();
-        if ( $module !== 'xmlrpc' ) {
-            $controller = $request->getControllerName();
-            $action = $request->getActionName();
+        $controller = $request->getControllerName();
+        $action = $request->getActionName();
+        $mac = "$module:$controller:$action";
+        if ( 'xmlrpc' !== $module || 'xmlrpc:client:index' == $mac ) {
             if ($request->isPost()) {
                 $post = ":post";
                 $formData = $this->_request->getPost();
