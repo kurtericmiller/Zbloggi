@@ -3,6 +3,7 @@ class Default_IndexController extends Zend_Controller_Action
 {
     private $_auth;
     private $_localReg;
+
     public function init()
     {
         $this->_auth = Zend_Auth::getInstance();

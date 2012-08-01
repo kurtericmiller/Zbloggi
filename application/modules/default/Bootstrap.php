@@ -20,13 +20,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     Zend_Registry::set('db', $db);
     Zend_Db_Table_Abstract::setDefaultAdapter($db);
   }
-  protected function _initCaching()
-  {
-    $frontend = array('lifetime' => 7200, 'automatic_seralization' => true);
-    $backend = array('cache_dir' => '/tmp');
-    $cache = Zend_Cache::factory('core', 'File', $frontend, $backend);
-    Zend_Registry::set('cache',$cache);
-  }
   protected function _initLocal()
   {
     $sm = new Local_Domain_Mappers_SettingMapper();

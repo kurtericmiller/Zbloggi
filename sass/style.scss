@@ -606,6 +606,12 @@ form button {
 
 /* sidebar stuff */
 
+.searchbox {
+  background:#ffffff url("/images/search.png") no-repeat;
+  background-position: right;
+  text-align:left;
+}
+
 .sidebarLt {
   width: $leftColWidth;
   margin-left: 5px;

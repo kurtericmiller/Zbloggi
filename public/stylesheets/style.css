@@ -1093,6 +1093,12 @@ form button {
 }
 
 /* sidebar stuff */
+.searchbox {
+  background: white url("/images/search.png") no-repeat;
+  background-position: right;
+  text-align: left;
+}
+
 .sidebarLt {
   width: 151px;
   margin-left: 5px;

@@ -13,8 +13,6 @@ require_once ("Interfaces/Finders.php");
  */
 abstract class Local_Domain_Mapper implements Finders
 {
-    /** cache */
-    protected static $cache;
     /** DB handle */
     protected static $DB;
     /** Last object id created */
@@ -24,9 +22,6 @@ abstract class Local_Domain_Mapper implements Finders
     {
         if (!self::$DB) {
             self::$DB = Zend_Registry::get('db');
-        }
-        if (!self::$cache) {
-            self::$cache = Zend_Registry::get('cache');
         }
     }
     function getAdapter()
@@ -149,20 +144,10 @@ abstract class Local_Domain_Mapper implements Finders
      *  @param string $sql
      *  @param array $values
      *  @param constant $singleton
-     *  @param string $sid
      *  @return boolean
      */
-    function doStatement($sql, $values = null, $singleton = false, $sid = 0)
+    function doStatement($sql, $values = null, $singleton = false)
     {
-        /* Caching code is not yet implemented */
-        /*
-		if ($sid != 0) {
-          $result = self::$cache->load($sid);
-          if (isset($result)) {
-            return $result;
-          }
-        }
-        */
         try {
             if ($singleton) {
                 $result = self::$DB->fetchOne($sql, $values);
@@ -171,11 +156,6 @@ abstract class Local_Domain_Mapper implements Finders
             } else {
                 $result = self::$DB->query($sql);
             }
-            /*
-            if ($sid != 0) {
-                self::$cache->save($result,$sid);
-            }
-            */
             return $result;
         }
         catch(Exception $e) {

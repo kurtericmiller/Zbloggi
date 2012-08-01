@@ -8,13 +8,14 @@ class Search_Form_Search extends Zend_Form
         $this->setName('searchForm');
         // create text input for search
         $search_text = new Zend_Form_Element_Text('search_text');
-        $search_text->setLabel('Search')->setOptions(array('size' => '20'))->addValidator('NotEmpty', true)->addFilter('HtmlEntities')->addFilter('StringTrim');
+        $search_text->setLabel('Search')->setOptions(array('class' => 'searchbox', 'size' => '20'))->addValidator('NotEmpty', true)->addFilter('HtmlEntities')->addFilter('StringTrim');
         $search_text->setDecorators(array(array('ViewHelper'), array('Errors'),));
         // create submit button
-        $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Search YMOZ')->setOptions(array('class' => 'submit'));
-        $submit->setDecorators(array(array('ViewHelper'),));
+        //$submit = new Zend_Form_Element_Submit('submit');
+        //$submit->setLabel('Search YMOZ')->setOptions(array('class' => 'submit'));
+        //$submit->setDecorators(array(array('ViewHelper'),));
         // attach elements to form
-        $this->addElement($search_text)->addElement($submit);
+        //$this->addElement($search_text)->addElement($submit);
+        $this->addElement($search_text);
     }
 }
